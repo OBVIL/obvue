@@ -33,6 +33,8 @@ FacetSort sort = (FacetSort)tools.getEnum("ord", fallback, Cookies.corpusSort);
 
 BitSet bits = bits(alix, corpus, q);
 TopTerms dic = facet.topTerms(bits, qTerms, null);
+boolean author = (alix.info("author") != null);
+
 
 %>
 <!DOCTYPE html>
@@ -63,8 +65,10 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
           <label for="start">Années</label>
           <input id="start" name="start" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Début" class="year"/>
           <input id="end" name="end" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Fin" class="year"/>
+          <% if (author) { %>
           <br/><label for="author">Auteur</label>
           <input id="author" name="author" autocomplete="off" list="author-data" size="50" type="text" onclick="select()" placeholder="Nom, Prénom"/>
+          <% } %>
           <br/><label for="title">Titre</label>
           <input id="title" name="title" autocomplete="off" list="title-data" type="text" size="50" onclick="select()" placeholder="Chercher un titre"/>
         </details>
@@ -171,35 +175,21 @@ switch(sort){
     </main>
 
     <script src="../static/vendor/sortable.js">//</script>
-              <datalist id="author-data">
     <%
-    {
-      facet = alix.facet("author", TEXT);
+    for (String field: new String[]{"author", "title"}) {
+      if(alix.info(field) == null) continue;
+      out.println("<datalist id=\""+field+"-data\">");
+      facet = alix.facet(field, TEXT);
       dic = facet.topTerms();
       dic.sort();
       while (dic.hasNext()) {
         dic.next();
         // long weight = facetEnum.weight();
-        out.println("<option value=\""+dic.term()+"\"/>");
+        out.println("  <option value=\""+dic.term()+"\"/>");
       }
+      out.println("</datalist>");
     }
     %>
-
-          </datalist>
-          <datalist id="title-data">
-    <%
-    {
-      facet = alix.facet("title", TEXT);
-      dic = facet.topTerms();
-      dic.sort();
-      while (dic.hasNext()) {
-        dic.next();
-        // long weight = facetEnum.weight();
-        out.println("<option value=\""+dic.term()+"\"/>");
-      }
-    }
-    %>
-          </datalist>
     <a href="#" id="gotop">▲</a>
     <script>
 bottomLoad();

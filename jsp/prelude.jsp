@@ -153,7 +153,6 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
   TopDocs topDocs = null;
   
   // topDocs = (TopDocs)page.getSession().getAttribute(key);
-  if (topDocs != null) return topDocs;
 
   IndexSearcher searcher = alix.searcher();
   int totalHitsThreshold = Integer.MAX_VALUE;

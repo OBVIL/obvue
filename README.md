@@ -1,4 +1,13 @@
-# Obvue, cuisine
+# Obvue
+
+Obvue est une application web Java pour explorer des textes en XML/TEI,
+basée sur le moteur d’indexation sur [Lucene java](https://lucene.apache.org/core/),
+piloté par [Alix](https://github.com/oeuvres/Alix), pour la lemmatisation
+et les statistiques lexicales.
+
+![Copie d’écran](static/doc/gout-critique.png)
+
+## Dossiers
 
 * static — ressources servies sans modification
   * vendor — librairies importées à ne pas modifier

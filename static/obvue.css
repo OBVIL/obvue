@@ -725,7 +725,9 @@ td.num {
 /**
  * Facets
  */
-body.facet {}
+body.facet p {
+  margin: 0 0 0 1rem;
+}
 
 body.facet main {
   padding: 1rem 0.2rem 1rem 0.5rem;
