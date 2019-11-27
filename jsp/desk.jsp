@@ -79,8 +79,8 @@ corpus = (Corpus)session.getAttribute(corpusKey);
 <html>
   <head>
     <meta charset="UTF-8"/>
-    <title><%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvue]</title>
-    <link rel="stylesheet" type="text/css" href="../static/obvue.css"/>
+    <title><%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
+    <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script> const base = "<%=base%>"; </script> <%-- give code of the text base for all further js  --%>
     <script src="../static/vendor/split.js">//</script>
     <script src="../static/js/common.js">//</script>
@@ -97,7 +97,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
      out.println("<mark><a title=\"Déselectionner ce corpus\" href=\"?corpus=new&amp;q="+Jsp.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
    }
  %></span>
-      <a class="logo" href="." title="Annuler les recherches en cours"><img alt="Obvue app" src="../static/img/obvue_50.png"/></a>
+      <a class="logo" href="." title="Annuler les recherches en cours"><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
       <form id="qform" name="qform" onsubmit="return dispatch(this)" target="page" action="<%=view%>">
         <a href="." class="reset">⟲</a>
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>

@@ -53,8 +53,8 @@ else { // help
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Comparer, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvue]</title>
-    <link rel="stylesheet" type="text/css" href="../static/obvue.css"/>
+    <title>Comparer, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
+    <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script src="../static/js/common.js">//</script>
     <style>
 body, html {
@@ -78,7 +78,7 @@ body, html {
 
    }
  %></span>
-      <a class="logo" href="." title="Annuler les recherches en cours"><img alt="Obvue app" src="../static/img/obvue_50.png"/></a>
+      <a class="logo" href="." title="Annuler les recherches en cours"><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
       <form id="qform" name="qform" action=".">
         <a href="." class="reset">⟲</a>
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>

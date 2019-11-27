@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ page import="obvue.Dispatch" %>
+<%@ page import="obvie.Dispatch" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <meta charset="UTF-8"/>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
     <%
 String redirect = (String)request.getAttribute(Dispatch.REDIRECT);
 if (redirect != null) {

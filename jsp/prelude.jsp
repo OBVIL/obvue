@@ -39,7 +39,7 @@
 <%@ page import="alix.lucene.search.TopTerms" %>
 <%@ page import="alix.util.ML" %>
 <%@ page import="alix.util.EnumOption" %>
-<%@ page import="obvue.*" %>
+<%@ page import="obvie.*" %>
 <%!
 
 /** Field name containing canonized text */

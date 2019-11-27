@@ -43,7 +43,7 @@ boolean author = (alix.info("author") != null);
     <meta charset="UTF-8">
     <title>Corpus [Alix]</title>
     <link href="../static/vendor/sortable.css" rel="stylesheet"/>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
     <script src="../static/js/common.js">//</script>
     <script type="text/javascript">
 const base = "<%=base%>"; // give code of texts base to further Javascript

@@ -1,4 +1,4 @@
-package obvue;
+package obvie;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ import alix.lucene.analysis.FrDics;
 import alix.lucene.analysis.tokenattributes.CharsAtt;
 
 /**
- * In an MVC model, this servlet is the global controller for the Obvue app.
+ * In an MVC model, this servlet is the global controller for the Obvie app.
  * Model is the lucene index and alix java, View is the jsp pages.
  * It is mainly an url dispatcher.
  */
@@ -34,7 +34,7 @@ public class Dispatch extends HttpServlet
   /** for serialization */
   private static final long serialVersionUID = 1L;
   /** Request attribute name: internal messages for the servlet */
-  public static final String OBVUE = "obvue";
+  public static final String OBVIE = "obvie";
   /** Request attribute name: the directory containing bases */
   public static final String BASE_DIR = "baseDir";
   /** Request attribute name: set of bases, with their properties */
@@ -68,14 +68,14 @@ public class Dispatch extends HttpServlet
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     request.setCharacterEncoding("UTF-8");
-    String stack = (String)request.getAttribute(OBVUE);
+    String stack = (String)request.getAttribute(OBVIE);
     if (stack == null) {
       stack = request.getRequestURI();
-      request.setAttribute(OBVUE, stack);
+      request.setAttribute(OBVIE, stack);
     }
     else {
       stack += "\n"+request.getRequestURI();
-      if (stack.length() > 1024) throw new ServletException("[Obvue] infinite loop error \n"+stack);
+      if (stack.length() > 1024) throw new ServletException("[Obvie] infinite loop error \n"+stack);
     }
     String context = request.getContextPath(); 
     String url = request.getRequestURI().substring(context.length());
@@ -96,12 +96,12 @@ public class Dispatch extends HttpServlet
     // reload base list
     if ("reload".equals(base)) {
       props();
-      throw new ServletException("[Obvue] reload base list.");
+      throw new ServletException("[Obvie] reload base list.");
     }
     
     Properties props = baseList.get(base);
     if (props == null) {
-      throw new ServletException("[Obvue] {"+base+ "} base not known on this server. \n"+stack);
+      throw new ServletException("[Obvie] {"+base+ "} base not known on this server. \n"+stack);
     }
     request.setAttribute(BASE, base);
     request.setAttribute(PROPS, props);
@@ -177,17 +177,17 @@ public class Dispatch extends HttpServlet
       if (!".xml".equals(ext)) continue;
       String code = filename.substring(0, i);
       if (STOP.contains(code)) {
-        throw new ServletException("[Obvue conf] {"+code+ "} name forbdden for a base.");
+        throw new ServletException("[Obvie conf] {"+code+ "} name forbdden for a base.");
       }
       if (!file.canRead()) {
-        throw new ServletException("[Obvue conf] {"+filename + "} properties file impossible to read.");
+        throw new ServletException("[Obvie conf] {"+filename + "} properties file impossible to read.");
       }
       Properties props = new Properties();
       try {
         props.loadFromXML(new FileInputStream(file));
       }
       catch (Exception e) {
-        throw new ServletException("[Obvue conf] {"+filename + "} xml properties error.", e);
+        throw new ServletException("[Obvie conf] {"+filename + "} xml properties error.", e);
       }
       baseList.put(code, props);
     }

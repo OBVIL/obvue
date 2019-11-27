@@ -1,4 +1,4 @@
-package obvue;
+package obvie;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -6,11 +6,14 @@ import java.util.List;
 
 import alix.util.EnumOption;
 
-public enum FacetField implements EnumOption {
-  author("Auteur"), 
+public enum FacetSort implements EnumOption {
+  alpha("Alphabétique"), 
+  freq("Fréquence"), 
+  score("Pertinence"),
   ;
+  // sadly repeating myself because enum can’t inherit from an abstract class (an Enum already extends a class). 
   public final String label;
-  private FacetField(final String label) {  
+  private FacetSort(final String label) {  
     this.label = label ;
   }
   public String label()

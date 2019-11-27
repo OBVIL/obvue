@@ -215,10 +215,10 @@ else {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Fréquences, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvue]</title>
+    <title>Fréquences, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
     <script src="../static/js/common.js">//</script>
     <link href="../static/vendor/sortable.css" rel="stylesheet"/>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
   </head>
   <body>
     <table class="sortable">

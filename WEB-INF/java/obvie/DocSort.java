@@ -1,4 +1,4 @@
-package obvue;
+package obvie;
 
 import java.util.Arrays;
 import java.util.Collections;

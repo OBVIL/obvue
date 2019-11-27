@@ -20,6 +20,12 @@
   line-height: 1.2em;
 }
 
+.sortable thead {
+  position: sticky;
+  top: 0;
+  background-color: #FFF;
+}
+
 .sortable td {
   vertical-align: top;
   border-left: #BBD 1px solid;

@@ -23,8 +23,8 @@ TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, sort);
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Recherche, <%=props.get("title")%> [Obvue]</title>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <title>Recherche, <%=props.get("title")%> [Obvie]</title>
+    <link href="../static/obvie.css" rel="stylesheet"/>
     <script src="../static/js/common.js">//</script>
   </head>
   <body class="results">

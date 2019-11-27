@@ -58,9 +58,9 @@ SortField sf2 = new SortField(Alix.ID, SortField.Type.STRING);
 <html>
   <head>
     <meta charset="UTF-8">
-    <title><%=title%> [Obvue]</title>
+    <title><%=title%> [Obvie]</title>
     <link href="../static/vendor/teinte.css" rel="stylesheet"/>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
     <script>
 <%
 if (doc != null) { // document id is verified, give it to javascript

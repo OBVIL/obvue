@@ -34,9 +34,9 @@ String[] terms = alix.qTermList(field, q).toArray();
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Recherche, <%=props.get("title")%> [Obvue]</title>
+    <title>Recherche, <%=props.get("title")%> [Obvie]</title>
     <script src="../static/js/common.js">//</script>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
     <style>
 span.left {display: inline-block; text-align: right; width: <%= Math.round(left * 1.0)%>ex; padding-right: 1ex;}
     </style>

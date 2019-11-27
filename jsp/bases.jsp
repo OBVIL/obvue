@@ -2,17 +2,17 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Properties" %>
-<%@ page import="obvue.Dispatch" %>
+<%@ page import="obvie.Dispatch" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <meta charset="UTF-8">
-    <title>Obvue, bases à chercher</title>
-    <link href="static/obvue.css" rel="stylesheet"/>
+    <title>Obvie, bases à chercher</title>
+    <link href="static/obvie.css" rel="stylesheet"/>
   </head>
   <body>
     <article class="chapter">
-      <h1>Obvue, bases à chercher sur ce serveur.</h1>
+      <h1>Obvie, bases à chercher sur ce serveur.</h1>
       <ul>
       <%
   HashMap<String, Properties> baseList = (HashMap<String, Properties>)request.getAttribute(Dispatch.BASE_LIST);

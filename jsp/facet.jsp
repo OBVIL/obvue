@@ -4,7 +4,7 @@
 <%@ page import="alix.lucene.search.TermList" %>
 <%@ page import="alix.lucene.search.TopTerms" %>
 <%@ page import="alix.lucene.search.TopTerms" %>
-<%@ page import="obvue.FacetField" %>
+<%@ page import="obvie.FacetField" %>
 
 <%
 // Params for the page
@@ -27,7 +27,7 @@ if(!queried && sort == FacetSort.score) sort = FacetSort.freq;
   <head>
     <meta charset="UTF-8"/>
     <title>Facettes</title>
-    <link rel="stylesheet" type="text/css" href="../static/obvue.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script src="../static/js/common.js">//</script>
     <base target="page" href="snip"/>
   </head>

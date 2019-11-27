@@ -61,9 +61,9 @@ catch (IllegalArgumentException e) {} // unknown id
         else {
       out.print("Comparaison, document");
         }
-    %> [Obvue]</title>
+    %> [Obvie]</title>
     <link href="../static/vendor/teinte.css" rel="stylesheet"/>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
     <script src="../static/js/common.js">//</script>
     <script>
     <%if (doc != null) {

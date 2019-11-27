@@ -1,4 +1,4 @@
-package obvue;
+package obvie;
 
 import java.io.File;
 import java.io.FileInputStream;

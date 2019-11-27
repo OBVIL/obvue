@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ page import="java.nio.file.Path" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="obvue.Dispatch" %>
+<%@ page import="obvie.Dispatch" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <meta charset="UTF-8"/>
-    <link href="../static/obvue.css" rel="stylesheet"/>
-    <title>Status, Obvue</title>
+    <link href="../static/obvie.css" rel="stylesheet"/>
+    <title>Status, Obvie</title>
   </head>
   <body>
   <body class="document">
     <article class="chapter">
-      <h1>Obvue, status</h1>
+      <h1>Obvie, status</h1>
       <ul>
           <li>ext=<%=request.getAttribute(Dispatch.EXT)%></li>
           <li>pathinfo=<%=request.getAttribute(Dispatch.PATHINFO)%></li>

@@ -32,7 +32,7 @@ else if (right > 10) right = 10;
   <head>
     <meta charset="UTF-8">
     <title>Nuage de mots</title>
-    <link rel="stylesheet" type="text/css" href="../static/obvue.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script src="../static/js/common.js">//</script>
     <script>var count = <%= count %>;</script>
   </head>

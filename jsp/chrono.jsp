@@ -6,7 +6,7 @@
     <meta charset="UTF-8"/>
     <title>Chronologie, Alix</title>
     <base target="page" href="kwic"/>
-    <link rel="stylesheet" type="text/css" href="../static/obvue.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
   </head>
   <body class="chrono">
     <form id="qform">

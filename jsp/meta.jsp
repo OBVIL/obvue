@@ -157,9 +157,9 @@ else {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Recherche bibliographique, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvue]</title>
+    <title>Recherche bibliographique, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
     <script src="../static/js/common.js">//</script>
-    <link href="../static/obvue.css" rel="stylesheet"/>
+    <link href="../static/obvie.css" rel="stylesheet"/>
   </head>
   <body class="results">
     <header>

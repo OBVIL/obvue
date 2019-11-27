@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <jardesc>
-    <jar path="obvue/WEB-INF/lib/obvue.jar"/>
-    <options buildIfNeeded="true" compress="true" descriptionLocation="/obvue/WEB-INF/obvue.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <jar path="obvie/WEB-INF/lib/obvie.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/obvie/WEB-INF/obvie.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <manifest generateManifest="true" manifestLocation="/Alix/java/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
@@ -11,6 +11,6 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=obvue/WEB-INF\/java"/>
+        <javaElement handleIdentifier="=obvie/WEB-INF\/java"/>
     </selectedElements>
 </jardesc>
