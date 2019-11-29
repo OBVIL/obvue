@@ -4,20 +4,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.apache.lucene.index.IndexWriter;
 import org.xml.sax.SAXException;
 
 import alix.lucene.Alix;
+import alix.lucene.SrcFormat;
 import alix.lucene.XMLIndexer;
 import alix.lucene.analysis.FrAnalyzer;
 import alix.lucene.util.Cooc;
@@ -25,35 +23,56 @@ import alix.util.Dir;
 
 public class Base
 {
-  public void index(File file) throws InvalidPropertiesFormatException, FileNotFoundException, IOException, NoSuchFieldException
+  public static String APP = "Obvie";
+  static public void index(File file) throws IOException, NoSuchFieldException, ParserConfigurationException, SAXException, InterruptedException, TransformerException 
   {
-    Properties props = new Properties();
-    props.loadFromXML(new FileInputStream(file));
-    String src = props.getProperty("src");
-    if (src == null) throw new NoSuchFieldException("<entry key=\"src\"> est requis pour indiquer le chemin des fichiers à indexer.");
-    long time = System.nanoTime();
     String name = file.getName().replaceFirst("\\..+$", "");
-    File index = new File(file, name);
+    if (!file.exists()) throw new FileNotFoundException("\n  ["+APP+"] "+file.getAbsolutePath()+"\nFichier de propriétés introuvable ");
+    Properties props = new Properties();
+    try {
+      props.loadFromXML(new FileInputStream(file));
+    }
+    catch (InvalidPropertiesFormatException e) {
+      throw new InvalidPropertiesFormatException("\n  ["+APP+"] "+file+"\nXML, erreur dans le fichier de propriétés.\n"
+          +"cf. https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html");
+    }
+    catch (IOException e) {
+      throw new IOException("\n  ["+APP+"] "+file.getAbsolutePath()+"\nLecture impossible du fichier de propriétés.");
+    }
+    String src = props.getProperty("src");
+    if (src == null) throw new NoSuchFieldException("\n  ["+APP+"] "+file+"\n<entry key=\"src\"> est requis pour indiquer le chemin des fichiers XML/TEI à indexer."
+        + "\nLes jokers sont autorisés, par exemple : ../../corpus/*.xml");
+    String[] globs = src.split(" *[;:] *");
+    // resolve globs relative to the folder of the properties field
+    File base = file.getParentFile().getCanonicalFile();
+    for (int i=0; i < globs.length; i++) {
+      if (!globs[i].startsWith("/")) globs[i] = new File(base, globs[i]).getCanonicalPath();
+    }
+    // test here if it's folder ?
+    long time = System.nanoTime();
+    File index = new File(file.getParentFile(), name);
     Path path = index.toPath();
     // delete index, faster to recreate
     Dir.rm(path);
     Alix alix = Alix.instance(path, new FrAnalyzer());
     // Alix alix = Alix.instance(path, "org.apache.lucene.analysis.core.WhitespaceAnalyzer");
     IndexWriter writer = alix.writer();
-    String[] globs = src.split(" *; *");
-    // XMLIndexer.index(writer, globs);
+    XMLIndexer.index(writer, globs, SrcFormat.tei);
     // index here will be committed and merged but need to be closed to prepare
     writer.close();
-    // XMLIndexer.index(writer, threads, "work/xml/.*\\.xml",
-    // "/var/www/html/Teinte/xsl/alix.xsl");
-    System.out.println("INDEXED in " + ((System.nanoTime() - time) / 1000000) + " ms.");
-    time = System.nanoTime();
     Cooc cooc = new Cooc(alix, "text");
     cooc.write();
-    System.out.println("Cooc in " + ((System.nanoTime() - time) / 1000000) + " ms.");
-    System.out.println("THE END");
+    System.out.println(name+" INDEXED in " + ((System.nanoTime() - time) / 1000000) + " ms.");
   }
-  public static void main(String[] args)
+  public static void main(String[] args) throws Exception
   {
+    if (args == null || args.length < 1) {
+      System.out.println("["+APP+"] usage");
+      System.out.println("WEB-INF$ java -cp lib/obvie.jar bases/ma_base.xml");
+      System.exit(1);
+    }
+    for(String file: args) {
+      index(new File(file));
+    }
   }
 }

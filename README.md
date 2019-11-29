@@ -1,6 +1,6 @@
-# Obvue
+# Obvie
 
-Obvue est une application web Java pour explorer des textes en XML/TEI,
+Obvie est une application web Java pour explorer des textes en XML/TEI,
 basée sur le moteur d’indexation sur [Lucene java](https://lucene.apache.org/core/),
 piloté par [Alix](https://github.com/oeuvres/Alix), pour la lemmatisation
 et les statistiques lexicales.
@@ -10,8 +10,8 @@ et les statistiques lexicales.
 ## Dossiers
 
 * static — ressources servies sans modification
-  * vendor — librairies importées à ne pas modifier
-  * img — ressources graphiques
+  * vendor — librairies importées, à ne pas modifier
+  * img — image
   * doc — aide
   * js — javascript de l’interface
 * jsp — pages dynamiques
@@ -19,8 +19,8 @@ et les statistiques lexicales.
   * web.xml — [servlet standard]
   * lib — [servlet standard] jars
   * classes — [servlet standard] classes compilées
-  * ext — autres librairies (pour la compilation et l’indexation)
-  * java — sources java partagées Obvue
+  * ext — autres librairies (uniquement pour le développement)
+  * java — classes java spécifiques à l’application Obvie
   * bases — [requis] dossier contenant la déclaration des bases et leur index lucene
     * base1.xml — déclaration d’une base qui répondra à {servletContext}/base1/
     * base2.xml — déclaration d’une base qui répondra à {servletContext}/base2/
