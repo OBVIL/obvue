@@ -100,7 +100,7 @@ public class Dispatch extends HttpServlet
     }
     
     Properties props = baseList.get(base);
-    if (props == null) {
+    if (props == null || props.contains("error")) {
       throw new ServletException("[Obvie] {"+base+ "} base not known on this server. \n"+stack);
     }
     request.setAttribute(BASE, base);
@@ -176,18 +176,23 @@ public class Dispatch extends HttpServlet
       String ext = filename.substring(i);
       if (!".xml".equals(ext)) continue;
       String code = filename.substring(0, i);
+      Properties props = new Properties();
       if (STOP.contains(code)) {
-        throw new ServletException("[Obvie conf] {"+code+ "} name forbdden for a base.");
+        props.put("error", "<i>"+code+"</i>, nom de base interdit.");
       }
       if (!file.canRead()) {
-        throw new ServletException("[Obvie conf] {"+filename + "} properties file impossible to read.");
+        props.put("error", "<i>"+code+"</i>, erreur de lecture.");
       }
-      Properties props = new Properties();
-      try {
-        props.loadFromXML(new FileInputStream(file));
+      else {
+        try {
+          props.loadFromXML(new FileInputStream(file));
+        }
+        catch (Exception e) {
+          props.put("error", "<i>"+code+"</i>, configuration en cours.");
+        }
       }
-      catch (Exception e) {
-        throw new ServletException("[Obvie conf] {"+filename + "} xml properties error.", e);
+      if (!new File(dir, code).isDirectory()) {
+        props.put("error", "<i>"+code+"</i>, chargement en cours.");
       }
       baseList.put(code, props);
     }

@@ -24,7 +24,7 @@ import alix.util.Dir;
 public class Base
 {
   public static String APP = "Obvie";
-  static public void index(File file) throws IOException, NoSuchFieldException, ParserConfigurationException, SAXException, InterruptedException, TransformerException 
+  static public void index(File file, int threads) throws IOException, NoSuchFieldException, ParserConfigurationException, SAXException, InterruptedException, TransformerException 
   {
     String name = file.getName().replaceFirst("\\..+$", "");
     if (!file.exists()) throw new FileNotFoundException("\n  ["+APP+"] "+file.getAbsolutePath()+"\nFichier de propriétés introuvable ");
@@ -57,7 +57,7 @@ public class Base
     Alix alix = Alix.instance(path, new FrAnalyzer());
     // Alix alix = Alix.instance(path, "org.apache.lucene.analysis.core.WhitespaceAnalyzer");
     IndexWriter writer = alix.writer();
-    XMLIndexer.index(writer, globs, SrcFormat.tei);
+    XMLIndexer.index(writer, globs, SrcFormat.tei, threads);
     // index here will be committed and merged but need to be closed to prepare
     writer.close();
     Cooc cooc = new Cooc(alix, "text");
@@ -71,8 +71,24 @@ public class Base
       System.out.println("WEB-INF$ java -cp lib/obvie.jar bases/ma_base.xml");
       System.exit(1);
     }
-    for(String file: args) {
-      index(new File(file));
+    int threads = Runtime.getRuntime().availableProcessors() - 1;
+    int i = 0;
+    try {
+      int n = Integer.parseInt(args[0]);
+      if (n > 0 && n < threads) threads = n;
+      i++;
+      System.out.println("["+APP+"] threads="+threads);
+    }
+    catch (NumberFormatException e) {
+      
+    }
+    if (i >= args.length) {
+      System.out.println("["+APP+"] usage");
+      System.out.println("WEB-INF$ java -cp lib/obvie.jar bases/ma_base.xml");
+      System.exit(1);
+    }
+    for(; i < args.length; i++) {
+      index(new File(args[i]), threads);
     }
   }
 }

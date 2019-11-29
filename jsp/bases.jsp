@@ -22,10 +22,15 @@
   Arrays.sort(keys);
   for (int i = 0; i < size; i++) {
     Properties props = baseList.get(keys[i]);
+    String error = props.getProperty("error", null);
+    if (error != null) {
+      out.println("<li class=\"error\">"+error+"</li>");
+      continue;
+    }
     String title = props.getProperty("title", null);
     if (title == null) title = props.getProperty("name", null);
     if (title == null) title =  keys[i];
-    out.println("<li><a href=\""+keys[i]+"/\">"+title+"</li>");
+    out.println("<li><a href=\""+keys[i]+"/\">"+title+"</a></li>");
   }
       %>
       </ul>
