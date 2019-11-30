@@ -58,7 +58,7 @@ public class Base
     // Alix alix = Alix.instance(path, "org.apache.lucene.analysis.core.WhitespaceAnalyzer");
     IndexWriter writer = alix.writer();
     XMLIndexer.index(writer, globs, SrcFormat.tei, threads);
-    // index here will be committed and merged but need to be closed to prepare
+    // index here will be committed and merged but need to be closed for cooccurrences
     writer.close();
     Cooc cooc = new Cooc(alix, "text");
     cooc.write();
