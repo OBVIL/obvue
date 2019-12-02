@@ -5,8 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -50,11 +55,31 @@ public class Base
     }
     // test here if it's folder ?
     long time = System.nanoTime();
-    File index = new File(file.getParentFile(), name);
-    Path path = index.toPath();
-    // delete index, faster to recreate
-    Dir.rm(path);
-    Alix alix = Alix.instance(path, new FrAnalyzer());
+    
+    String tmpName = "000_obvie";
+    // indexer d'abord dans un index temporaire
+    File tmpDir = new File(file.getParentFile(), tmpName);
+    if (tmpDir.exists()) {
+      long modified = tmpDir.lastModified();
+      Duration duration = Duration.ofMillis(System.currentTimeMillis() - modified);
+      throw new IOException("\n  ["+APP+"] Un autre processus d'indexation semble en cours depuis "+duration+"\n" + tmpDir
+          + "\nSi vous pensez que c’est une erreur, vous devez supprimez vous-mêmes ce dossier.");
+    }
+    Path tmpPath = tmpDir.toPath();
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        if (!tmpDir.exists()) return;
+        System.out.println("Interruption inattendue du processus d'indexation, vos bases n’ont pas été modifiées. Suppression de l'index temporaire :\n" + tmpPath);
+        try {
+          Dir.rm(tmpPath);
+        }
+        catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    });
+    Alix alix = Alix.instance(tmpPath, new FrAnalyzer());
     // Alix alix = Alix.instance(path, "org.apache.lucene.analysis.core.WhitespaceAnalyzer");
     IndexWriter writer = alix.writer();
     XMLIndexer.index(writer, globs, SrcFormat.tei, threads);
@@ -62,7 +87,19 @@ public class Base
     writer.close();
     Cooc cooc = new Cooc(alix, "text");
     cooc.write();
-    System.out.println(name+" INDEXED in " + ((System.nanoTime() - time) / 1000000) + " ms.");
+    System.out.println("["+APP+"] "+name+" indexé en " + ((System.nanoTime() - time) / 1000000) + " ms.");
+    
+    TimeZone tz = TimeZone.getTimeZone("UTC");
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+    df.setTimeZone(tz);
+    File oldDir = new File(file.getParentFile(), "_"+name+"_"+df.format(new Date()));
+    File theDir = new File(file.getParentFile(), name);
+    System.out.println(theDir);
+    if (theDir.exists()) {
+      theDir.renameTo(oldDir);
+      System.out.println("["+APP+"] Par précaution, votre ancien index a été conservé dans le dossier :\n"+oldDir);
+    }
+    tmpDir.renameTo(theDir);
   }
   public static void main(String[] args) throws Exception
   {

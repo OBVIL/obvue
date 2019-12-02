@@ -171,8 +171,9 @@ public class Dispatch extends HttpServlet
     for (File file : ls) {
       if (file.isDirectory()) continue;
       String filename = file.getName();
+      if (filename.startsWith("_")) continue;
+      if (filename.startsWith(".")) continue;
       int i = filename.lastIndexOf('.');
-      if (i < 1) continue;
       String ext = filename.substring(i);
       if (!".xml".equals(ext)) continue;
       String code = filename.substring(0, i);
