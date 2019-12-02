@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -71,7 +72,20 @@ public class Base
       public void run() {
         if (!tmpDir.exists()) return;
         System.out.println("Interruption inattendue du processus d'indexation, vos bases n’ont pas été modifiées. Suppression de l'index temporaire :\n" + tmpPath);
-        Dir.rm(tmpDir);
+        try {
+          TimeUnit.SECONDS.sleep(1);
+          int timeout = 10;
+          while (!tmpDir.canWrite()) {
+            TimeUnit.SECONDS.sleep(1);
+            if(--timeout == 0) throw new IOException("\n  ["+APP+"] Impossible de suppimer l'index temporaire\n" + tmpDir);
+          }
+          Dir.rm(tmpDir);
+          // Encore là ?
+          if (tmpDir.exists()) Dir.rm(tmpDir);
+        }
+        catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     });
     Alix alix = Alix.instance(tmpPath, new FrAnalyzer());
