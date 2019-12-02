@@ -71,12 +71,7 @@ public class Base
       public void run() {
         if (!tmpDir.exists()) return;
         System.out.println("Interruption inattendue du processus d'indexation, vos bases n’ont pas été modifiées. Suppression de l'index temporaire :\n" + tmpPath);
-        try {
-          Dir.rm(tmpPath);
-        }
-        catch (IOException e) {
-          e.printStackTrace();
-        }
+        Dir.rm(tmpDir);
       }
     });
     Alix alix = Alix.instance(tmpPath, new FrAnalyzer());
