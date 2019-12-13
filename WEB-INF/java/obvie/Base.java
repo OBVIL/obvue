@@ -81,7 +81,11 @@ public class Base
           }
           Dir.rm(tmpDir);
           // Encore là ?
-          if (tmpDir.exists()) Dir.rm(tmpDir);
+          while (tmpDir.exists()) {
+            TimeUnit.SECONDS.sleep(1);
+            Dir.rm(tmpDir);
+            if(--timeout == 0) throw new IOException("\n  ["+APP+"] Impossible de suppimer l'index temporaire\n" + tmpDir);
+          }
         }
         catch (Exception e) {
           e.printStackTrace();

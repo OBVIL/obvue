@@ -2,6 +2,9 @@
 <%@ page import="java.nio.file.Path" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="obvie.Dispatch" %>
+<%@ page import="alix.lucene.Alix" %>
+<%@ page import="alix.lucene.Alix.FSDirectoryType" %>
+<%@ page import="alix.lucene.analysis.FrAnalyzer" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
@@ -30,6 +33,14 @@ for (String s: new String[] {
 }) {
   out.println("<li>"+s+"="+request.getAttribute(s)+"</li>");
 }
+        try {
+          final String baseDir = (String)request.getAttribute(Dispatch.BASE_DIR);
+          final String base = (String)request.getAttribute(Dispatch.BASE);
+          final Alix alix = Alix.instance(baseDir +"/"+ base, new FrAnalyzer(), null);
+          out.println("<li><pre>"+alix+"</pre></li>");
+        } catch (Exception e) {
+          out.println("<li>"+e+"</li>");
+        }
         %>
       </ul>
       <h5>Paramètres</h5>
@@ -53,6 +64,7 @@ for (String s: new String[] {
         }
       }
       %>
+      
     </article>
   </body>
 </html>
