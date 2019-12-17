@@ -3,6 +3,7 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.text.DecimalFormatSymbols" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter" %>
 <%@ page import="alix.fr.Tag" %>
 <%@ page import="alix.lucene.analysis.tokenattributes.CharsAtt" %>
 <%@ page import="alix.lucene.analysis.FrDics" %>
@@ -22,7 +23,8 @@ private static final int OUT_JSON = 2;
 
 private static String lines(final TopTerms dic, int max, final Mime mime, final WordClass cat, final boolean hasScore, final String q)
 {
-  max = Math.min(max, dic.size());
+  if (max <= 0) max =dic.size();
+  else max = Math.min(max, dic.size());
   StringBuilder sb = new StringBuilder();
 
 
@@ -94,7 +96,7 @@ private static String lines(final TopTerms dic, int max, final Mime mime, final 
 /**
  * An html table row &lt;tr&gt; for lexical frequence result.
  */
-private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag zetag, final int no, boolean hasScore, final String q)
+private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, boolean hasScore, final String q)
 {
   sb.append("  <tr>\n");
   sb.append("    <td class=\"num\">");
@@ -120,7 +122,7 @@ private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag zet
   sb.append(term);
   sb.append("</a></td>\n");
   sb.append("    <td>");
-  sb.append(zetag) ;
+  sb.append(tag) ;
   sb.append("</td>\n");
   sb.append("    <td class=\"num\">");
   sb.append(dic.hits()) ;
@@ -138,6 +140,14 @@ private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag zet
 
 private static void csvLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, final boolean hasScore)
 {
+  sb.append(dic.term().replaceAll("\t\n", " "));
+  sb.append("\t").append(tag) ;
+  sb.append("\t").append(dic.hits()) ;
+  sb.append("\t").append(dic.occs()) ;
+  if (hasScore) {
+    sb.append("\t").append(dic.score()) ;
+  }
+  sb.append("\n");
 }
 
 static private void jsonLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, final boolean hasScore)
@@ -207,7 +217,25 @@ if (Mime.json.equals(mime)) {
 }
 else if (Mime.csv.equals(mime)) {
   response.setContentType(Mime.csv.type);
-  out.println( lines(dic, -1, mime, cat, hasScore, q));
+  StringBuffer sb = new StringBuffer().append(base);
+  if (corpus != null) {
+    sb.append('-').append(corpus.name());
+  }
+  
+  if (q != null) {
+    String zeq = q.trim().replaceAll("[ ,;]+", "-");
+    int limit = Math.min(zeq.length(), 30);
+    char[] zeqchars = new char[limit*4]; // 
+    ASCIIFoldingFilter.foldToASCII(zeq.toCharArray(), 0, zeqchars, 0, limit);
+    sb.append('_').append(zeqchars, 0, limit);
+  }
+  response.setHeader("Content-Disposition", "attachment; filename=\""+sb+".csv\"");
+  out.print("Mot\tType\tChapitres\tOccurrences");
+  if (hasScore) {
+    out.print("\tScore");
+  }
+  out.println();
+  out.print( lines(dic, -1, mime, cat, hasScore, q));
 }
 else {
 %>
@@ -221,7 +249,8 @@ else {
     <link href="../static/obvie.css" rel="stylesheet"/>
   </head>
   <body>
-    <table class="sortable">
+    <a class="reset" href="freqs.csv?q=<%=Jsp.escape(q)%>&amp;left=<%= left %>&amp;right=<%= right %>&amp;cat=<%= cat %>&amp;sort=<%= sort %>">csv 🡵</a>
+    <table class="sortable" style="float:left;">
       <caption>
         <form id="sortForm">
         <input type="submit"

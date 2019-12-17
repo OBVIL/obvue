@@ -29,6 +29,7 @@
 <%@ page import="alix.web.Jsp" %>
 <%@ page import="alix.web.Mime" %>
 <%@ page import="alix.lucene.Alix" %>
+<%@ page import="alix.lucene.Alix.FSDirectoryType" %>
 <%@ page import="alix.lucene.DocType" %>
 <%@ page import="alix.lucene.analysis.FrAnalyzer" %>
 <%@ page import="alix.lucene.search.CollectorBits" %>

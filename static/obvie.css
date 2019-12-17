@@ -1410,6 +1410,10 @@ body.chrono form {
   -ms-transform: rotate(-90deg)
 }
 
+.sortable {
+  margin-top: 0;
+}
+
 /**
  * Old stuf to refactor
  */
