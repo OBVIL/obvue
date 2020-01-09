@@ -94,7 +94,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
       <span class="base"><%=props.get("name")%> <%
    if (corpus != null) {
      String name = corpus.name();
-     out.println("<mark><a title=\"Déselectionner ce corpus\" href=\"?corpus=new&amp;q="+Jsp.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
+     out.println("<mark><a class=\"xred\" title=\"Supprimer la sélection\" href=\"?corpus=new&amp;q="+Jsp.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
    }
  %></span>
       <a class="logo" href="." title="Annuler les recherches en cours"><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
@@ -117,6 +117,9 @@ corpus = (Corpus)session.getAttribute(corpusKey);
           <button type="submit" id="comparer" style="display: none" onclick="this.form.target='_self'; this.form.action = 'comparer'; this.form.submit()">Comparer</button>
         </div>
       </form>
+      <a class="hn" href="https://www.huma-num.fr/annuaire-des-sites-web" target="_blank">
+        <img title="Hébergé par Huma-Num" src="../static/img/hn.png" align="right"/>
+      </a>
     </header>
     <div id="win">
       <div id="aside">

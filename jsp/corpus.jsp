@@ -54,21 +54,13 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
     <main>
         <details id="filter">
           <summary>Filtres</summary>
-          <form>
-            <input type="hidden" name="q" value="<%=Jsp.escape(q)%>"/>
-            <label for="ord">Tri par défaut</label>
-            <select name="ord" onchange="this.form.submit()">
-              <option/>
-              <%= options(sort) %>
-            </select>
-          </form>
-          <label for="start">Années</label>
-          <input id="start" name="start" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Début" class="year"/>
-          <input id="end" name="end" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Fin" class="year"/>
           <% if (author) { %>
-          <br/><label for="author">Auteur</label>
+          <label for="author">Auteur</label>
           <input id="author" name="author" autocomplete="off" list="author-data" size="50" type="text" onclick="select()" placeholder="Nom, Prénom"/>
           <% } %>
+          <br/><label for="start">Dates</label>
+          <input id="start" name="start" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Début" class="year"/>
+          <input id="end" name="end" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Fin" class="year"/>
           <br/><label for="title">Titre</label>
           <input id="title" name="title" autocomplete="off" list="title-data" type="text" size="50" onclick="select()" placeholder="Chercher un titre"/>
         </details>
@@ -88,14 +80,14 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
           <thead>
             <tr>
               <th class="checkbox"><input id="checkall" type="checkbox" title="Sélectionner/déselectionner les lignes visibles"/></th>
-              <th class="author">Auteur</th>
-              <th class="year">Date</th>
-              <th class="title">Titre</th>
-              <th class="docs">Chapitres</th>
-              <th class="length" title="Taille en mots">Taille</th>
+              <th class="author">auteur</th>
+              <th class="year">date</th>
+              <th class="title">titre</th>
+              <th class="length" title="Taille en mots">taille</th>
+              <th class="docs" title="Chapitres">docs</th>
             <% if (score) { %>
-              <th class="occs">Occurrences</th>
-              <th class="score">Score</th>
+              <th class="occs" title="Occurrences">occs</th>
+              <th class="score">pertinence</th>
             <% } %>
             </tr>
           </thead>
@@ -151,15 +143,15 @@ switch(sort){
     int n = dic.n();
     String href;
     // hpp?
-    if (score) href = "kwic?sort=author&amp;q="+Jsp.escape(q)+"&amp;start="+(n+1);
+    if (score) href = "kwic?sort=author&amp;q="+Jsp.escUrl(q)+"&amp;start="+(n+1);
     else href = "doc?sort=author&amp;start="+(n+1);
     out.print("<a href=\""+href+"\">");
     // out.println("<a href=\"kwic?sort="+facetField+"&amp;q="+q+"&start="+(n+1)+"&amp;hpp="+hits+"\">");
     out.print(doc.get("title"));
     out.println("</a>");
     out.println("  </td>");
-    out.println("  <td class=\"docs num\">"+dic.docs()+"</td>");
     out.println("  <td class=\"length num\">"+dfint.format(dic.length())+"</td>");
+    out.println("  <td class=\"docs num\">"+dic.docs()+"</td>");
     if (score) {
       out.println("  <td class=\"occs num\">" +dic.occs()+"</td>");
       out.println("  <td class=\"score num\">" +dfScoreFr.format(dic.score())+"</td>");

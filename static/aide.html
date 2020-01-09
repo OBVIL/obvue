@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Aide [Obvie]</title>
+    <link href="obvie.css" rel="stylesheet"/>
+  </head>
+  <body class="help">
+    <header>
+      <h1>Obvie, Aide</h1>
+    </header>
+    <main>
+      <article>
+
+        <section id="presentation">
+          <h1>Présentation</h1>
+          <p>Obvie est un logiciel en ligne pour explorer des textes. Il permet de retrouver des passages, comme dans un moteur de recherche conventionnel, selon différentes présentations paginées ; mais aussi, de calculer des statistiques globales, pour toute la collection, ou une sélection personnalisée. Il en résulte un bureau redimensionnable qui compose plusieurs vues, les plus intuitives et cohérentes possibles. La lecture de cette documentation n’est pas requise pour découvrir la plupart des fonctionnalités. Elles sont expliquées ici pour assurer l’utilisateur qu’il a tout découvert par lui-même. Le texte est ordonné comme un scénario conventionnel d’exploration, expliquant chaque vue.</p>
+          <ul>
+            <li><a href="#recherche">Recherche</a></li>
+            <li>
+              <span>Statistiques globales</span>
+              <ul>
+                <li><a href="#corpus">Corpus</a></li>
+                <li><a href="#chrono">Chronologie</a></li>
+                <li><a href="#nuage">Nuage</a></li>
+                <li><a href="#frequences">Fréquences</a></li>
+              </ul>
+            </li>
+            <li>
+              <span>Résultats paginées</span>
+              <ul>
+                <li><a href="#extraits">Extraits</a></li>
+                <li><a href="#concordance">Concordance</a></li>
+                <li><a href="#document">Document</a></li>
+                <li><a href="#comparer">Comparer</a></li>
+              </ul>
+            </li>
+          </ul>
+          <img src="doc/gout-critique.png"/>
+        </section>
+        <section id="recherche">
+          <h1>Recherche</h1>
+          <p>Le champ de recherche est toujours visible, dans toutes les vues, il affecte la plupart des vues. Quand aucun mot n’est cherché, les vues se rapportent à la totalité de la collection ou à la sélection en cours, sinon, elles se rapportent aux mots recherchés. Pour chaque vue seront précisés les comportements avec ou sans mots recherchés.</p>
+          <p><b>Lemmatisation —</b> Les textes sont indexés par les lemmes, c’est-à-dire que l’on trouve toutes les formes d’un verbe conjugué en cherchant son infinitif, de même, les noms et les adjectifs sont ramenés à une forme canonique au masculin singulier. Les noms propres doivent être cherchés avec une majuscule initiale. Les accents sont significatifs.</p>
+          <p><b>Pertinence –</b> Outre le tri par auteur ou dates, un moteur de recherche permet de proposer ses résultats en ordre de pertinence selon les mots recherchés. Après une expérimentation systématique, Obvie a choisi l’algorithme <a href="https://fr.wikipedia.org/wiki/Okapi_BM25">BM25</a> qui est apparu le plus robuste. Il est utilisé à tous les endroits où l’on parlera de <i>pertinence</i>. Le principe consiste à pondérer le nombre de d’occurrences trouvées dans des textes, la taille de ces textes, et le nombre de documents trouvés. Cet ordre est souvent plus précis que le nombre brut d’occurrences qui favorise les documents les plus longs.</p>
+          <p><b>Opérateurs —</b> Rechercher plusieurs mots revient à un <i>ou</i> implicite. Deux opérateurs fonctionnent et peuvent se combiner :</p>
+          <ul>
+            <li><b>+</b> (et). <i>+amour +gloire +beauté</i>, trouve tous les textes qui contiennent à la fois les mots <i>amour</i>, <i>gloire</i>, et <i>beauté</i>.</li>
+            <li><b>-</b> (non). <i>intuition -pur</i>, trouve tous les documents avec le mot <i>intuition</i> mais sans l’adjectif <i>pur</i>.</li>
+          </ul>
+          <img src="doc/amour-gloire-beaute.png"/>
+          <p>La lemmatisation dans Obvie est réalisée automatiquement par le logiciel <a href="https://github.com/oeuvres/alix">Alix</a>, selon un algorithme imparfait mais aux erreurs prévisibles. Toute graphie rencontrée est ramenée au lemme le plus fréquent dans un dictionnaire. Par exemple, la graphie <i>suis</i> est toujours ramenée au verbe <i>être</i>, sans essayer de résoudre les équivoques (ex : <i>je suis son ombre</i>, <i>être</i> ou <i>suivre</i> ?). Des progrès sont attendus prochainement sur la prise en compte de graphies d’Ancien-Régime, et les locutions (<i>parce que</i>, <i>Conseil d’État</i>…).</p>
+        </section>
+        <section id="corpus">
+          <h1>Corpus</h1>
+          <p>La vue corpus se présente principalement comme un tableau bibliographique de livres. Dans Obvie, un livre est un groupe de chapitres, le chapitre est l’unité documentaire de référence qui est trouvée et comptée (<i>docs</i>). Cliquer une cellule en tête de colonne permet de trier les lignes selon les valeurs dans cette colonne (mots ou nombres). C’est l’interface la plus complexe, elle a trois usages :</p>
+          <ul>
+            <li>Liste de tous les livres de la collection proposée (quand aucune sélection ou recherche est en cours).</li>
+            <li>Avec une recherche active, statistiques par livre.</li>
+            <li>Composition et enregistrement d’une sélection personnalisée de livres pour limiter les recherches et les statistiques. Mode d’emploi :
+              <ul>
+                <li>Cliquer la case à cocher d’une ligne pour sélectionner ou déselectionner un livre.</li>
+                <li>Nommer la sélection dans le champ texte.</li>
+                <li>Ne pas oublier d’enregistrer pour transmettre la liste au serveur.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>Ces différents usages conditionnent l’affichage de certaines sections ou colonnes.</p>
+          <img src="doc/corpus.png"/>
+          <p><b>Colonnes</b></p>
+          <ul>
+            <li><input type="checkbox"/>, <input type="checkbox" checked="checked"/> — Sur une ligne, cliquer une case à cocher sélectionne ou déselectionne un livre dans une sélection personnalisée. En tête de colonne, cliquer la case à cocher sélectionne ou déselectionne toutes les lignes visibles.</li>
+            <li><b>auteur —</b> Forme normalisée du ou des auteurs, tel qu’inscrit dans le fichier indexé.</li>
+            <li><b>date —</b> Année de publication, telle qu’inscrite dans le fichier indexé.</li>
+            <li><b>titre —</b> Cliquer un titre permet d’arriver à des résultats de recherche qui commencent avec le premier chapitre trouvé de ce livre.</li>
+            <li><b>taille —</b> Nombre total de mots du livre (indice utilisé dans les calculs statistiques).</li>
+            <li><b>docs —</b> Nombre de chapitres (<i>documents</i>) : soit le nombre total de chapitres du livre quand aucune recherche n’est en cours, soit le nombre de chapitres contenant les mots recherchés.</li>
+            <li><b>occs —</b> Nombre d’occurrences trouvées quand une recherche de mots est en cours.</li>
+            <li><b>pertinence —</b> Score de pertinence du livre selon la recherche en cours.</li>
+          </ul>
+          <b>Sélection</b>
+          <ul>
+            <li><input type="text" size="4"/> <button>Enregistre</button><b> —</b> Nom de la sélection personnalisée en cours ou à enregistrer.</li>
+            <li><a title="Déselectionner ce corpus" class="xred">🗙</a> Nom de sélection<b> —</b> Cliquer la croix rouge annule la sélection personnalisée en cours.</li>
+            <li>
+              <b>Filtres —</b> Cliquer la flèche pour ouvrir le bloc et accéder à des champs réactifs avec suggestion pour sélectionner des lignes dans le tableau (auteur, date, titre).
+            </li>
+          </ul>
+        </section>
+        <section id="chrono">
+          <h1>Chronologie</h1>
+          <p>La vue chronologique montre la fréquence des termes cherchés dans les documents trouvés (soit dans toute la collection, soit dans une sélection personnalisée). S’il n’y a pas de recherche en cours, cette fenêtre est vide. La lexicométrie enseigne qu’il vaut mieux comparer des fréquences sur des textes de taille comparable. À cette fin, cette chronologie emploie une échelle de dates <i>inégale</i>, une même longueur ne représente pas un nombre égal d’années, mais un nombre égal de mots. Un corpus historique réel a nécessairement une densité variable. Il se publiait beaucoup moins de livres durant l’Ancien-Régime que maintenant, les guerres diminuent beaucoup la production éditoriale. Les points sur le graphique sont posés à distance presque égales (toujours à la frontière d’un chapitre, qui est l’unité documentaire), les fréquences peuvent donc être considérées comparables. La courbe montrée est une interpolation avec un peu de lissage, elle aide à lire les seule données sûres, les points. L’échelle verticale est ramenée à des <i>ppm</i> (parties par million), c’est à dire en nombre d’occurences pour 1 million de mots. L’échelle verticale est logarithmique, ce qui permet de comparer les pentes entre courbes, même si les mots ne sont pas dans la même couche de fréquence (un mot 10x plus fréquent dans une section de corpus est un phénomène relativement aussi important, que ce mot soit rare ou commun). Cliquer sur une courbe lance une recherche chronologique sur ces mots qui commencera à l’année cliquée.</p>
+          <img src="doc/chrono.png"/>
+        </section>
+        <section id="nuage">
+          <h1>Nuage</h1>
+          <img src="doc/chrono.png"/>
+        </section>
+        <section>
+          <h1>Comparer</h1>
+          <p>L'interface comparer permet de lire deux textes côte à côte.</p>
+          <p>Pour commencer :</p>
+          <ul>
+            <li>Trouver un texte à gauche par ses métadonnées (le champ de recherche est réactif).</li>
+            <li>L'entête d'un texte comporte différentes listes de mots significatifs, cliquer la flèche ⮞> lance une recherche avec ces mots.</li>
+            <li>Choisir un texte à droite.</li>
+            <li>Cliquer un mot un texte, ou dans les listes en entête, en surligne toutes les occurrences (les réglettes au centre permette d'en mesurer la diffusion). Cliquer le titre d'une liste en surligne tous les mots dans les deux textes.</li>
+          </ul>
+          Comparaison:
+
+    On voudrait être sûr que le critère de la comparaison entre documents est bien basé sur les "mots en communs"?
+        Non, les mots en commun sont calculés a posteriori, ils sont différents pour chaque couple de documents. Les documents sont rapprochés par une requête qui ne concerne que le document source, selon la flèche que l’on clique (mots pleins fréquents, noms propres).
+    Est ce que l'ordre d'apparition de ces mots en commun est basé sur le nombre de fréquences?
+        Oui
+    Est ce que l'ordre d'apparition des documents à comprarer est également basé sur le nombre de fréquences?
+        C’est le même algorithme de pertinence qu’ailleurs (BM25) qui joue à la fois sur la fréquence dans le document et la rareté dans le corpus.
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

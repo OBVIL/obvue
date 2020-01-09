@@ -185,6 +185,7 @@ article.res div.line a, /* pivot word in kwic */
 a.delete,
 body.facet .active,
 h4 .occs,
+a.xred,
 .term .occs {
   color: #ea5b0c;
 }
@@ -240,7 +241,7 @@ input.start {
   padding: 2px 1rem;
   font-weight: bold;
   min-width: 8rem;
-  max-width: 60rem;
+  max-width: 55rem;
   width: 90%;
 }
 
@@ -479,6 +480,18 @@ iframe {
   z-index: 2;
 }
 
+#header .hn {
+  position: absolute;
+  top: 12px;
+  right: 7px;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+#header .hn:hover {
+  opacity: 1;
+}
+
 #header .base {
   position: absolute;
   bottom: 0;
@@ -493,14 +506,6 @@ iframe {
   padding: 0 3px;
   margin-left: 10px;
   border-color: #FFF;
-}
-
-#header .base mark a {
-  color: red;
-}
-
-#header .base mark a:hover {
-  color: red;
 }
 
 #tabs {
@@ -1015,6 +1020,17 @@ body.help {
   background-repeat: no-repeat;
 }
 
+body.help p,
+body.help li {
+  max-width: 60rem;
+  text-align: justify;
+}
+
+body.help img {
+  max-width: 100%;
+}
+
+
 body.comp.left main {
   padding-left: 2rem;
   padding-right: 2.5rem;
@@ -1192,6 +1208,10 @@ article.res header a:hover {
 #chapters mark,
 div.line a {
   font-weight: bold;
+}
+
+article.res div.line {
+  white-space: nowrap;
 }
 
 article.res div.line a:hover {
@@ -1384,8 +1404,9 @@ body.chrono form {
 }
 
 .dygraph-label {
-  color: #999;
-  font-size: 25px;
+  color: #000;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 .dygraph-xlabel {
@@ -1412,6 +1433,10 @@ body.chrono form {
 
 .sortable {
   margin-top: 0;
+}
+.sortable thead th {
+  font-weight: normal;
+  font-size: 16px;
 }
 
 /**

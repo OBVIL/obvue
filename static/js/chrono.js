@@ -83,10 +83,8 @@ function draw(div, data, labels) {
     // labelsKMB: true,
     legend: "always",
     labelsSeparateLines: true,
-    // ylabel: "occurrence / 100 000 mots",
+    ylabel: "ppm",
     // xlabel: "Répartition des années en nombre de mots",
-    showRoller: true,
-    rollPeriod: rollPeriod,
     clickCallback: xClick,
     drawCallback: function() {
       localStorage.setItem('chronoRollPeriod', this.rollPeriod());
@@ -101,13 +99,16 @@ function draw(div, data, labels) {
         fillGraph: true,
       },
     },
+    plotter: Dygraph.plotHistory,
+    fillAlpha: 0.35,
+    strokeWidth: 2,
+    logscale: true,
     colors:['rgba(26, 26, 128, 0.5)', 'rgba(192, 128, 0, 0.5)', 'rgba(0, 128, 192, 0.5)', 'rgba(146,137,127, 0.7)'],
-    strokeBorderWidth: 0.5,
-    strokeWidth: 5,
     highlightCircleSize: 8,
     drawHighlightPointCallback : hiCirc,
     drawGapEdgePoints: true,
-    logscale: true,
+    showRoller: false,
+    rollPeriod: rollPeriod,
 
     // logscale: true,
     axes : {

@@ -41,7 +41,6 @@ var chrono = document.getElementById("chrono");
 var panel = document.getElementById("panel");
 function dispatch(form)
 {
-  console.log("dispatch");
   var q = form['q'].value;
   parTop("q", q); // update URL
   // get frame as a window object
