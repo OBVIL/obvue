@@ -39,7 +39,7 @@ fetch("freqs.json" + query).then(
 });
 */
 var fontMin = 14;
-var fontMax = 80;
+var fontMax = 100;
 function cloud(div, list) {
   WordCloud(div, {
     list: list,
@@ -60,6 +60,7 @@ function cloud(div, list) {
     fontWeight: function(word, weight, fontSize) {
       var ratio = (fontSize - fontMin) / (fontMax - fontMin);
       var bold = 300 + Math.round(ratio * 16) * 50;
+      if (bold > 900) bold = 900; // if bold > 900, display will bug
       return "" + bold;
     },
     backgroundColor: null,

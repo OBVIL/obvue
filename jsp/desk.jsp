@@ -97,9 +97,9 @@ corpus = (Corpus)session.getAttribute(corpusKey);
      out.println("<mark><a class=\"xred\" title=\"Supprimer la sélection\" href=\"?corpus=new&amp;q="+Jsp.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
    }
  %></span>
-      <a class="logo" href="." title="Annuler les recherches en cours"><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
+      <a class="logo" href="../" title="Liste des collections de cet installation."><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
       <form id="qform" name="qform" onsubmit="return dispatch(this)" target="page" action="<%=view%>">
-        <a href="." class="reset">⟲</a>
+        <a href="." class="reset" title="Annuler les recherches en cours">⟲</a>
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>
         <input type="hidden" name="hpp"/>
         <input type="hidden" name="leftid"/>
@@ -115,6 +115,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
           <a href="kwic" target="page">Concordance</a>
           <a href="doc" target="page">Document</a>
           <button type="submit" id="comparer" style="display: none" onclick="this.form.target='_self'; this.form.action = 'comparer'; this.form.submit()">Comparer</button>
+          <a class="help" href="../static/aide.html" target="aide">Aide</a>
         </div>
       </form>
       <a class="hn" href="https://www.huma-num.fr/annuaire-des-sites-web" target="_blank">

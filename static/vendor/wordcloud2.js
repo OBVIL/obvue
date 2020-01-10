@@ -4,6 +4,8 @@
  *
  * Copyright 2011 - 2013 Tim Chien
  * Released under the MIT license
+ *
+ * 2018–2020 Debugs by frederic.glorieux@ficitif.org
  */
 
 'use strict';
@@ -840,22 +842,16 @@ if (!window.clearImmediate) {
               'scale(' + (1 / info.mu) + ')';
           }
           var styleRules = {
-            'position': 'absolute',
-            'display': 'block',
-            'font': fontWeight + ' ' +
-              (fontSize * info.mu) + 'px ' + settings.fontFamily,
-            'left': ((gx + info.gw / 2) * g + info.fillTextOffsetX) + 'px',
-            'top': ((gy + info.gh / 2) * g + info.fillTextOffsetY) + 'px',
+            'fontSize': (fontSize * info.mu) + 'px ',
             'width': info.fillTextWidth + 'px',
             'height': info.fillTextHeight + 'px',
-            'lineHeight': fontSize + 'px',
-            'whiteSpace': 'nowrap',
+            'fontWeight': fontWeight,
+            'fontFamily': settings.fontFamily,
+            'left': ((gx + info.gw / 2) * g + info.fillTextOffsetX) + 'px',
+            'top': ((gy + info.gh / 2) * g + info.fillTextOffsetY) + 'px',
             'transform': transformRule,
             'webkitTransform': transformRule,
             'msTransform': transformRule,
-            'transformOrigin': '50% 40%',
-            'webkitTransformOrigin': '50% 40%',
-            'msTransformOrigin': '50% 40%'
           };
           if (color) {
             styleRules.color = color;

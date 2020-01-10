@@ -217,6 +217,7 @@ select {
  */
 #header form {
   width: 80%;
+  margin-right: 20px;
   margin-left: calc(15vw + 100px);
 }
 
@@ -525,6 +526,7 @@ iframe {
   border-width: 1px;
   margin-right: 2px;
   cursor: pointer;
+  position: relative;
 }
 
 #tabs a:hover {
@@ -538,6 +540,12 @@ iframe {
 body.view_doc #tabs a.comparer {
   display: inline;
 }
+
+#tabs .help {
+  right: 63px;
+  position: absolute;
+}
+
 
 #alert {
   font-weight: bold;
@@ -858,6 +866,8 @@ body.document header.bibl a.but,
 button.magnify,
 a.reset {
   font-size: 1.5rem;
+  margin-left: -1.5rem;
+  position: absolute;
   border-radius: unset;
   border: none !important;
   background: transparent;
@@ -1294,7 +1304,13 @@ body.cloud #filter {
   color: #887;
   text-decoration: none;
   line-height: 0.8em;
-  /* padding: 0 0.5ex; */
+  display: block;
+  position: absolute;
+  line-height: 100%;
+  white-space: nowrap;
+  -ms-transform-origin: 50% 40%;
+  -webkit-transform-origin: 50% 40%;
+  transform-origin: 50% 40%;
 }
 
 #wordcloud2 .SUB {
@@ -1309,7 +1325,6 @@ body.cloud #filter {
 
 #wordcloud2 .NAME {
   color: #FF0000;
-  font-family: serif;
 }
 
 /**

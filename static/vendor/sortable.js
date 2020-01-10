@@ -158,14 +158,29 @@ var Sortable = {
     if (!table.tHead) {
       table.createTHead().appendChild(table.rows[0]);
     }
-    firstRow = table.tHead.rows[0];
+    if (!table.tBodies) {
+      tbody = table.createTBody();
+      for (var i = 1, len = table.rows.length; i < len; i++) tbody.appendChild(table.rows[i]);
+    }
+    else tbody = table.tBodies[0];
     // We have a first row: assume it's the header, and make its contents clickable links
+    firstRow = table.tHead.rows[0];
+    // get type of each col
+    var types = [];
+    var row = tbody.rows[0];
+    for (var i = 0, len2 = row.cells.length; i < len2 ; i++) {
+      var key = Sortable.key(row.cells[i]);
+      if (isNaN(key)) types[i] = false;
+      else types[i] = true;
+    }
+
     var i = firstRow.cells.length;
     while (--i >= 0) (function (i) { // hack to localize i
       var cell = firstRow.cells[i];
       var text = cell.innerHTML.replace(/<.+>/g, '');
       if (cell.className.indexOf("unsort") != -1 || cell.className.indexOf("nosort") != -1 || Sortable.trim(text) == '') return;
       cell.className = cell.className+' sorting';
+      if (types[i]) cell.desc = true;
       cell.addEventListener('click', function () {
         Sortable.sort(table, i, cell.desc);
         if (cell.desc) cell.className = cell.className.replace(/ asc/, "") + " desc";
@@ -173,11 +188,6 @@ var Sortable = {
         cell.desc = !cell.desc;
       });
     }(i));
-    if (!table.tBodies) {
-      tbody = table.createTBody();
-      for (var i = 1, len = table.rows.length; i < len; i++) tbody.appendChild(table.rows[i]);
-    }
-    else tbody = table.tBodies[0];
     // for each line, prepare a key to use for sorting
     for (var i = 0, len = tbody.rows.length; i < len; i++) {
       var row = tbody.rows[i];

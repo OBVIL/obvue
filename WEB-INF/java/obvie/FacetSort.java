@@ -7,8 +7,11 @@ import java.util.List;
 import alix.util.EnumOption;
 
 public enum FacetSort implements EnumOption {
+  /** Ordre alphabétique */
   alpha("Alphabétique"), 
+  /** Fréquence */
   freq("Fréquence"), 
+  /** Algorithme de pertinence */
   score("Pertinence"),
   ;
   // sadly repeating myself because enum can’t inherit from an abstract class (an Enum already extends a class). 

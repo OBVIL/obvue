@@ -169,7 +169,7 @@ int count = tools.getInt("count", -1);
 if (count < 1 || count > 2000) count = 500;
 
 
-final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.score, Cookies.freqsSort);
+final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
 WordClass cat = (WordClass)tools.getEnum("cat", WordClass.NOSTOP, Cookies.wordClass);
 
 int left = tools.getInt("left", 5, Cookies.coocLeft);
