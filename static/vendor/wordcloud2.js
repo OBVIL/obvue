@@ -588,6 +588,7 @@ if (!window.clearImmediate) {
         fctx.measureText('m').width,
         fctx.measureText('\uFF37').width) / mu;
 
+
       // Create a boundary box that is larger than our estimates,
       // so text don't get cut of (it sill might)
       var boxWidth = fw + fh * 2;

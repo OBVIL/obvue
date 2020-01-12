@@ -42,6 +42,7 @@ span.left {display: inline-block; text-align: right; width: <%= Math.round(left 
     </style>
   </head>
   <body class="results">
+    <%=getQuery(alix, q, null) %>
       <form id="qform">
         <input type="submit"
        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
@@ -143,8 +144,27 @@ if (topDocs != null) {
   
 }
     %>
+      <form>
+    <% 
+if (start > 1 && q != null) {
+  int n = Math.max(1, start-hppDefault);
+  out.println("<button name=\"prev\" type=\"submit\" onclick=\"this.form['start'].value="+n+"\">◀</button>");
+}
+    %>
+    
+      <input type="hidden" id="q" name="q" value="<%=Jsp.escUrl(q)%>"/>
+               <%
+if (topDocs != null) {
+  long max = topDocs.totalHits.value;
+  out.println("<input  name=\"start\" value=\""+start+"\" autocomplete=\"off\" class=\"start\"/>");
+  out.println("<span class=\"hits\"> / "+ max  + "</span>");
+  int n = start + hpp;
+  if (n < max) out.println("<button name=\"next\" type=\"submit\" onclick=\"this.form['start'].value="+n+"\">▶</button>");
+}
+        %>
+      </form>
+      <a href="#" id="gotop">▲</a>
     </main>
-    <a href="#" id="gotop">▲</a>
     <% out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->"); %>
   </body>
 </html>

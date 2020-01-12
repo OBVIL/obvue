@@ -458,7 +458,7 @@ iframe {
 #header {
   padding: 5px 2px 0 2px;
   position: relative;
-  height: 68px;
+  height: 65px;
   margin: 0;
   width: 100%;
   overflow: hidden; /* scroll pb */
@@ -526,7 +526,6 @@ iframe {
   border-width: 1px;
   margin-right: 2px;
   cursor: pointer;
-  position: relative;
 }
 
 #tabs a:hover {
@@ -542,8 +541,9 @@ body.view_doc #tabs a.comparer {
 }
 
 #tabs .help {
-  right: 63px;
   position: absolute;
+  right: 67px;
+  bottom: -3px;
 }
 
 
@@ -866,11 +866,17 @@ body.document header.bibl a.but,
 button.magnify,
 a.reset {
   font-size: 1.5rem;
-  margin-left: -1.5rem;
   position: absolute;
   border-radius: unset;
   border: none !important;
   background: transparent;
+}
+a.reset {
+  margin-left: -1.5rem;
+}
+
+button.magnify {
+  margin-left: -2rem;
 }
 
 button.magnify:hover,
@@ -1150,28 +1156,6 @@ a.tk5 {
 
 #rulhi a:hover {
   border: 1px solid #000;
-}
-
-/*
-.em1 {
-  font-weight: 300;
-}
-
-.em2 {
-  font-weight: 300;
-}
-
-.em3 {
-  font-weight: 400;
-}
-
-.em5 {
-  font-weight: 600;
-}
-
-*/
-.em9 {
-  font-weight: 700;
 }
 
 /**

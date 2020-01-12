@@ -13,7 +13,6 @@
 <%@ page import="alix.lucene.util.Cooc" %>
 <%@ page import="alix.util.Char" %>
 <%!final static DecimalFormatSymbols frsyms = DecimalFormatSymbols.getInstance(Locale.FRANCE);
-final static DecimalFormat dfScoreFr = new DecimalFormat("0.000", frsyms);
 final static DecimalFormatSymbols ensyms = DecimalFormatSymbols.getInstance(Locale.ENGLISH);
 static final DecimalFormat dfdec3 = new DecimalFormat("0.###", ensyms);
 private static final int OUT_HTML = 0;
@@ -21,7 +20,7 @@ private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
 
 
-private static String lines(final TopTerms dic, int max, final Mime mime, final WordClass cat, final boolean hasScore, final String q)
+private static String lines(final TopTerms dic, int max, final Mime mime, final WordClass cat, final String q)
 {
   if (max <= 0) max =dic.size();
   else max = Math.min(max, dic.size());
@@ -78,13 +77,13 @@ private static String lines(final TopTerms dic, int max, final Mime mime, final 
     switch(mime) {
       case json:
         if (!first) sb.append(",\n");
-        jsonLine(sb, dic, zetag, no, hasScore);
+        jsonLine(sb, dic, zetag, no);
         break;
       case csv:
-        csvLine(sb, dic, zetag, no, hasScore);
+        csvLine(sb, dic, zetag, no);
         break;
       default:
-        htmlLine(sb, dic, zetag, no, hasScore, q);
+        htmlLine(sb, dic, zetag, no, q);
     }
     no++;
     first = false;
@@ -96,12 +95,8 @@ private static String lines(final TopTerms dic, int max, final Mime mime, final 
 /**
  * An html table row &lt;tr&gt; for lexical frequence result.
  */
-private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, boolean hasScore, final String q)
+private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, final String q)
 {
-  sb.append("  <tr>\n");
-  sb.append("    <td class=\"num\">");
-  sb.append(no) ;
-  sb.append("</td>\n");
   String term = dic.term().toString();
   // .replace('_', ' ') ?
   sb.append("    <td><a");
@@ -130,27 +125,19 @@ private static void htmlLine(StringBuilder sb, final TopTerms dic, final Tag tag
   sb.append("    <td class=\"num\">");
   sb.append(dic.occs()) ;
   sb.append("</td>\n");
-  if (hasScore) {
-    sb.append("    <td class=\"num\">");
-    sb.append(dfScoreFr.format(dic.score())) ;
-    sb.append("</td>\n");
-  }
   sb.append("  </tr>\n");
 }
 
-private static void csvLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, final boolean hasScore)
+private static void csvLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no)
 {
   sb.append(dic.term().replaceAll("\t\n", " "));
   sb.append("\t").append(tag) ;
   sb.append("\t").append(dic.hits()) ;
   sb.append("\t").append(dic.occs()) ;
-  if (hasScore) {
-    sb.append("\t").append(dic.score()) ;
-  }
   sb.append("\n");
 }
 
-static private void jsonLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no, final boolean hasScore)
+static private void jsonLine(StringBuilder sb, final TopTerms dic, final Tag tag, final int no)
 {
   sb.append("    {\"word\" : \"");
   sb.append(dic.term().toString().replace( "\"", "\\\"" ).replace('_', ' ')) ;
@@ -189,8 +176,7 @@ if (corpus != null) filter = corpus.bits();
 if (q == null) {
   Freqs freqs = alix.freqs(field);
   dic = freqs.topTerms(filter);
-  if (sort == FacetSort.score) dic.sortByScores();
-  else dic.sortByOccs();
+  dic.sortByOccs();
 }
 else {
   Cooc cooc = alix.cooc(field);
@@ -198,8 +184,6 @@ else {
   dic = cooc.topTerms(terms, left, right, filter);
   dic.sortByOccs();
 }
-// cooccurrences has not yet score
-final boolean hasScore = (q == null);
 
 String format = tools.getString("format", null);
 if (format == null) format = (String)request.getAttribute(Dispatch.EXT);
@@ -211,7 +195,7 @@ if (Mime.json.equals(mime)) {
   response.setContentType(Mime.json.type);
   out.println("{");
   out.println("  \"data\":[");
-  out.println( lines(dic, count, mime, cat, hasScore, q));
+  out.println( lines(dic, count, mime, cat, q));
   out.println("\n  ]");
   out.println("\n}");
 }
@@ -231,11 +215,8 @@ else if (Mime.csv.equals(mime)) {
   }
   response.setHeader("Content-Disposition", "attachment; filename=\""+sb+".csv\"");
   out.print("Mot\tType\tChapitres\tOccurrences");
-  if (hasScore) {
-    out.print("\tScore");
-  }
   out.println();
-  out.print( lines(dic, -1, mime, cat, hasScore, q));
+  out.print( lines(dic, -1, mime, cat, q));
 }
 else {
 %>
@@ -253,9 +234,6 @@ else {
     <table class="sortable" style="float:left;">
       <caption>
         <form id="sortForm">
-        <input type="submit"
-       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
-       tabindex="-1" />
              <%
                if (corpus != null) {
                   out.println("<i>"+corpus.name()+"</i>");
@@ -275,24 +253,21 @@ else {
               <option/>
               <%= options(cat) %>
            </select>
+           <button type="submit">▼</button>
         </form>
       </caption>
       <thead>
         <tr>
     <%
-    out.println("<th>Nᵒ</th>");
     out.println("<th>Mot</th>");
     out.println("<th>Type</th>");
     out.println("<th>Chapitres</th>");
     out.println("<th>Occurrences</th>");
-    if (hasScore) {
-      out.println("<th>Score</th>");
-    }
     %>
         <tr>
       </thead>
       <tbody>
-        <%= lines(dic, count, mime, cat, hasScore, q) %>
+        <%= lines(dic, count, mime, cat, q) %>
       </tbody>
     </table>
     <% out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->"); %>

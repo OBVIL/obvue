@@ -21,7 +21,7 @@ String q = tools.getString("q", null);
 Corpus corpus = (Corpus)session.getAttribute(corpusKey);
 Set<String> bookids = null;
 if (corpus != null) bookids = corpus.books();
-Facet facet = alix.facet(Alix.BOOKID, TEXT, new Term(Alix.TYPE, DocType.book.name()));
+Facet facet = alix.facet(Alix.BOOKID, TEXT);
 IntSeries years = alix.intSeries(YEAR); // to get min() max() year
 TermList qTerms = alix.qTermList(TEXT, q);
 boolean score = (qTerms != null && qTerms.size() > 0);
@@ -120,9 +120,9 @@ switch(sort){
 
   while (dic.hasNext()) {
     dic.next();
-    int coverId = dic.cover();
-    Document doc = reader.document(coverId, FIELDS);
-    String bookid = doc.get(Alix.BOOKID);
+    String bookid = dic.term();
+    // String bookid = doc.get(Alix.BOOKID);
+    Document doc = reader.document(alix.getDocId(bookid), FIELDS);
     // for results, do not diplay not relevant results
     if (score && dic.occs() == 0) continue;
 

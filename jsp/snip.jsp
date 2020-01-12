@@ -38,7 +38,7 @@ if (start > 1 && q != null) {
   out.println("<button name=\"prev\" type=\"submit\" onclick=\"this.form['start'].value="+n+"\">◀</button>");
 }
         %>
-      <input type="hidden" id="q" name="q" value="<%=Jsp.escape(q)%>" autocomplete="off" size="60" autofocus="autofocus" 
+      <input type="hidden" id="q" name="q" value="<%=Jsp.escUrl(q)%>" autocomplete="off" size="60" autofocus="autofocus" 
         onfocus="this.setSelectionRange(this.value.length,this.value.length);"
         oninput="this.form['start'].value='';"/>
       <script>if(self == top) { input = document.getElementById("q"); if (input && input.type == "hidden") input.type = "text";}</script>
@@ -138,7 +138,27 @@ else { // list title of documents
   }
 }
     %>
+    <form>
+    <% 
+if (start > 1 && q != null) {
+  int n = Math.max(1, start-hppDefault);
+  out.println("<button name=\"prev\" type=\"submit\" onclick=\"this.form['start'].value="+n+"\">◀</button>");
+}
+    %>
+    
+      <input type="hidden" id="q" name="q" value="<%=Jsp.escUrl(q)%>"/>
+               <%
+if (topDocs != null) {
+  long max = topDocs.totalHits.value;
+  out.println("<input  name=\"start\" value=\""+start+"\" autocomplete=\"off\" class=\"start\"/>");
+  out.println("<span class=\"hits\"> / "+ max  + "</span>");
+  int n = start + hpp;
+  if (n < max) out.println("<button name=\"next\" type=\"submit\" onclick=\"this.form['start'].value="+n+"\">▶</button>");
+}
+        %>
+    </form>
+
+    <a href="#" id="gotop">▲</a>
     </main>
-    <% out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->"); %>
   </body>
 </html>

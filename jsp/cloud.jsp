@@ -47,16 +47,15 @@ else if (right > 10) right = 10;
         // out.println(max+" termes");
       }
       else {
-        out.println("&lt;<input style=\"width: 2em;\" name=\"left\" value=\""+left+"\"/>");
+        out.println("&lt;<input style=\"width: 2em;\" name=\"left\" value=\""+left+"\" title=\"Nombre de mots à gauche du pivot repris dans la liste de fréquence\"/>");
         out.print(q);
-        out.println("<input style=\"width: 2em;\" name=\"right\" value=\""+right+"\"/>&gt;");
-        out.println("<input type=\"hidden\" name=\"q\" value=\""+Jsp.escape(q)+"\"/>");
+        out.println("<input style=\"width: 2em;\" name=\"right\" value=\""+right+"\" title=\"Nombre de mots à droite du pivot repris dans la liste de fréquence\"/>&gt;");
       }
       %>
        
        <select name="count" onchange="this.form.submit()">
         <option/>
-        <%= options(new int[]{30, 50, 100, 200, 500, 100}, count) %>
+        <%= options(new int[]{30, 50, 100, 200, 500, 1000}, count) %>
        </select>
 
        <select name="cat" onchange="this.form.submit()">
@@ -64,7 +63,8 @@ else if (right > 10) right = 10;
           <%= options(cat) %>
        </select>
        
-       <input type="hidden" name="q" value="<%=Jsp.escape(q)%>"/>
+       <input type="hidden" name="q" value="<%=Jsp.escUrl(q)%>"/>
+       <button type="submit">▼</button>
     </form>
     <div id="wordcloud2"></div>
     <script src="../static/vendor/wordcloud2.js">//</script>
