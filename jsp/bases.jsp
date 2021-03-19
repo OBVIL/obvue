@@ -44,10 +44,12 @@ Développement: Frédéric Glorieux</p>
 https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41</p>
 
 <p>Prise en main rapide:<br/>
-https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM/edit</p>
+<a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41">
+https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM/edit</a></p>
 
 <p>Guide détaillé:<br/>
-https://obvil.huma-num.fr/obvie/static/aide.html</p>
+<a href="https://obvil.huma-num.fr/obvie/static/aide.html">
+https://obvil.huma-num.fr/obvie/static/aide.html</a></p>
 
 <p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>
 
