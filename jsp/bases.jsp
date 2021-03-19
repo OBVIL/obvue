@@ -35,10 +35,10 @@
   }
       %>
       </ul>
-      <p>Projet réalisé sous la direction de Didier Alexandre 2018-2020 <br/>
-Idée et conception: Motasem Alrahabi<br/>
-Contributeurs: Glenn Roe, Marine Riguet, Frédéric Glorieux<br/>
-Développement: Frédéric Glorieux</p>
+      <p>Projet réalisé sous la direction de <b>Didier Alexandre 2018-2020</b> <br/>
+Idée et conception: <b>Motasem Alrahabi</b><br/>
+Contributeurs: <b>Glenn Roe</b>, <b>Marine Riguet</b>, <b>Frédéric Glorieux</b><br/>
+Développement: <b>Frédéric Glorieux</b></p>
 
 <p>Présentation:<br/>
 <a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41">
