@@ -35,7 +35,7 @@
   }
       %>
       </ul>
-      <p>Projet réalisé sous la direction de <b>Didier Alexandre 2018-2020</b> <br/>
+      <p>Projet réalisé sous la direction de <b>Didier Alexandre </b>2018-2020 <br/>
 Idée et conception: <b>Motasem Alrahabi</b><br/>
 Contributeurs: <b>Glenn Roe</b>, <b>Marine Riguet</b>, <b>Frédéric Glorieux</b><br/>
 Développement: <b>Frédéric Glorieux</b></p>
