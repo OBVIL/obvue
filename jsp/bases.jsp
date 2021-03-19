@@ -41,10 +41,11 @@ Contributeurs: Glenn Roe, Marine Riguet, Frédéric Glorieux<br/>
 Développement: Frédéric Glorieux</p>
 
 <p>Présentation:<br/>
-https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41</p>
+<a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41">
+https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41</a></p>
 
 <p>Prise en main rapide:<br/>
-<a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41">
+<a href="https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM/edit">
 https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM/edit</a></p>
 
 <p>Guide détaillé:<br/>
