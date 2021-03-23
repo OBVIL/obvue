@@ -1938,5 +1938,6 @@ div.scatter div.legend div.dot {
 div.landing {
 
 	margin-left: 20px;
+	word-wrap: normal;  	
 
 }
