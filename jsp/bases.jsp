@@ -12,8 +12,8 @@
   </head>
   <body>
     <article class="chapter">
-      <h1>Obvie</h1>
-      <h3>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</h3>
+		Obvie
+      OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.
       <ul>
       <%
   HashMap<String, Properties> baseList = (HashMap<String, Properties>)request.getAttribute(Dispatch.BASE_LIST);
@@ -35,20 +35,20 @@
   }
       %>
       </ul>
-      <p>Projet réalisé sous la direction de <b>Didier Alexandre </b>2018-2020 </p>
-<p>Idée et conception: <b>Motasem Alrahabi</b><p/>
-<p>Contributeurs: <b>Glenn Roe</b>, <b>Marine Riguet</b>, <b>Frédéric Glorieux</b><p/>
-<p>Développement: <b>Frédéric Glorieux</b></p>
+      <p>Projet réalisé sous la direction de <b>Didier Alexandre </b>2018-2020 <br/>
+Idée et conception: <b>Motasem Alrahabi</b><br/>
+Contributeurs: <b>Glenn Roe</b>, <b>Marine Riguet</b>, <b>Frédéric Glorieux</b><br/>
+Développement: <b>Frédéric Glorieux</b></p>
 
-<p>Présentation:</p>
+<p>Présentation:
 <a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41">
 lien</a></p>
 
-<p>Prise en main rapide:<br/>
+<p>Prise en main rapide:
 <a href="https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM">
 lien</a></p>
 
-<p>Guide détaillé:<br/>
+<p>Guide détaillé:
 <a href="https://obvil.huma-num.fr/obvie/static/aide.html">
 lien</a></p>
 
