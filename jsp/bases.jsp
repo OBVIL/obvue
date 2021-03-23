@@ -35,22 +35,22 @@
   }
       %>
       </ul>
-      <p>Projet réalisé sous la direction de <b>Didier Alexandre </b>2018-2020 <br/>
-Idée et conception: <b>Motasem Alrahabi</b><br/>
-Contributeurs: <b>Glenn Roe</b>, <b>Marine Riguet</b>, <b>Frédéric Glorieux</b><br/>
-Développement: <b>Frédéric Glorieux</b></p>
+      <p>Projet réalisé sous la direction de <b>Didier Alexandre </b>2018-2020 </p>
+<p>Idée et conception: <b>Motasem Alrahabi</b><p/>
+<p>Contributeurs: <b>Glenn Roe</b>, <b>Marine Riguet</b>, <b>Frédéric Glorieux</b><p/>
+<p>Développement: <b>Frédéric Glorieux</b></p>
 
-<p>Présentation:<br/>
+<p>Présentation:</p>
 <a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41">
-https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41</a></p>
+lien</a></p>
 
 <p>Prise en main rapide:<br/>
 <a href="https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM">
-https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM</a></p>
+lien</a></p>
 
 <p>Guide détaillé:<br/>
 <a href="https://obvil.huma-num.fr/obvie/static/aide.html">
-https://obvil.huma-num.fr/obvie/static/aide.html</a></p>
+lien</a></p>
 
 <p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>
 
