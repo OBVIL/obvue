@@ -12,8 +12,8 @@
   </head>
   <body>
     <article class="chapter">
-		Obvie
-      OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.
+      <h1>Obvie</h1>
+      <h3>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</h3>
       <ul>
       <%
   HashMap<String, Properties> baseList = (HashMap<String, Properties>)request.getAttribute(Dispatch.BASE_LIST);
