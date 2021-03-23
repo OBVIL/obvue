@@ -12,6 +12,7 @@
   </head>
   <body>
     <article class="chapter">
+    <div class="landing">
       <h1>Obvie</h1>
       <h3>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</h3>
       <ul>
@@ -53,7 +54,7 @@ lien</a></p>
 lien</a></p>
 
 <p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>
-
+	</div>
     </article>
   </body>
 </html>

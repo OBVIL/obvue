@@ -1934,3 +1934,9 @@ div.scatter div.legend div.dot {
   position: static;
   transform: none;
 }
+
+div.landing {
+
+	margin: 2rem;
+
+}
