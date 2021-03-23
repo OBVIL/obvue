@@ -1936,7 +1936,7 @@ div.scatter div.legend div.dot {
 }
 
 div.landing {
-
+	max-width: 55rem;	
 	margin-left: 20px;
 	word-wrap: normal;  	
 
