@@ -14,8 +14,8 @@
     <article class="chapter">
     <div class="landing">
       <h1>Obvie</h1>
-      <h3><p>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</p></h3>
-      <p>Les corpus disponibles:</p>
+      <h3><p>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</p>
+      <p>Les corpus disponibles:</p></h3>
       <ul>
       <%
   HashMap<String, Properties> baseList = (HashMap<String, Properties>)request.getAttribute(Dispatch.BASE_LIST);
