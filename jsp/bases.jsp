@@ -14,7 +14,8 @@
     <article class="chapter">
     <div class="landing">
       <h1>Obvie</h1>
-      <h3>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</h3>
+      <h3><p>OBVIE est un moteur de recherche offrant des fonctionnalités avancées de fouille (avec lemmatisation), de statistiques lexicales et de comparaison de textes.</p></h3>
+      <p>Les corpus disponibles:</p>
       <ul>
       <%
   HashMap<String, Properties> baseList = (HashMap<String, Properties>)request.getAttribute(Dispatch.BASE_LIST);
@@ -36,6 +37,8 @@
   }
       %>
       </ul>
+      <p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>
+      
       <p>Projet réalisé sous la direction de Didier Alexandre 2018-2020 <br/>
 Idée et conception: Motasem Alrahabi<br/>
 Contributeurs: Glenn Roe, Marine Riguet, Frédéric Glorieux<br/>
@@ -52,8 +55,6 @@ lien</a></p>
 <p>Guide détaillé:
 <a href="https://obvil.huma-num.fr/obvie/static/aide.html" target="_blank">
 lien</a></p>
-
-<p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>
 	</div>
     </article>
   </body>
