@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: obvie.Base
-Name: obvie/
-Class-Path: alix.jar lucene-analyzers-common-8.2.0.jar lucene-core-8.2.0.jar saxon9.jar

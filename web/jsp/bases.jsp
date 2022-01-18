@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="obvie.Dispatch" %>
+<%@ page import="alix.lucene.Alix" %>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
   <head>
     <meta charset="UTF-8">
     <title>Obvie, bases à chercher</title>
@@ -18,23 +19,14 @@
       <p>Les corpus disponibles:</p></h3>
       <ul>
       <%
-  HashMap<String, Properties> baseList = (HashMap<String, Properties>)request.getAttribute(Dispatch.BASE_LIST);
-  int size = baseList.size();
-  String[] keys = new String[size];
-  keys = baseList.keySet().toArray(keys);
-  Arrays.sort(keys);
-  for (int i = 0; i < size; i++) {
-    Properties props = baseList.get(keys[i]);
-    String error = props.getProperty("error", null);
-    if (error != null) {
-      out.println("<li class=\"error\">"+error+"</li>");
-      continue;
-    }
-    String title = props.getProperty("title", null);
-    if (title == null) title = props.getProperty("name", null);
-    if (title == null) title =  keys[i];
-    out.println("<li><a href=\""+keys[i]+"/\">"+title+"</a></li>");
-  }
+      for (Map.Entry<String, Alix> entry : Alix.pool.entrySet()) {
+          String corpusId = entry.getKey();
+          out.println("<li>");
+          out.print("<a href=\"" + corpusId + "\">");
+          out.print(entry.getValue().props.get("label"));
+          out.println("</a>");
+          out.println("</li>");
+       }
       %>
       </ul>
       <p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>

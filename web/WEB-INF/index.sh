@@ -1,3 +1,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-java -cp $DIR/lib/obvie.jar obvie.Base "$@"
+echo $DIR
+java -cp "$DIR/lib/*" alix.cli.Load "$@"
 touch $DIR/web.xml # reload webapp

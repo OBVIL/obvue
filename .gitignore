@@ -1,3 +1,3 @@
-WEB-INF/bases/
-WEB-INF/classes/
-.settings/
+web/WEB-INF/bases/
+web/WEB-INF/classes/
+

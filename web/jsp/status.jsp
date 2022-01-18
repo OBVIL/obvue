@@ -36,7 +36,7 @@ for (String s: new String[] {
         try {
           final String baseDir = (String)request.getAttribute(Dispatch.BASE_DIR);
           final String base = (String)request.getAttribute(Dispatch.BASE);
-          final Alix alix = Alix.instance(baseDir +"/"+ base, new FrAnalyzer());
+          final Alix alix = Alix.instance(base);
           out.println("<li><pre>"+alix+"</pre></li>");
         } catch (Exception e) {
           out.println("<li>"+e+"</li>");
