@@ -20,7 +20,7 @@ private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
 
 
-private static String lines(final TopTerms dic, int max, final Mime mime, final WordClass cat, final String q)
+private static String lines(final TopTerms dic, int max, final Mime mime, final Cat cat, final String q)
 {
   if (max <= 0) max =dic.size();
   else max = Math.min(max, dic.size());
@@ -157,7 +157,7 @@ if (count < 1 || count > 2000) count = 500;
 
 
 final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
-WordClass cat = (WordClass)tools.getEnum("cat", WordClass.NOSTOP, Cookies.wordClass);
+Cat cat = (Cat)tools.getEnum("cat", Cat.NOSTOP, Cookies.cat);
 
 int left = tools.getInt("left", 5, Cookies.coocLeft);
 if (left < 0) left = 0;
@@ -224,13 +224,13 @@ else {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Fréquences, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
+    <title>Fréquences, <%= (corpus != null) ? JspTools.escape(corpus.name())+", " : "" %><%=alix.props.get("label")%> [Obvie]</title>
     <script src="../static/js/common.js">//</script>
     <link href="../static/vendor/sortable.css" rel="stylesheet"/>
     <link href="../static/obvie.css" rel="stylesheet"/>
   </head>
   <body>
-    <a class="reset" href="freqs.csv?q=<%=Jsp.escape(q)%>&amp;left=<%= left %>&amp;right=<%= right %>&amp;cat=<%= cat %>&amp;sort=<%= sort %>">csv 🡵</a>
+    <a class="reset" href="freqs.csv?q=<%=JspTools.escape(q)%>&amp;left=<%= left %>&amp;right=<%= right %>&amp;cat=<%= cat %>&amp;sort=<%= sort %>">csv 🡵</a>
     <table class="sortable" style="float:left;">
       <caption>
         <form id="sortForm">
@@ -246,7 +246,7 @@ else {
                   out.println("&lt;<input style=\"width: 2em;\" name=\"left\" value=\""+left+"\"/>");
                   out.print(q);
                   out.println("<input style=\"width: 2em;\" name=\"right\" value=\""+right+"\"/>&gt;");
-                  out.println("<input type=\"hidden\" name=\"q\" value=\""+Jsp.escape(q)+"\"/>");
+                  out.println("<input type=\"hidden\" name=\"q\" value=\""+JspTools.escape(q)+"\"/>");
                 }
              %>
            <select name="cat" onchange="this.form.submit()">

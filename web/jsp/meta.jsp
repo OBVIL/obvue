@@ -11,7 +11,7 @@ final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new S
 /**
  * Build a query fron page params, a selected  corpus a reference 
  */
-private Query query(final Jsp tools, final Corpus corpus, final Doc refDoc) throws IOException, NoSuchFieldException {
+private Query query(final JspTools tools, final Corpus corpus, final Doc refDoc) throws IOException, NoSuchFieldException {
   Query query = null;
   String refType = tools.getString("reftype", null);
   String q = tools.getString("q", null);
@@ -23,7 +23,7 @@ private Query query(final Jsp tools, final Corpus corpus, final Doc refDoc) thro
   }
   else if (q != null) {
     String lowbibl = q.toLowerCase();
-    query = Alix.qParse("bibl", lowbibl, ANAMET, Occur.MUST);
+    query = Alix.query("bibl", lowbibl, ANAMET, Occur.MUST);
   }
   // restrict to corpus
   if (corpus != null) {
@@ -43,7 +43,7 @@ private Query query(final Jsp tools, final Corpus corpus, final Doc refDoc) thro
   return query;
 }
 
-private String results(final Jsp tools, final Corpus corpus, final Doc refDoc, final IndexSearcher searcher)  throws IOException, NoSuchFieldException 
+private String results(final JspTools tools, final Corpus corpus, final Doc refDoc, final IndexSearcher searcher)  throws IOException, NoSuchFieldException 
 {
   StringBuilder sb = new StringBuilder();
   
@@ -157,7 +157,7 @@ else {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Recherche bibliographique, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
+    <title>Recherche bibliographique, <%= (corpus != null) ? JspTools.escape(corpus.name())+", " : "" %><%=alix.props.get("label")%> [Obvie]</title>
     <script src="../static/js/common.js">//</script>
     <link href="../static/obvie.css" rel="stylesheet"/>
   </head>
@@ -185,7 +185,7 @@ if (corpus != null) {
         }
         else {
           out.print("<input size=\"50\" type=\"text\" id=\"q\" onfocus=\"var len = this.value.length * 2; this.setSelectionRange(len, len); \" autofocus=\"true\"");
-          out.println(" spellcheck=\"false\" autocomplete=\"off\" name=\"q\" value=\"" +Jsp.escape(q)+"\"/>");
+          out.println(" spellcheck=\"false\" autocomplete=\"off\" name=\"q\" value=\"" +JspTools.escape(q)+"\"/>");
           // out.println("<br/>" + query);
         }
       %>

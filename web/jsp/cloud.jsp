@@ -16,7 +16,7 @@ private String options(int[] values, int value) {
 %>
 <%
 final String q = tools.getString("q", null);
-WordClass cat = (WordClass)tools.getEnum("cat", WordClass.NOSTOP, Cookies.wordClass);
+Cat cat = (Cat)tools.getEnum("cat", Cat.NOSTOP, Cookies.cat);
 final int count = tools.getInt("count", 500, Cookies.count);
 Corpus corpus = (Corpus)session.getAttribute(corpusKey);
 int left = tools.getInt("left", 5, Cookies.coocLeft);
@@ -60,10 +60,10 @@ else if (right > 10) right = 10;
 
        <select name="cat" onchange="this.form.submit()">
           <option/>
-          <%= options(cat) %>
+          <%= cat.options() %>
        </select>
        
-       <input type="hidden" name="q" value="<%=Jsp.escUrl(q)%>"/>
+       <input type="hidden" name="q" value="<%=JspTools.escUrl(q)%>"/>
        <button type="submit">▼</button>
     </form>
     <div id="wordcloud2"></div>

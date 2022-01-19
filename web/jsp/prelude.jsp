@@ -38,6 +38,7 @@
 <%@ page import="alix.lucene.search.SimilarityOccs" %>
 <%@ page import="alix.lucene.search.TermList" %>
 <%@ page import="alix.util.ML" %>
+<%@ page import="alix.web.Cat" %>
 <%@ page import="alix.web.DocSort" %>
 <%@ page import="alix.web.Option" %>
 <%@ page import="obvie.*" %>
@@ -66,7 +67,7 @@ public enum Cookies
   expression,
   facetSort,
   freqsSort,
-  wordClass,
+  cat,
   ;
 }
 

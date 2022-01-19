@@ -40,7 +40,7 @@ else {
     %>
     <form id="qform" target="_self">
       <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"  tabindex="-1" />
-      <input type="hidden" id="q" name="q" value="<%=Jsp.escape(q)%>" autocomplete="off"/>
+      <input type="hidden" id="q" name="q" value="<%=JspTools.escape(q)%>" autocomplete="off"/>
       <select name="ord" onchange="this.form.submit()">
         <option/>
         <%= options(sort) %>
@@ -87,7 +87,7 @@ else {
   
   final StringBuilder href = new StringBuilder();
   href.append("?sort=author");
-  if (q != null) href.append("&amp;q=").append(Jsp.escUrl(q));;
+  if (q != null) href.append("&amp;q=").append(JspTools.escUrl(q));;
   final int hrefLen = href.length();
   
   while (dic.hasNext()) {
