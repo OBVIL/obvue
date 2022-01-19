@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="prelude.jsp" %>
-<%@ page import="alix.lucene.search.Doc" %>
-<%@ page import="alix.util.Top" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="prelude.jsp"%>
+<%@ page import="alix.lucene.search.Doc"%>
+<%@ page import="alix.util.Top"%>
 
-<%!%>
 <%
-p
 
 
 // params for the page
@@ -53,28 +52,32 @@ if (doc == null && start > 0) {
 String title = "";
 if (doc != null) title = ML.detag(doc.doc().get("bibl"));
 
-SortField sf2 = new SortField(Alix.ID, SortField.Type.STRING)
+SortField sf2 = new SortField(Alix.ID, SortField.Type.STRING);
 %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title><%=title%> [Obvie]</title>
-    <link href="../static/vendor/teinte.css" rel="stylesheet"/>
-    <link href="../static/obvie.css" rel="stylesheet"/>
-    <script>
+<head>
+<meta charset="UTF-8">
+<title><%=title%> [Obvie]</title>
+<link href="../static/vendor/teinte.css" rel="stylesheet" />
+<link href="../static/obvie.css" rel="stylesheet" />
+<script>
+    
 <%
 if (doc != null) { // document id is verified, give it to javascript
   out.println("var docLength = "+doc.length(TEXT)+";");
   out.println("var docId = \""+doc.id()+"\";");
 }
 %>
-    </script>
-    <script src="../static/js/common.js">//</script>
-  </head>
-  <body class="document">
-  <%--  <a title="Comparer ce document" href="comparer?leftid=<%=id%>" target="_top" class="goright">⮞</a> --%>
-  <%
+    
+</script>
+<script src="../static/js/common.js">
+    //
+</script>
+</head>
+<body class="document">
+    <%--  <a title="Comparer ce document" href="comparer?leftid=<%=id%>" target="_top" class="goright">⮞</a> --%>
+    <%
   if (doc != null) {
     out.println("<header class=\"biblbar\" title=\""+title+"\">");
     out.print("<a href=\"#\" class=\"bibl\">");
@@ -83,24 +86,35 @@ if (doc != null) { // document id is verified, give it to javascript
     out.println("</header>");
   }
   %>
-  <main>
-      <form id="qform" action="#">
-        <input type="submit"
-       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
-       tabindex="-1" />
-        <input id="q" name="q" value="<%=JspTools.escape(q)%>" autocomplete="off" type="hidden"/>
-        <script>if(self == top) { input = document.getElementById("q"); if (input && input.type == "hidden") input.type = "text";}</script>
-        <%
+    <main>
+        <form id="qform" action="#">
+            <input type="submit"
+                style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+                tabindex="-1" /> <input id="q" name="q"
+                value="<%=JspTools.escape(q)%>" autocomplete="off"
+                type="hidden" />
+            <script>
+                                                    if (self == top) {
+                                                        input = document
+                                                                .getElementById("q");
+                                                        if (input
+                                                                && input.type == "hidden")
+                                                            input.type = "text";
+                                                    }
+                                                </script>
+            <%
         if (topDocs != null && start > 1) {
           out.println("<button name=\"prev\" type=\"submit\" onclick=\"this.form['start'].value="+(start - 1)+"\">◀</button>");
         }
         %>
-        <select name="sort" onchange="this.form['start'].value=''; this.form.submit()" title="Ordre">
-            <option/>
-            <%= sort %>
-        </select>
-        <input id="start" name="start" value="<%=start%>" autocomplete="off" size="1"/>
-               <%
+            <select name="sort"
+                onchange="this.form['start'].value=''; this.form.submit()"
+                title="Ordre">
+                <option />
+                <%= sort %>
+            </select> <input id="start" name="start" value="<%=start%>"
+                autocomplete="off" size="1" />
+            <%
         if (topDocs != null) {
           long max = topDocs.totalHits.value;
           out.println("<span class=\"hits\"> / "+ max  + "</span>");
@@ -109,8 +123,8 @@ if (doc != null) { // document id is verified, give it to javascript
           }
         }
         %>
-      </form>
-    <%
+        </form>
+        <%
     if (doc != null) {
       out.println("<div class=\"heading\">");
       out.println(doc.doc().get("bibl"));
@@ -127,7 +141,9 @@ if (doc != null) { // document id is verified, give it to javascript
     %>
     </main>
     <a href="#" id="gotop">▲</a>
-    <script src="../static/js/doc.js">//</script>
+    <script src="../static/js/doc.js">
+                    //
+                </script>
     <% out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->"); %>
-  </body>
+</body>
 </html>

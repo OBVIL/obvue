@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
+<%@ page import="org.apache.lucene.search.BooleanClause"%>
 <%@ page import="alix.lucene.analysis.MetaAnalyzer"%>
 <%@ page import="alix.lucene.search.Doc"%>
 <%@ page import="alix.lucene.search.Marker"%>
@@ -9,14 +10,13 @@
 final static Analyzer ANAMET = new MetaAnalyzer();
 final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new String[]{Alix.ID, Alix.BOOKID, "bibl"}));
 
-private Query mlt(Doc doc, String field)
+private Query mlt(Doc doc, String field) throws IOException, NoSuchFieldException
 {
     final int mltLimit = 50;
     Query mlt = null;
     BooleanQuery.Builder qBuilder = new BooleanQuery.Builder();
     FormEnum forms = doc.results(field, OptionDistrib.g.scorer(), OptionCat.STRONG.tags());
     forms.sort(FormEnum.Sorter.score, mltLimit, false);
-    int no = 1;
     forms.reset();
     while (forms.hasNext()) {
         forms.next();
@@ -26,9 +26,9 @@ private Query mlt(Doc doc, String field)
         qBuilder.add(tq, BooleanClause.Occur.SHOULD);
     }
     mlt = qBuilder.build();
-  }
-
+    return mlt;
 }
+
 
 /**
  * Build a query fron page params, a selected  corpus a reference 
@@ -39,14 +39,7 @@ private Query query(final JspTools tools, final Corpus corpus, final Doc refDoc)
     String refType = tools.getString("reftype", null);
     String q = tools.getString("q", null);
     if (refDoc != null) {
-        Top<String> topTerms;
-        if ("names".equals(refType)) {
-            topTerms = refDoc.names(TEXT);
-        }
-        else {
-            topTerms = refDoc.theme(TEXT);
-        }
-        query = Doc.moreLikeThis(TEXT, topTerms, 50);
+        query = mlt(refDoc, TEXT);
     } 
     else if (q != null) {
         String lowbibl = q.toLowerCase();
@@ -173,9 +166,10 @@ try {
 } // unknown id
 
 // parameter 
-if (Mime.htf.name().equals(format)) {
+if (OptionMime.htf.name().equals(format)) {
     out.println(results(tools, corpus, refDoc, searcher));
-} else {
+} 
+else {
 %>
 <!DOCTYPE html>
 <html>

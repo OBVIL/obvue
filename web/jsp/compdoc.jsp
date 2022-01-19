@@ -24,7 +24,33 @@ static String wordList(Top<String> top) {
             break;
     }
     return sb.toString();
-}%>
+}
+
+static String ahref(FormEnum forms) {
+    int max = 50;
+    forms.sort(FormEnum.Sorter.score, max, false);
+    forms.reset();
+    StringBuilder sb = new StringBuilder();
+    boolean first = true;
+    while (forms.hasNext()) {
+        forms.next();
+        String form = forms.form();
+        if (first)
+            first = false;
+        else
+            sb.append(", ");
+        sb.append("<a class=\"" + Doc.csstok(form) + "\">");
+        sb.append(JspTools.escape(form));
+        sb.append("</a>");
+        // out.print(" ("+entry.score()+")");
+        // if (entry.score() <= 0) break;
+        if (--max <= 0)
+            break;
+    }
+    return sb.toString();
+}
+
+%>
 <%
 // Parameters
 // get a doc, by String id is preferred (more persistant)
@@ -114,10 +140,10 @@ try { // load full document
         <a href="#" class="bibl"><%=bibl%></a>
     </header>
     <%
-    Top<String> top;
+    FormEnum forms;
 
     if (refDocId >= 0) {
-        top = doc.intersect(TEXT, refDocId);
+    	Top<String> top = doc.intersect(TEXT, refDocId);
         out.println("<nav class=\"biflex\">");
         out.println("<p class=\"keywords\">");
         out.println("<label onclick=\"clickSet(this)\">Mots en commun</label> : ");
@@ -128,11 +154,11 @@ try { // load full document
         out.println("</nav>");
     }
 
-    top = doc.frequent(TEXT);
+    forms = doc.results(TEXT, OptionDistrib.g.scorer(), OptionCat.STRONG.tags());
     out.println("<nav class=\"biflex\">");
     out.println("<p class=\"keywords\">");
     out.println("<label onclick=\"clickSet(this)\">Mots fréquents</label> : ");
-    out.println(wordList(top));
+    out.println(ahref(forms));
     out.print(".");
     out.println("</p>");
     out.println("<a class=\"goright\" href=\"meta?reftype=frequent&amp;refid=" + id + "\" target=\"right\">⮞</a>");
@@ -150,11 +176,11 @@ try { // load full document
       out.println("</nav>");
     */
 
-    top = doc.names(TEXT);
+    forms = doc.results(TEXT, OptionDistrib.g.scorer(), OptionCat.NAME.tags());
     out.println("<nav class=\"biflex\">");
     out.println("<p class=\"keywords\">");
     out.println("<label onclick=\"clickSet(this)\">Noms cités</label> : ");
-    out.println(wordList(top));
+    out.println(ahref(forms));
     out.print(".");
     out.println("</p>");
     out.println("<a class=\"goright\" href=\"meta?reftype=names&amp;refid=" + id + "\" target=\"right\">⮞</a>");
