@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="web/WEB-INF/lib/lucene-queries-9.0.0.jar"/>
 	<classpathentry kind="lib" path="ext/tomcat-jsp-api-8.5.28.jar"/>
 	<classpathentry kind="lib" path="ext/tomcat-servlet-api-8.5.73.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/json-20211205.jar"/>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

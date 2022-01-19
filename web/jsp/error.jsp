@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ page import="obvie.Dispatch" %>
+<%
+String baseHref = request.getContextPath() + '/';
+%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
   <head>
     <meta charset="UTF-8"/>
-    <link href="../static/obvie.css" rel="stylesheet"/>
+    <link href="<%=baseHref%>static/obvie.css" rel="stylesheet"/>
     <%
 String redirect = (String)request.getAttribute(Dispatch.REDIRECT);
 if (redirect != null) {

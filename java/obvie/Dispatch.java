@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import alix.lucene.Alix;
 import alix.web.Webinf;
 
 /**
- * In an MVC model, this servlet is the global controller for the Obvie app.
- * Model is the lucene index and alix java, View is the jsp pages. It is mainly
- * an url dispatcher.
+ * Url dispatcher.
  */
-public class Dispatch extends HttpServlet {
+public class Dispatch extends HttpServlet
+{
     /** Load bases from WEB-INF/, one time */
     static {
         if (!Webinf.bases) {
@@ -54,36 +54,30 @@ public class Dispatch extends HttpServlet {
             Arrays.asList(new String[] { "WEB-INF", "static", "jsp", "reload" }));
     /** Absolute folder of properties file and lucene index */
     private String baseDir;
-    /** List of available bases with properties */
-    private HashMap<String, Properties> baseList = new HashMap<>();
 
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) throws ServletException
+    {
         super.init(config);
         baseDir = getServletContext().getRealPath("WEB-INF/bases");
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         request.setCharacterEncoding("UTF-8");
-        String stack = (String) request.getAttribute(OBVIE);
-        if (stack == null) {
-            stack = request.getRequestURI();
-            request.setAttribute(OBVIE, stack);
-        } else {
-            stack += "\n" + request.getRequestURI();
-            if (stack.length() > 1024)
-                throw new ServletException("[Obvie] infinite loop error \n" + stack);
-        }
         String context = request.getContextPath();
+        
         String url = request.getRequestURI().substring(context.length());
         Path path = Paths.get(url).normalize();
+        if (path.getNameCount() > 5) {
+            throw new ServletException("Infinite loop");
+        }
         request.setAttribute(BASE_DIR, baseDir);
         if (path.getNameCount() == 0) {
-            request.setAttribute(BASE_LIST, baseList);
             request.getRequestDispatcher("/jsp/bases.jsp").forward(request, response);
             return;
         }
         String base = path.getName(0).toString();
-        // direct access to jsp directory, problems seen with tomcat7 and <jsp:include/>
+        // direct access to jsp directory, problem seen with tomcat7 and <jsp:include/>
         if ("jsp".equals(base)) {
             request.getRequestDispatcher(path.toString()).forward(request, response);
             return;
@@ -92,17 +86,29 @@ public class Dispatch extends HttpServlet {
         // reload base list
         if ("reload".equals(base)) {
             Webinf.bases();
-            throw new ServletException("[Obvie] reload base list.");
+            response.sendRedirect(context + "/");
+            return;
         }
 
-        Properties props = baseList.get(base);
-        if (props == null || props.contains("error")) {
-            throw new ServletException("[Obvie] {" + base + "} base not known on this server. \n" + stack);
+        
+        if (!Alix.hasInstance(base)) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            request.setAttribute(MESSAGE, "[Obvie] {" + base + "} base not known on this server.");
+            /* request.setAttribute(REDIRECT, base + "/"); */
+            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
+            return;
         }
+        
         request.setAttribute(BASE, base);
-        request.setAttribute(PROPS, props);
+        // ensure trailing space, redirection
+        if (path.getNameCount() == 1 && !url.equals("/" + base + "/")) {
+            
+            response.sendRedirect(context + "/" + base + "/");
+            return;
+        }
         // base welcome page
         if (path.getNameCount() == 1) {
+            /*
             // ensure trailing space for relative links
             if (!url.equals("/" + base + "/")) {
                 // response.sendRedirect(context+"/"+base+"/"); // will not work behind proxy
@@ -113,6 +119,7 @@ public class Dispatch extends HttpServlet {
                 request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
                 return;
             }
+            */
             request.getRequestDispatcher("/jsp/desk.jsp").forward(request, response);
             return;
         }
@@ -148,7 +155,8 @@ public class Dispatch extends HttpServlet {
     /**
      * Formulaires
      */
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         doGet(request, response);
     }
 

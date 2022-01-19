@@ -16,7 +16,7 @@ String url;
 // pars
 String pars = "";
 if (q != null) {
-  pars += "q=" + Jsp.escUrl(q);
+  pars += "q=" + JspTools.escUrl(q);
   if (start > 1) pars += "&amp;start="+start;
   if (expression) pars += "&amp;expression=true";
 }
@@ -79,7 +79,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
 <html>
   <head>
     <meta charset="UTF-8"/>
-    <title><%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
+    <title><%= (corpus != null) ? JspTools.escape(corpus.name())+", " : "" %><%=alix.props.get("label")%> [Obvie]</title>
     <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script> const base = "<%=base%>"; </script> <%-- give code of the text base for all further js  --%>
     <script src="../static/vendor/split.js">//</script>
@@ -91,10 +91,10 @@ corpus = (Corpus)session.getAttribute(corpusKey);
   </head>
   <body class="split">
     <header id="header">
-      <span class="base"><%=props.get("name")%> <%
+      <span class="base"><%=alix.props.get("label")%> <%
    if (corpus != null) {
      String name = corpus.name();
-     out.println("<mark><a class=\"xred\" title=\"Supprimer la sélection\" href=\"?corpus=new&amp;q="+Jsp.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
+     out.println("<mark><a class=\"xred\" title=\"Supprimer la sélection\" href=\"?corpus=new&amp;q="+JspTools.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
    }
  %></span>
       <a class="logo" href="../" title="Liste des collections de cet installation."><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
@@ -103,7 +103,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>
         <input type="hidden" name="hpp"/>
         <input type="hidden" name="leftid"/>
-        <input id="q" name="q" autocomplete="off" autofocus="true" value="<%=Jsp.escape(q)%>"
+        <input id="q" name="q" autocomplete="off" autofocus="true" value="<%=JspTools.escape(q)%>"
           oninput="this.form['start'].value=''; this.form['hpp'].value=''"
         />
         <button type="submit" name="send" tabindex="-1" class="magnify">⚲</button>

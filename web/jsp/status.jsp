@@ -20,7 +20,6 @@
           <li>ext=<%=request.getAttribute(Dispatch.EXT)%></li>
           <li>pathinfo=<%=request.getAttribute(Dispatch.PATHINFO)%></li>
           <li>baseDir=<%=request.getAttribute(Dispatch.BASE_DIR)%></li>
-          <li>baseList=<%=request.getAttribute(Dispatch.BASE_LIST)%></li>
           <li>base=<%=request.getAttribute(Dispatch.BASE)%></li>
           <li>props=<%=request.getAttribute(Dispatch.PROPS)%></li>
           <li>path=<%=request.getAttribute("path")%></li>

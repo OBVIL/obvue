@@ -26,7 +26,7 @@
 <%@ page import="org.apache.lucene.search.TopFieldCollector" %>
 <%@ page import="org.apache.lucene.search.TopScoreDocCollector" %>
 <%@ page import="org.apache.lucene.util.BitSet" %>
-<%@ page import="alix.web.Jsp" %>
+<%@ page import="alix.web.JspTools" %>
 <%@ page import="alix.web.Mime" %>
 <%@ page import="alix.lucene.Alix" %>
 <%@ page import="alix.lucene.Alix.FSDirectoryType" %>
@@ -36,10 +36,9 @@
 <%@ page import="alix.lucene.search.Corpus" %>
 <%@ page import="alix.lucene.search.CorpusQuery" %>
 <%@ page import="alix.lucene.search.SimilarityOccs" %>
-<%@ page import="alix.lucene.search.SimilarityTheme" %>
-<%@ page import="alix.lucene.search.TopTerms" %>
+<%@ page import="alix.lucene.search.TermList" %>
 <%@ page import="alix.util.ML" %>
-<%@ page import="alix.util.EnumOption" %>
+<%@ page import="alix.web.Option" %>
 <%@ page import="obvie.*" %>
 <%!
 
@@ -67,24 +66,6 @@ public static Query corpusQuery(Corpus corpus, Query query) throws IOException
   .build();
 }
 
-/**
- * Sort options for facets or corpus
- */
-public static String options(final EnumOption option) throws IOException
-{
-  StringBuilder sb = new StringBuilder();
-  for (EnumOption opt : option.list()) {
-    String value = opt.toString();
-    sb.append("<option");
-    if (option == opt) sb.append(" selected=\"selected\"");
-    sb.append(" value=\"");
-    sb.append(value);
-    sb.append("\">");
-    sb.append(opt.label());
-    sb.append("</option>\n");
-  }
-  return sb.toString();
-}
 
 
 /**
@@ -95,7 +76,7 @@ public static String options(final EnumOption option) throws IOException
 public static Query getQuery(Alix alix, String q, Corpus corpus) throws IOException
 {
   String fieldName = TEXT;
-  Query qWords = alix.qParse(fieldName, q);
+  Query qWords = alix.query(fieldName, q);
   if (qWords == null) {
     return null;
     // return filter;
@@ -200,7 +181,6 @@ public static Similarity getSimilarity(final String sortSpec)
   else if ("lmd0.7".equals(sortSpec)) similarity = new LMJelinekMercerSimilarity(0.7f);
   else if ("dfr".equals(sortSpec)) similarity = new DFRSimilarity(new BasicModelG(), new AfterEffectB(), new NormalizationH1());
   else if ("ib".equals(sortSpec)) similarity = new IBSimilarity(new DistributionLL(), new LambdaDF(), new NormalizationH3());
-  else if ("theme".equals(sortSpec)) similarity = new SimilarityTheme();
   else if ("occs".equals(sortSpec)) similarity = new SimilarityOccs();
   return similarity;
 }
@@ -208,15 +188,10 @@ public static Similarity getSimilarity(final String sortSpec)
 %>
 <%
 final long time = System.nanoTime();
-final Jsp tools = new Jsp(request, response, pageContext);
+final JspTools tools = new JspTools(pageContext);
 final String baseDir = (String)request.getAttribute(Dispatch.BASE_DIR);
 final String base = (String)request.getAttribute(Dispatch.BASE);
-final Properties props = (Properties)request.getAttribute(Dispatch.PROPS);
-{
-  final String baseName = props.getProperty("name", null);
-  if (baseName == null) props.setProperty("name", base);
-}
-final Alix alix = Alix.instance(baseDir +"/"+ base, new FrAnalyzer());
+final Alix alix = Alix.instance(base);
 final IndexSearcher searcher = alix.searcher();
 final IndexReader reader = alix.reader();
 final String corpusKey = CORPUS_ + base;
