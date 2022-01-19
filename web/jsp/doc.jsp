@@ -3,16 +3,17 @@
 <%@ page import="alix.lucene.search.Doc" %>
 <%@ page import="alix.util.Top" %>
 
-<%!
-%>
+<%!%>
 <%
+p
+
 
 // params for the page
 
 int docId = tools.getInt("docid", -1); // get doc by lucene internal docId or persistant String id
 String id = tools.getString("id", null);
 String q = tools.getString("q", null); // if no doc, get params to navigate in a results series
-DocSort sort = (DocSort)tools.getEnum("sort", DocSort.score, Cookies.docSort);
+OptionSort sort = (OptionSort)tools.getEnum("sort", OptionSort.score, Cookies.docSort);
 int start = tools.getInt("start", 1);
 
 // global variables
@@ -52,7 +53,7 @@ if (doc == null && start > 0) {
 String title = "";
 if (doc != null) title = ML.detag(doc.doc().get("bibl"));
 
-SortField sf2 = new SortField(Alix.ID, SortField.Type.STRING);
+SortField sf2 = new SortField(Alix.ID, SortField.Type.STRING)
 %>
 <!DOCTYPE html>
 <html>

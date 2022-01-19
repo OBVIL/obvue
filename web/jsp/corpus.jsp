@@ -13,7 +13,6 @@ final static DecimalFormat dfint = new DecimalFormat("###,###,##0", frsyms);
 final static HashSet<String> FIELDS = new HashSet<String>(Arrays.asList(new String[] {Alix.BOOKID, "byline", "year", "title"}));
 static Sort SORT = new Sort(new SortField("author1", SortField.Type.STRING), new SortField("year", SortField.Type.INT));%>
 <%
-
 // params for this page
 String q = tools.getString("q", null);
     
@@ -35,8 +34,6 @@ FacetSort sort = (FacetSort)tools.getEnum("ord", fallback, Cookies.corpusSort);
 BitSet bits = bits(alix, corpus, q);
 FormEnum dic = facet.results(qterms, bits, null);  // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -55,10 +52,14 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
     <main>
         <details id="filter">
           <summary>Filtres</summary>
-          <% if (author) { %>
+          <%
+          if (author) {
+          %>
           <label for="author">Auteur</label>
           <input id="author" name="author" autocomplete="off" list="author-data" size="50" type="text" onclick="select()" placeholder="Nom, Prénom"/>
-          <% } %>
+          <%
+          }
+          %>
           <br/><label for="start">Dates</label>
           <input id="start" name="start" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Début" class="year"/>
           <input id="end" name="end" type="number" min="<%=years.min()%>" max="<%=years.max()%>" placeholder="Fin" class="year"/>
@@ -68,10 +69,10 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
       <form method="post" id="corpus" target="_top" action=".">
         <table class="sortable" id="bib">
          <caption>
-            <%=  (bits != null)?bits.cardinality():facet.docsAll() %> chapitres.
+            <%=(bits != null)?bits.cardinality():facet.docsAll()%> chapitres.
             <input type="hidden" name="q" value="<%=JspTools.escape(q)%>"/>
             <button style="float: right;" name="save" type="submit">Enregistrer</button>
-            <input style="float: right;" type="text" size="10" id="name" name="name" value="<%= (corpus != null) ? JspTools.escape(corpus.name()) : "" %>"
+            <input style="float: right;" type="text" size="10" id="name" name="name" value="<%=(corpus != null) ? JspTools.escape(corpus.name()) : ""%>"
             title="Donner un nom à cette sélection"
             placeholder="Nom ?"
             oninvalid="this.setCustomValidity('Un nom est nécessaire pour enregistrer votre sélection.')"
@@ -86,81 +87,84 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
               <th class="title">titre</th>
               <th class="length" title="Taille en mots">taille</th>
               <th class="docs" title="Chapitres">docs</th>
-            <% if (score) { %>
+            <%
+            if (score) {
+            %>
               <th class="occs" title="Occurrences">occs</th>
               <th class="score">pertinence</th>
-            <% } %>
+            <%
+            }
+            %>
             </tr>
           </thead>
           <tbody>
     <%
-
-  // sorting
-switch(sort){
-  case alpha:
-    dic.sort();
-    break;
-  case freq:
-    if (score) dic.sortByOccs();
-    else dic.sort();
-    break;
-  case score:
-    if (score) dic.sortByScores();
-    else dic.sort();
-    break;
-  default:
-    dic.sort();
-}
- 
-  // Hack to use facet as a navigator in results
-  // get and cache results in facet order, find a index 
-  TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, DocSort.author);
-  int[] nos = facet.nos(topDocs);
-  dic.setNos(nos);
-
-
-  while (dic.hasNext()) {
-    dic.next();
-    String bookid = dic.term();
-    // String bookid = doc.get(Alix.BOOKID);
-    Document doc = reader.document(alix.getDocId(bookid), FIELDS);
-    // for results, do not diplay not relevant results
-    if (score && dic.occs() == 0) continue;
-
-    out.println("<tr>");
-    out.println("  <td class=\"checkbox\">");
-    out.print("    <input type=\"checkbox\" name=\"book\" id=\""+bookid+"\" value=\""+bookid+"\"");
-    if (bookids != null && bookids.contains(bookid)) out.print(" checked=\"checked\"");
-    out.println(" />");
-    out.println("  </td>");
-    out.print("  <td class=\"author\">");
-    out.print("<label for=\""+bookid+"\">");
-    String byline = doc.get("byline");
-    if (byline != null) out.print(byline);
-    out.print("</label>");
-    out.println("</td>");
-    out.println("  <td class=\"year\">"+doc.get("year")+"</td>");
-    out.println("  <td class=\"title\">");
-    int n = dic.n();
-    String href;
-    // hpp?
-    if (score) href = "kwic?sort=author&amp;q="+JspTools.escUrl(q)+"&amp;start="+(n+1);
-    else href = "doc?sort=author&amp;start="+(n+1);
-    out.print("<a href=\""+href+"\">");
-    // out.println("<a href=\"kwic?sort="+facetField+"&amp;q="+q+"&start="+(n+1)+"&amp;hpp="+hits+"\">");
-    out.print(doc.get("title"));
-    out.println("</a>");
-    out.println("  </td>");
-    out.println("  <td class=\"length num\">"+dfint.format(dic.length())+"</td>");
-    out.println("  <td class=\"docs num\">"+dic.docs()+"</td>");
-    if (score) {
-      out.println("  <td class=\"occs num\">" +dic.occs()+"</td>");
-      out.println("  <td class=\"score num\">" +dfScoreFr.format(dic.score())+"</td>");
+    // sorting
+    switch(sort){
+      case alpha:
+        dic.sort();
+        break;
+      case freq:
+        if (score) dic.sortByOccs();
+        else dic.sort();
+        break;
+      case score:
+        if (score) dic.sortByScores();
+        else dic.sort();
+        break;
+      default:
+        dic.sort();
     }
-    out.println("</tr>");
-  }
-  // TermQuery filterQuery = null;
-  // put metas
+     
+      // Hack to use facet as a navigator in results
+      // get and cache results in facet order, find a index 
+      TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
+      int[] nos = facet.nos(topDocs);
+      dic.setNos(nos);
+
+
+      while (dic.hasNext()) {
+        dic.next();
+        String bookid = dic.term();
+        // String bookid = doc.get(Alix.BOOKID);
+        Document doc = reader.document(alix.getDocId(bookid), FIELDS);
+        // for results, do not diplay not relevant results
+        if (score && dic.occs() == 0) continue;
+
+        out.println("<tr>");
+        out.println("  <td class=\"checkbox\">");
+        out.print("    <input type=\"checkbox\" name=\"book\" id=\""+bookid+"\" value=\""+bookid+"\"");
+        if (bookids != null && bookids.contains(bookid)) out.print(" checked=\"checked\"");
+        out.println(" />");
+        out.println("  </td>");
+        out.print("  <td class=\"author\">");
+        out.print("<label for=\""+bookid+"\">");
+        String byline = doc.get("byline");
+        if (byline != null) out.print(byline);
+        out.print("</label>");
+        out.println("</td>");
+        out.println("  <td class=\"year\">"+doc.get("year")+"</td>");
+        out.println("  <td class=\"title\">");
+        int n = dic.n();
+        String href;
+        // hpp?
+        if (score) href = "kwic?sort=author&amp;q="+JspTools.escUrl(q)+"&amp;start="+(n+1);
+        else href = "doc?sort=author&amp;start="+(n+1);
+        out.print("<a href=\""+href+"\">");
+        // out.println("<a href=\"kwic?sort="+facetField+"&amp;q="+q+"&start="+(n+1)+"&amp;hpp="+hits+"\">");
+        out.print(doc.get("title"));
+        out.println("</a>");
+        out.println("  </td>");
+        out.println("  <td class=\"length num\">"+dfint.format(dic.length())+"</td>");
+        out.println("  <td class=\"docs num\">"+dic.docs()+"</td>");
+        if (score) {
+          out.println("  <td class=\"occs num\">" +dic.occs()+"</td>");
+          out.println("  <td class=\"score num\">" +dfScoreFr.format(dic.score())+"</td>");
+        }
+        out.println("</tr>");
+      }
+      // TermQuery filterQuery = null;
+      // put metas
     %>
           </tbody>
         </table>

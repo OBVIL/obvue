@@ -13,7 +13,7 @@ int hpp = tools.getInt("hpp", hppDefault);
 if (hpp > hppMax || hpp < 1)
     hpp = hppDefault;
 final String q = tools.getString("q", null);
-DocSort sort = (DocSort) tools.getEnum("sort", DocSort.score, Cookies.docSort);
+OptionSort sort = (OptionSort) tools.getEnum("sort", OptionSort.score, Cookies.docSort);
 boolean expression = tools.getBoolean("expression", false);
 
 int start = tools.getInt("start", 1);

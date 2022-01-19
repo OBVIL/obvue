@@ -20,7 +20,7 @@ private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
 
 
-private static String lines(final TopTerms dic, int max, final Mime mime, final Cat cat, final String q)
+private static String lines(final TopTerms dic, int max, final OptionMime mime, final OptionCat cat, final String q)
 {
   if (max <= 0) max =dic.size();
   else max = Math.min(max, dic.size());
@@ -150,14 +150,14 @@ static private void jsonLine(StringBuilder sb, final TopTerms dic, final Tag tag
   sb.append("}");
 }%>
 <%
-  //parameters
+//parameters
 final String q = tools.getString("q", null);
 int count = tools.getInt("count", -1);
 if (count < 1 || count > 2000) count = 500;
 
 
 final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
-Cat cat = (Cat)tools.getEnum("cat", Cat.NOSTOP, Cookies.cat);
+OptionCat cat = (OptionCat)tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);
 
 int left = tools.getInt("left", 5, Cookies.coocLeft);
 if (left < 0) left = 0;
@@ -187,20 +187,20 @@ else {
 
 String format = tools.getString("format", null);
 if (format == null) format = (String)request.getAttribute(Dispatch.EXT);
-Mime mime;
-try { mime = Mime.valueOf(format); }
-catch(Exception e) { mime = Mime.html; }
+OptionMime mime;
+try { mime = OptionMime.valueOf(format); }
+catch(Exception e) { mime = OptionMime.html; }
 
-if (Mime.json.equals(mime)) {
-  response.setContentType(Mime.json.type);
+if (OptionMime.json.equals(mime)) {
+  response.setContentType(OptionMime.json.type);
   out.println("{");
   out.println("  \"data\":[");
   out.println( lines(dic, count, mime, cat, q));
   out.println("\n  ]");
   out.println("\n}");
 }
-else if (Mime.csv.equals(mime)) {
-  response.setContentType(Mime.csv.type);
+else if (OptionMime.csv.equals(mime)) {
+  response.setContentType(OptionMime.csv.type);
   StringBuffer sb = new StringBuffer().append(base);
   if (corpus != null) {
     sb.append('-').append(corpus.name());

@@ -1,7 +1,6 @@
 <%@ page language="java"  pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp" %>
-<%!
-private String options(int[] values, int value) {
+<%!private String options(int[] values, int value) {
   StringBuilder sb = new StringBuilder();
   for (int i = 0, lim = values.length; i < lim; i++) {
     sb.append("<option");
@@ -11,12 +10,12 @@ private String options(int[] values, int value) {
     sb.append("</option>\n");
   }
   return sb.toString();
-}
-
-%>
+}%>
 <%
+p
+
 final String q = tools.getString("q", null);
-Cat cat = (Cat)tools.getEnum("cat", Cat.NOSTOP, Cookies.cat);
+OptionCat cat = (OptionCat)tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);
 final int count = tools.getInt("count", 500, Cookies.count);
 Corpus corpus = (Corpus)session.getAttribute(corpusKey);
 int left = tools.getInt("left", 5, Cookies.coocLeft);
@@ -25,7 +24,6 @@ else if (left > 10) left = 10;
 int right = tools.getInt("right", 5, Cookies.coocRight);
 if (right < 0) right = 0;
 else if (right > 10) right = 10;
-
 %>
 <!DOCTYPE html>
 <html>

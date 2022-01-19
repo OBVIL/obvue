@@ -1,8 +1,7 @@
 <%@ page language="java"  pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="prelude.jsp" %>
-<%@ page import="alix.lucene.search.Facet" %>
+<%@ page import="alix.lucene.search.FieldFacet" %>
 <%@ page import="alix.lucene.search.TermList" %>
-<%@ page import="alix.lucene.search.TopTerms" %>
 <%@ page import="alix.lucene.search.TopTerms" %>
 <%@ page import="obvie.FacetField" %>
 
@@ -20,7 +19,6 @@ final boolean filtered = (bits !=null);
 TermList qTerms = alix.qTermList(TEXT, q);
 final boolean queried =  (qTerms != null && qTerms.size() > 0);
 if(!queried && sort == FacetSort.score) sort = FacetSort.freq;
-
 %>
 <!DOCTYPE html>
 <html>
@@ -32,26 +30,26 @@ if(!queried && sort == FacetSort.score) sort = FacetSort.freq;
     <base target="page" href="snip"/>
   </head>
   <body class="facet">
-    <% 
-if (alix.info(field.name()) == null) {
-  out.println("<p>Cette base de textes ne comporte pas d’auteurs.</p>");
-}
-else {
+    <%
+    if (alix.info(field.name()) == null) {
+      out.println("<p>Cette base de textes ne comporte pas d’auteurs.</p>");
+    }
+    else {
     %>
     <form id="qform" target="_self">
       <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"  tabindex="-1" />
       <input type="hidden" id="q" name="q" value="<%=JspTools.escape(q)%>" autocomplete="off"/>
       <select name="ord" onchange="this.form.submit()">
         <option/>
-        <%= options(sort) %>
+        <%=sort.options()%>
       </select>
     </form>
     <main>
 <%
-  Facet facet = alix.facet(field.name(), TEXT);
+FieldFacet facet = alix.facet(field.name(), TEXT);
   TopTerms dic = facet.topTerms(bits, qTerms, null);
   //Hack to use facet as a navigator in results, cache results in the facet order
-  TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, DocSort.author);
+  TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
   int[] nos = facet.nos(topDocs);
   dic.setNos(nos);
   
@@ -119,7 +117,7 @@ else {
     out.println("</div>");
   }
 }
-    %>
+%>
     </main>
     <script src="../static/js/facet.js">//</script>
     <% out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->"); %>

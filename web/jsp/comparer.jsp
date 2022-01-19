@@ -53,7 +53,7 @@ else { // help
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Comparer, <%= (corpus != null) ? Jsp.escape(corpus.name())+", " : "" %><%=props.get("name")%> [Obvie]</title>
+    <title>Comparer, <%= (corpus != null) ? JspTools.escape(corpus.name())+", " : "" %><%=alix.props.get("label")%> [Obvie]</title>
     <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script src="../static/js/common.js">//</script>
     <style>
@@ -71,10 +71,10 @@ body, html {
   </head>
   <body class="comparer">
     <header id="header">
-      <span class="base"><%=props.get("name")%> <%
+      <span class="base"><%= alix.props.get("label")%> <%
    if (corpus != null) {
      String name = corpus.name();
-     out.println("<mark><a title=\"Déselectionner ce corpus\" href=\"?corpus=new&amp;q="+Jsp.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
+     out.println("<mark><a title=\"Déselectionner ce corpus\" href=\"?corpus=new&amp;q="+JspTools.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
 
    }
  %></span>
@@ -83,7 +83,7 @@ body, html {
         <a href="." class="reset">⟲</a>
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>
         <input type="hidden" name="hpp"/>
-        <input id="q" name="q" autocomplete="off" value="<%=Jsp.escape(q)%>"
+        <input id="q" name="q" autocomplete="off" value="<%=JspTools.escape(q)%>"
           oninput="this.form['start'].value=''; this.form['hpp'].value=''"
         />
         <button type="submit" name="send" tabindex="-1" class="magnify">⚲</button>

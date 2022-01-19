@@ -27,7 +27,7 @@
 <%@ page import="org.apache.lucene.search.TopScoreDocCollector" %>
 <%@ page import="org.apache.lucene.util.BitSet" %>
 <%@ page import="alix.web.JspTools" %>
-<%@ page import="alix.web.Mime" %>
+<%@ page import="alix.web.OptionMime" %>
 <%@ page import="alix.lucene.Alix" %>
 <%@ page import="alix.lucene.Alix.FSDirectoryType" %>
 <%@ page import="alix.lucene.DocType" %>
@@ -35,16 +35,16 @@
 <%@ page import="alix.lucene.search.CollectorBits" %>
 <%@ page import="alix.lucene.search.Corpus" %>
 <%@ page import="alix.lucene.search.CorpusQuery" %>
+<%@ page import="alix.lucene.search.FormEnum" %>
 <%@ page import="alix.lucene.search.SimilarityOccs" %>
 <%@ page import="alix.lucene.search.TermList" %>
 <%@ page import="alix.util.ML" %>
-<%@ page import="alix.web.Cat" %>
-<%@ page import="alix.web.DocSort" %>
 <%@ page import="alix.web.Option" %>
+<%@ page import="alix.web.OptionCat" %>
+<%@ page import="alix.web.OptionDistrib" %>
+<%@ page import="alix.web.OptionSort" %>
 <%@ page import="obvie.*" %>
-<%!
-
-/** Field name containing canonized text */
+<%!/** Field name containing canonized text */
 public static String TEXT = "text";
 /** Field Name with int date */
 final static String YEAR = "year";
@@ -136,7 +136,7 @@ public BitSet bits(Alix alix, Corpus corpus, String q) throws IOException
  * Seems quite fast (2ms), no cache needed.
  * Cache bug if corpus is changed under same name.
  */
-public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, DocSort sorter) throws IOException
+public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, OptionSort sorter) throws IOException
 {
   // build the key 
   Query query = getQuery(alix, q, corpus);
@@ -204,9 +204,7 @@ public static Similarity getSimilarity(final String sortSpec)
   else if ("ib".equals(sortSpec)) similarity = new IBSimilarity(new DistributionLL(), new LambdaDF(), new NormalizationH3());
   else if ("occs".equals(sortSpec)) similarity = new SimilarityOccs();
   return similarity;
-}
-
-%>
+}%>
 <%
 final long time = System.nanoTime();
 final JspTools tools = new JspTools(pageContext);

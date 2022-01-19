@@ -183,13 +183,13 @@ const Split = (idsOption, options = {}) => {
   const cursor = getOption(
     options,
     'cursor',
-    direction === HORIZONTAL ? 'col-resize' : 'row-resize',
+    direction === HORIZONTAL ? 'col-resize' : 'row-resize'
   )
   const gutter = getOption(options, 'gutter', defaultGutterFn)
   const elementStyle = getOption(
     options,
     'elementStyle',
-    defaultElementStyleFn,
+    defaultElementStyleFn
   )
   const gutterStyle = getOption(options, 'gutterStyle', defaultGutterStyleFn)
 
@@ -454,7 +454,7 @@ const Split = (idsOption, options = {}) => {
         gutterSize,
         i === 0,
         i === sizesToTrim.length - 1,
-        gutterAlign,
+        gutterAlign
       )
       const elementMinSize = minSizes[i] + elementGutterSize
 
@@ -484,7 +484,7 @@ const Split = (idsOption, options = {}) => {
       if (excessPixels > 0 && toSpare[i] - excessPixels > 0) {
         const takenPixels = Math.min(
           excessPixels,
-          toSpare[i] - excessPixels,
+          toSpare[i] - excessPixels
         )
 
         // Subtract the amount taken for the next iteration
@@ -662,13 +662,13 @@ const Split = (idsOption, options = {}) => {
         gutterSize,
         i - 1 === 0,
         false,
-        gutterAlign,
+        gutterAlign
       )
       pair[bGutterSize] = getGutterSize(
         gutterSize,
         false,
         i === ids.length - 1,
-        gutterAlign,
+        gutterAlign
       )
 
       // if the parent has a reverse flex-direction, switch the pair elements.
@@ -707,7 +707,7 @@ const Split = (idsOption, options = {}) => {
           pair['butClick'] = butClick.bind(pair);
           pair['but'][addEventListener](
             'click',
-            pair['butClick'],
+            pair['butClick']
           );
         }
 
@@ -716,11 +716,11 @@ const Split = (idsOption, options = {}) => {
         // Attach bound event listener
         gutterElement[addEventListener](
           'mousedown',
-          pair[gutterStartDragging],
+          pair[gutterStartDragging]
         )
         gutterElement[addEventListener](
           'touchstart',
-          pair[gutterStartDragging],
+          pair[gutterStartDragging]
         )
         parent.insertBefore(gutterElement, element.element)
         // Set gutterSize from element offsetWith or offsetHeight of created element is not working here
@@ -735,9 +735,9 @@ const Split = (idsOption, options = {}) => {
         gutterSize,
         i === 0,
         i === ids.length - 1,
-        gutterAlign,
+        gutterAlign
       ),
-      i,
+      i
     )
 
     // After the first iteration, and we have a pair object, append it to the
@@ -799,11 +799,11 @@ const Split = (idsOption, options = {}) => {
       } else {
         pair.gutter[removeEventListener](
           'mousedown',
-          pair[gutterStartDragging],
+          pair[gutterStartDragging]
         )
         pair.gutter[removeEventListener](
           'touchstart',
-          pair[gutterStartDragging],
+          pair[gutterStartDragging]
         )
       }
 
@@ -811,7 +811,7 @@ const Split = (idsOption, options = {}) => {
         const style = elementStyle(
           dimension,
           pair.a.size,
-          pair[aGutterSize],
+          pair[aGutterSize]
         );
 
         Object.keys(style).forEach(prop => {
