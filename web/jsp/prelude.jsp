@@ -38,6 +38,7 @@
 <%@ page import="alix.lucene.search.SimilarityOccs" %>
 <%@ page import="alix.lucene.search.TermList" %>
 <%@ page import="alix.util.ML" %>
+<%@ page import="alix.web.DocSort" %>
 <%@ page import="alix.web.Option" %>
 <%@ page import="obvie.*" %>
 <%!
@@ -50,6 +51,25 @@ final static String YEAR = "year";
 public static String CORPUS_ = "corpus_";
 /** A filter for documents */
 final static Query QUERY_CHAPTER = new TermQuery(new Term(Alix.TYPE, DocType.chapter.name()));
+
+/**
+ * Control proliferation of cookies. All of them are user interface customization, 
+ * without personal information. Do not require consent.
+ */
+public enum Cookies
+{
+  count,
+  coocLeft,
+  coocRight,
+  corpusSort,
+  docSort,
+  expression,
+  facetSort,
+  freqsSort,
+  wordClass,
+  ;
+}
+
 
 /**
  * Build a filtering query with a corpus
@@ -122,7 +142,7 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
   if (query != null); // get a query, nothing to do
   else if (corpus != null) query = new CorpusQuery(corpus.name(), corpus.bits());
   else query = QUERY_CHAPTER;
-  Sort sort = sorter.sort();
+  Sort sort = sorter.sort;
   String key = ""+page.getRequest().getAttribute(Dispatch.BASE)+"?"+query;
   if (sort != null)  key+= " " + sort;
   /*

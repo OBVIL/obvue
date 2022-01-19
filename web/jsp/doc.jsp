@@ -87,7 +87,7 @@ if (doc != null) { // document id is verified, give it to javascript
         <input type="submit"
        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
        tabindex="-1" />
-        <input id="q" name="q" value="<%=Jsp.escape(q)%>" autocomplete="off" type="hidden"/>
+        <input id="q" name="q" value="<%=JspTools.escape(q)%>" autocomplete="off" type="hidden"/>
         <script>if(self == top) { input = document.getElementById("q"); if (input && input.type == "hidden") input.type = "text";}</script>
         <%
         if (topDocs != null && start > 1) {
@@ -96,7 +96,7 @@ if (doc != null) { // document id is verified, give it to javascript
         %>
         <select name="sort" onchange="this.form['start'].value=''; this.form.submit()" title="Ordre">
             <option/>
-            <%= options(sort) %>
+            <%= sort %>
         </select>
         <input id="start" name="start" value="<%=start%>" autocomplete="off" size="1"/>
                <%
@@ -116,7 +116,7 @@ if (doc != null) { // document id is verified, give it to javascript
       out.println("</div>");
       // hilite
       if (!"".equals(q)) {
-        String[] terms = alix.qTermList(TEXT, q).toArray();
+        String[] terms = alix.tokenize(q, TEXT);
         out.print(doc.hilite(TEXT, terms));
       }
       else {

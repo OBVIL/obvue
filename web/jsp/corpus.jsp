@@ -3,10 +3,10 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.text.DecimalFormatSymbols" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="alix.lucene.search.Facet" %>
-<%@ page import="alix.lucene.search.IntSeries" %>
+<%@ page import="alix.lucene.search.FieldFacet" %>
+<%@ page import="alix.lucene.search.FieldInt" %>
 <%@ page import="alix.lucene.search.TermList" %>
-<%@ page import="alix.lucene.search.TopTerms" %>
+<%@ page import="alix.lucene.search.FormEnum" %>
 <%!final static DecimalFormatSymbols frsyms = DecimalFormatSymbols.getInstance(Locale.FRANCE);
 final static DecimalFormat dfScoreFr = new DecimalFormat("0.00000", frsyms);
 final static DecimalFormat dfint = new DecimalFormat("###,###,##0", frsyms);
@@ -21,10 +21,11 @@ String q = tools.getString("q", null);
 Corpus corpus = (Corpus)session.getAttribute(corpusKey);
 Set<String> bookids = null;
 if (corpus != null) bookids = corpus.books();
-Facet facet = alix.facet(Alix.BOOKID, TEXT);
-IntSeries years = alix.intSeries(YEAR); // to get min() max() year
-TermList qTerms = alix.qTermList(TEXT, q);
-boolean score = (qTerms != null && qTerms.size() > 0);
+FieldFacet facet = alix.fieldFacet(Alix.BOOKID, TEXT);
+
+FieldInt years = alix.fieldInt(YEAR, null); // to get min() max() year
+String[] qterms = alix.tokenize(TEXT, q);
+boolean score = (qterms != null && qterms.length > 0);
 
 FacetSort fallback = FacetSort.alpha;
 if (score) fallback = FacetSort.score;
@@ -32,7 +33,7 @@ FacetSort sort = (FacetSort)tools.getEnum("ord", fallback, Cookies.corpusSort);
 
 
 BitSet bits = bits(alix, corpus, q);
-TopTerms dic = facet.topTerms(bits, qTerms, null);
+FormEnum dic = facet.results(qterms, bits, null);  // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
 
 
@@ -67,10 +68,10 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
       <form method="post" id="corpus" target="_top" action=".">
         <table class="sortable" id="bib">
          <caption>
-            <%=  (bits != null)?bits.cardinality():facet.docsAll %> chapitres.
-            <input type="hidden" name="q" value="<%=Jsp.escape(q)%>"/>
+            <%=  (bits != null)?bits.cardinality():facet.docsAll() %> chapitres.
+            <input type="hidden" name="q" value="<%=JspTools.escape(q)%>"/>
             <button style="float: right;" name="save" type="submit">Enregistrer</button>
-            <input style="float: right;" type="text" size="10" id="name" name="name" value="<%= (corpus != null) ? Jsp.escape(corpus.name()) : "" %>"
+            <input style="float: right;" type="text" size="10" id="name" name="name" value="<%= (corpus != null) ? JspTools.escape(corpus.name()) : "" %>"
             title="Donner un nom à cette sélection"
             placeholder="Nom ?"
             oninvalid="this.setCustomValidity('Un nom est nécessaire pour enregistrer votre sélection.')"
@@ -143,7 +144,7 @@ switch(sort){
     int n = dic.n();
     String href;
     // hpp?
-    if (score) href = "kwic?sort=author&amp;q="+Jsp.escUrl(q)+"&amp;start="+(n+1);
+    if (score) href = "kwic?sort=author&amp;q="+JspTools.escUrl(q)+"&amp;start="+(n+1);
     else href = "doc?sort=author&amp;start="+(n+1);
     out.print("<a href=\""+href+"\">");
     // out.println("<a href=\"kwic?sort="+facetField+"&amp;q="+q+"&start="+(n+1)+"&amp;hpp="+hits+"\">");
@@ -171,8 +172,8 @@ switch(sort){
     for (String field: new String[]{"author", "title"}) {
       if(alix.info(field) == null) continue;
       out.println("<datalist id=\""+field+"-data\">");
-      facet = alix.facet(field, TEXT);
-      dic = facet.topTerms();
+      facet = alix.fieldFacet(field, TEXT);
+      dic = facet.results();
       dic.sort();
       while (dic.hasNext()) {
         dic.next();
