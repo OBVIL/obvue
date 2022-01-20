@@ -149,7 +149,7 @@ static private void jsonLine(StringBuilder sb, final FormEnum dic, final int fla
     sb.append(", \"weight\" : ");
     sb.append(dfdec3.format(dic.occs()));
     sb.append(", \"attributes\" : {\"class\" : \"");
-    sb.append(Tag.label(flag));
+    sb.append(Tag.name(flag));
     sb.append("\"}");
     sb.append("}");
 }

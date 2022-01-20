@@ -88,20 +88,19 @@ out.println("  \"time\" : \"" + (System.nanoTime() - partial) / 1000000.0 + "ms\
 
 
 //parse the query by line
-TermList terms = alix.qTermList(TEXT, q);
-if (terms.size() > 0) {
-  terms.sortByRowFreq(); // sort query lines by freq
+String[] forms = alix.tokenize(q, TEXT);
+if (forms.length > 0) {
   out.print("  \"labels\": [\"\"");
   boolean first = true;
-  for(Term t: terms) {
-    if (t == null) continue;
+  for(String form: forms) {
+    if (form == null) continue;
     out.print(", \"");
-    out.print(t.text().replace("\"", ""));
+    out.print(form.replace("\"", ""));
     out.print("\"");
   }
   out.println("],");
   // get dots by curve
-  long[][] data = scale.curves(terms, dots);
+  long[][] data = scale.curves(forms, dots);
   long step = data[0][1];
   // 
   int rows = data[0].length;
