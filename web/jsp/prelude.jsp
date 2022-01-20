@@ -53,6 +53,40 @@
     public enum Cookies {
         count, coocLeft, coocRight, corpusSort, docSort, expression, facetSort, freqsSort, cat,;
     }
+    
+    /**
+     * Sorting facets
+     */
+    public enum OptionFacetSort implements Option {
+        /** Ordre alphabétique */
+        alpha("Alphabétique"), 
+        /** Fréquence */
+        freq("Fréquence"), 
+        /** Algorithme de pertinence */
+        score("Pertinence"),
+        ;
+        // sadly repeating myself because enum can’t inherit from an abstract class (an Enum already extends a class). 
+        public final String label;
+        final public String hint = "";
+        private OptionFacetSort(final String label) {  
+            this.label = label ;
+        }
+        public String label() { return label; }
+        @Override
+        public String hint() { return hint; }
+    }
+
+    public enum OptionFacet implements Option {
+        author("Auteur"), 
+        ;
+        public final String label;
+        final public String hint = "";
+        private OptionFacet(final String label) {    
+            this.label = label ;
+        }
+        public String label() { return label; }
+        public String hint() { return hint; }
+    }
 
     /**
      * Build a filtering query with a corpus

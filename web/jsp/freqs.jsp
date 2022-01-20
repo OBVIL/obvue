@@ -161,7 +161,7 @@ int count = tools.getInt("count", -1);
 if (count < 1 || count > 2000)
     count = 500;
 
-final FacetSort sort = (FacetSort) tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
+final OptionFacetSort sort = (OptionFacetSort) tools.getEnum("sort", OptionFacetSort.freq, Cookies.freqsSort);
 OptionCat cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);
 
 int left = tools.getInt("left", 5, Cookies.coocLeft);
@@ -195,7 +195,7 @@ if (q == null) {
     dic.search = alix.tokenize(q, TEXT);
     long found = rail.coocs(dic); // populate the wordlist
 }
-dic.sort(OptionOrder.occs.sorter(), count);
+dic.sort(OptionOrder.occs.order(), count);
 
 String format = tools.getString("format", null);
 if (format == null)
