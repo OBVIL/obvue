@@ -23,16 +23,17 @@ if (corpus != null) bookids = corpus.books();
 FieldFacet facet = alix.fieldFacet(Alix.BOOKID, TEXT);
 
 FieldInt years = alix.fieldInt(YEAR, null); // to get min() max() year
-String[] qterms = alix.tokenize(TEXT, q);
-boolean score = (qterms != null && qterms.length > 0);
+String[] qterms = alix.tokenize(q, TEXT);
+final boolean score = (qterms != null && qterms.length > 0);
 
-FacetSort fallback = FacetSort.alpha;
-if (score) fallback = FacetSort.score;
-FacetSort sort = (FacetSort)tools.getEnum("ord", fallback, Cookies.corpusSort);
+OptionFacetSort fallback = OptionFacetSort.alpha;
+if (score) fallback = OptionFacetSort.score;
+OptionFacetSort sort = (OptionFacetSort)tools.getEnum("ord", fallback, Cookies.corpusSort);
+
 
 
 BitSet bits = bits(alix, corpus, q);
-FormEnum dic = facet.results(qterms, bits, null);  // .topTerms(bits, qTerms, null);
+FormEnum dic = facet.results(qterms, bits, OptionDistrib.g.scorer());  // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
 %>
 <!DOCTYPE html>
@@ -99,22 +100,23 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
           </thead>
           <tbody>
     <%
-    // sorting
-    switch(sort){
-      case alpha:
-        dic.sort();
+FormEnum.Order order;
+switch (sort) {
+    case alpha :
+        order = FormEnum.Order.alpha;
         break;
-      case freq:
-        if (score) dic.sortByOccs();
-        else dic.sort();
+    case score :
+        if (score) order = FormEnum.Order.score;
+        else order = FormEnum.Order.alpha;
         break;
-      case score:
-        if (score) dic.sortByScores();
-        else dic.sort();
+    case freq :
+        if (score) order = FormEnum.Order.occs;
+        else order = FormEnum.Order.alpha;
         break;
-      default:
-        dic.sort();
-    }
+    default :
+        order = FormEnum.Order.alpha;
+}
+dic.sort(order);
      
       // Hack to use facet as a navigator in results
       // get and cache results in facet order, find a index 
@@ -125,7 +127,7 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
 
       while (dic.hasNext()) {
         dic.next();
-        String bookid = dic.term();
+        String bookid = dic.form();
         // String bookid = doc.get(Alix.BOOKID);
         Document doc = reader.document(alix.getDocId(bookid), FIELDS);
         // for results, do not diplay not relevant results
@@ -145,7 +147,7 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
         out.println("</td>");
         out.println("  <td class=\"year\">"+doc.get("year")+"</td>");
         out.println("  <td class=\"title\">");
-        int n = dic.n();
+        int n = dic.no();
         String href;
         // hpp?
         if (score) href = "kwic?sort=author&amp;q="+JspTools.escUrl(q)+"&amp;start="+(n+1);
@@ -155,7 +157,7 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
         out.print(doc.get("title"));
         out.println("</a>");
         out.println("  </td>");
-        out.println("  <td class=\"length num\">"+dfint.format(dic.length())+"</td>");
+        out.println("  <td class=\"length num\">"+dfint.format(dic.occs())+"</td>");
         out.println("  <td class=\"docs num\">"+dic.docs()+"</td>");
         if (score) {
           out.println("  <td class=\"occs num\">" +dic.occs()+"</td>");
@@ -173,17 +175,20 @@ const base = "<%=base%>"; // give code of texts base to further Javascript
 
     <script src="../static/vendor/sortable.js">//</script>
     <%
+    // Loop on metadata fields to provide lists for suggestion
     for (String field: new String[]{"author", "title"}) {
       if(alix.info(field) == null) continue;
-      out.println("<datalist id=\""+field+"-data\">");
       facet = alix.fieldFacet(field, TEXT);
       dic = facet.results();
-      dic.sort();
+      out.println("<datalist id=\""+field+"-data\">");
+      dic.sort(FormEnum.Order.alpha);
+      /*
       while (dic.hasNext()) {
         dic.next();
         // long weight = facetEnum.weight();
-        out.println("  <option value=\""+dic.term()+"\"/>");
+        out.println("  <option value=\""+ JspTools.escape(dic.form())+"\"/>");
       }
+      */
       out.println("</datalist>");
     }
     %>
