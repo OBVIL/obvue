@@ -28,7 +28,7 @@ static String wordList(Top<String> top) {
 
 static String ahref(FormEnum forms) {
     int max = 50;
-    forms.sort(FormEnum.Sorter.score, max, false);
+    forms.sort(FormEnum.Order.score, max, false);
     forms.reset();
     StringBuilder sb = new StringBuilder();
     boolean first = true;

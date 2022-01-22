@@ -1,10 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ page import="java.io.IOException"%>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.text.DecimalFormatSymbols" %>
 <%@ page import="java.util.Arrays"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.HashSet"%>
 <%@ page import="java.util.LinkedHashMap"%>
+<%@ page import="java.util.Locale" %>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.Properties"%>
 <%@ page import="java.util.Set"%>
@@ -37,14 +40,19 @@
 <%@ page import="alix.util.ML"%>
 <%@ page import="alix.web.*"%>
 <%@ page import="obvie.*"%>
-<%!/** Field name containing canonized text */
-    public static String TEXT = "text";
-    /** Field Name with int date */
-    final static String YEAR = "year";
-    /** Key prefix for current corpus in session */
-    public static String CORPUS_ = "corpus_";
-    /** A filter for documents */
-    final static Query QUERY_CHAPTER = new TermQuery(new Term(Alix.TYPE, DocType.chapter.name()));
+<%!
+/** Field name containing canonized text */
+public static String TEXT = "text";
+/** Field Name with int date */
+final static String YEAR = "year";
+/** Key prefix for current corpus in session */
+public static String CORPUS_ = "corpus_";
+/** A filter for documents */
+final static Query QUERY_CHAPTER = new TermQuery(new Term(Alix.TYPE, DocType.chapter.name()));
+
+final static DecimalFormatSymbols frsyms = DecimalFormatSymbols.getInstance(Locale.FRANCE);
+final static DecimalFormat dfScoreFr = new DecimalFormat("0.00000", frsyms);
+final static DecimalFormat dfint = new DecimalFormat("###,###,##0", frsyms);
 
     /**
      * Control proliferation of cookies. All of them are user interface customization, 

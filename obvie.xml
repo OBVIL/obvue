@@ -1,0 +1,9 @@
+<!-- Context file for Tomcat, docBase should be edited to conform to where is the webapp -->
+<Context 
+  docBase="web" 
+  reloadable="true" 
+>
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
+  <!-- Avoid Cross Site warning in browser for auto session cookie -->
+  <CookieProcessor sameSiteCookies="Lax"/>
+</Context>

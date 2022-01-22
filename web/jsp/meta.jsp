@@ -16,7 +16,7 @@ private Query mlt(Doc doc, String field) throws IOException, NoSuchFieldExceptio
     Query mlt = null;
     BooleanQuery.Builder qBuilder = new BooleanQuery.Builder();
     FormEnum forms = doc.results(field, OptionDistrib.g.scorer(), OptionCat.STRONG.tags());
-    forms.sort(FormEnum.Sorter.score, mltLimit, false);
+    forms.sort(FormEnum.Order.score, mltLimit, false);
     forms.reset();
     while (forms.hasNext()) {
         forms.next();

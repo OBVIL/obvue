@@ -54,14 +54,15 @@ FormEnum dic = facet.results(forms, bits, null);
 //Hack to use facet as a navigator in results, cache results in the facet order
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
 int[] nos = facet.nos(topDocs);
-
-if (queried) {
-    out.println("<h4><span class=\"occs\" title=\"Nombre d’occurrences\">occs</span>  " + field.label
-    + " <span class=\"docs\" title=\"Nombre de documents\">(chapitres)</span></h4>");
-}
-else {
-    out.println("<h4>" + field.label + " <span class=\"docs\" title=\"Nombre de documents\">(chapitres)</span></h4>"); 
-}
+out.println("<h4>");
+out.print(field.label);
+out.print(" <span class=\"stats\">(");
+if (queried) out.print("occurrences — ");
+if (queried) out.print("textes trouvés / total textes");
+else if (filtered) out.print("textes sélectionnés / total textes");
+else out.print("total textes");
+out.print(")</span>");
+out.println("</h4>");
 
 FormEnum.Order order;
 switch (sort) {
@@ -117,18 +118,20 @@ while (dic.hasNext()) {
     }
 
     out.print("<div class=\"term\">");
-    if (queried)
-        out.print("<span class=\"occs\">" + occs + "</span> ");
     out.print("<a href=\"" + href + "\">");
     out.print(dic.form());
-    out.print("</a>");
+    out.print(" <span class=\"stats\">(");
+    if (queried)
+        out.print(dfint.format(occs) + " — ");
     if (filtered || queried)
-        out.print(" <span class=\"docs\">(" + hits + " / " + docs + ")</span>    ");
+        out.print(hits + " / " + docs);
     else
-        out.print(" <span class=\"docs\">(" + docs + ")</span>    ");
+        out.print(docs);
+    out.print(")</span>");
     out.println("</div>");
 }
         }
+    out.print("</a>");
         %>
     </main>
     <script src="../static/js/facet.js">
