@@ -91,7 +91,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
   </head>
   <body class="split">
     <header id="header">
-      <span class="base"><%=alix.props.get("label")%> <%
+      <span class="base"><a href=".">Corpus : <%=alix.props.get("label")%></a> <%
    if (corpus != null) {
      String name = corpus.name();
      out.println("<mark><a class=\"xred\" title=\"Supprimer la sélection\" href=\"?corpus=new&amp;q="+JspTools.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
