@@ -222,7 +222,8 @@ select {
 .keywords a,
 .mark a.prev,
 .mark a.next {
-    rgba(128, 70, 13, 0.5);
+    color: rgba(128, 70, 13, 0.5);
+    font-variant: normal;
 }
 
 

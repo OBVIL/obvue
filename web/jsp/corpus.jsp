@@ -98,7 +98,7 @@ else {
                         id="name" name="name"
                         value="<%=(corpus != null) ? JspTools.escape(corpus.name()) : ""%>"
                         title="Donner un nom à cette sélection"
-                        placeholder="Nom ?"
+                        placeholder="Nommer cette séelection ?"
                         oninvalid="this.setCustomValidity('Un nom est nécessaire pour enregistrer votre sélection.')"
                         oninput="this.setCustomValidity('')"
                         required="required" />
