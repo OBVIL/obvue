@@ -68,9 +68,10 @@ else if (right > 10)
         <select name="count" onchange="this.form.submit()">
             <option />
             <%=options(new int[]{30, 50, 100, 200, 500, 1000}, count)%>
-        </select> <select name="cat" onchange="this.form.submit()">
+        </select> 
+        <select name="cat" onchange="this.form.submit()">
             <option />
-            <%=cat.options()%>
+            <%=cat.options("NOSTOP, SUB, NAME, VERB, ADJ, ADV, ALL")%>
         </select> <input type="hidden" name="q" value="<%=JspTools.escUrl(q)%>" />
         <button type="submit">▼</button>
     </form>

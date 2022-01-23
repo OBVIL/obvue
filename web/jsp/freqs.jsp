@@ -44,35 +44,9 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
         } else {
             flag = 0;
         }
-        // filtering
-        switch (cat) {
-            case NOSTOP :
-                if (FrDics.isStop(term))
-                    continue;
-                break;
-            case SUB :
-                if (flag != Tag.SUB.flag)
-                    continue;
-                break;
-            case NAME :
-                if (!Tag.NAME.sameParent(flag))
-                    continue;
-                break;
-            case VERB :
-                if (!Tag.VERB.sameParent(flag))
-                    continue;
-                break;
-            case ADJ :
-                if (Tag.ADJ.flag != flag)
-                    continue;
-                break;
-            case ADV :
-                if (Tag.ADV.flag != flag)
-                    continue;
-                break;
-            case ALL :
-                break;
-        }
+        
+        if (cat == cat.NOSTOP && FrDics.isStop(term)) continue;
+        else if (!cat.tags().accept(flag)) continue;
         if (dic.occs() == 0)
             break;
         if (no >= max)
@@ -275,7 +249,7 @@ else {
                 %>
                 <select name="cat" onchange="this.form.submit()">
                     <option />
-                    <%=cat.options()%>
+                    <%=cat.options("NOSTOP, SUB, NAME, VERB, ADJ, ADV, ALL")%>
                 </select>
                 <button type="submit">▼</button>
             </form>

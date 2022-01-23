@@ -31,6 +31,7 @@ if (score)
 OptionFacetSort sort = (OptionFacetSort) tools.getEnum("ord", fallback, Cookies.corpusSort);
 
 BitSet bits = bits(alix, corpus, q);
+// out.println()
 FormEnum dic = facet.results(qterms, bits, OptionDistrib.g.scorer()); // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
 %>
@@ -82,10 +83,14 @@ const base = "<%=base%>
             <table class="sortable" id="bib">
                 <caption>
                     <%
-                    if (score) out.println();
+if (score) {
+    out.println(dic.occsFreq() + " occurrences trouvées dans " + dic.docsHit() + " chapitres");
+}
+else {
+    out.println(((bits != null) ? bits.cardinality() : facet.docsAll()) + " chapitres");
+}
                     %>
-                    <%=(bits != null) ? bits.cardinality() : facet.docsAll()%>
-                    chapitres. <input type="hidden" name="q"
+                    <input type="hidden" name="q"
                         value="<%=JspTools.escape(q)%>" />
                     <button style="float: right;" name="save"
                         type="submit">Enregistrer</button>
@@ -106,16 +111,20 @@ const base = "<%=base%>
                         <th class="author">auteur</th>
                         <th class="year">date</th>
                         <th class="title">titre</th>
-                        <th class="length" title="Taille en mots">taille</th>
-                        <th class="docs" title="Chapitres">docs</th>
                         <%
-                        if (score) {
+if (score) {
+    out.println("<th class=\"occs\" title=\"Occurrences\">occs</th>");
+    out.println("<th class=\"docs\" title=\"Chapitres\">chaps.</th>");
+    out.println("<th class=\"score\">pertinence</th>");
+}
+else {
+    out.println("<th class=\"length\" title=\"Taille en mots\">taille</th>");
+    out.println("<th class=\"docs\" title=\"Chapitres\">chaps.</th>");
+}
                         %>
-                        <th class="occs" title="Occurrences">occs</th>
-                        <th class="score">pertinence</th>
-                        <%
-                        }
-                        %>
+                        
+                        
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -187,11 +196,14 @@ while (dic.hasNext()) {
     out.print(doc.get("title"));
     out.println("</a>");
     out.println("  </td>");
-    out.println("  <td class=\"length num\">" + dfint.format(dic.occs()) + "</td>");
-    out.println("  <td class=\"docs num\">" + dic.docs() + "</td>");
     if (score) {
         out.println("  <td class=\"occs num\">" + dic.freq() + "</td>");
-        out.println("  <td class=\"score num\">" + dfScoreFr.format(dic.score()) + "</td>");
+        out.println("  <td class=\"docs num\">" + dic.hits() + "</td>");
+               out.println("  <td class=\"score num\">" + dfScoreFr.format(dic.score()) + "</td>");
+    }
+    else {
+        out.println("  <td class=\"length num\">" + dfint.format(dic.occs()) + "</td>");
+        out.println("  <td class=\"docs num\">" + dic.docs() + "</td>");
     }
     out.println("</tr>");
 }
