@@ -58,9 +58,9 @@ out.println("<h4>");
 out.print(field.label);
 out.print(" <span class=\"stats\">(");
 if (queried) out.print("occurrences — ");
-if (queried) out.print("textes trouvés / total textes");
-else if (filtered) out.print("textes sélectionnés / total textes");
-else out.print("total textes");
+if (queried) out.print("chapitres trouvés / total chapitres");
+else if (filtered) out.print("chapitres sélectionnés / total chapitres");
+else out.print("total chapitres");
 out.print(")</span>");
 out.println("</h4>");
 
@@ -122,7 +122,7 @@ while (dic.hasNext()) {
     out.print(dic.form());
     out.print(" <span class=\"stats\">(");
     if (queried)
-        out.print(dfint.format(occs) + " — ");
+        out.print(dfint.format(dic.freq()) + " — ");
     if (filtered || queried)
         out.print(hits + " / " + docs);
     else

@@ -12,9 +12,6 @@
 <%@ page import="alix.lucene.analysis.FrDics.LexEntry"%>
 <%@ page import="alix.util.Char"%>
 <%!
-final static DecimalFormatSymbols frsyms = DecimalFormatSymbols.getInstance(Locale.FRANCE);
-final static DecimalFormatSymbols ensyms = DecimalFormatSymbols.getInstance(Locale.ENGLISH);
-static final DecimalFormat dfdec3 = new DecimalFormat("0.###", ensyms);
 private static final int OUT_HTML = 0;
 private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
@@ -85,10 +82,10 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
             case json :
                 if (!first)
                     sb.append(",\n");
-                jsonLine(sb, dic, flag, no);
+                jsonLine(sb, dic, flag, no, q);
                 break;
             case csv :
-                csvLine(sb, dic, flag, no);
+                csvLine(sb, dic, flag, no, q);
                 break;
             default :
                 htmlLine(sb, dic, flag, no, q);
@@ -129,25 +126,29 @@ private static void htmlLine(StringBuilder sb, final FormEnum dic, final int fla
     sb.append(dic.hits());
     sb.append("</td>\n");
     sb.append("    <td class=\"num\">");
-    sb.append(dic.occs());
+    if (q != null) sb.append(dic.freq());
+    else sb.append(dic.occs());
     sb.append("</td>\n");
     sb.append("  </tr>\n");
 }
 
-private static void csvLine(StringBuilder sb, final FormEnum dic, final int flag, final int no) {
+private static void csvLine(StringBuilder sb, final FormEnum dic, final int flag, final int no, final String q) {
     sb.append(dic.form().replaceAll("\t\n", " "));
     sb.append("\t").append(Tag.label(flag));
     sb.append("\t").append(dic.hits());
-    sb.append("\t").append(dic.occs());
+    sb.append("\t");
+    if (q != null) sb.append(dic.freq());
+    else sb.append(dic.occs());
     sb.append("\n");
 }
 
-static private void jsonLine(StringBuilder sb, final FormEnum dic, final int flag, final int no) {
+static private void jsonLine(StringBuilder sb, final FormEnum dic, final int flag, final int no, final String q) {
     sb.append("    {\"word\" : \"");
     sb.append(dic.form().replace("\"", "\\\"").replace('_', ' '));
     sb.append("\"");
     sb.append(", \"weight\" : ");
-    sb.append(dfdec3.format(dic.occs()));
+    if (q != null) sb.append(dfdec3.format(dic.freq()));
+    else sb.append(dfdec3.format(dic.occs()));
     sb.append(", \"attributes\" : {\"class\" : \"");
     sb.append(Tag.name(flag));
     sb.append("\"}");
@@ -186,7 +187,9 @@ if (corpus != null)
 FieldText ftext = alix.fieldText(field);
 if (q == null) {
     dic = ftext.results(null, null, filter);
-} else {
+    dic.sort(OptionOrder.occs.order(), count);
+} 
+else {
     FieldRail rail = alix.fieldRail(field);
     dic = new FormEnum(ftext);
     dic.filter = filter; // corpus
@@ -194,8 +197,8 @@ if (q == null) {
     dic.right = right; // right context
     dic.search = alix.tokenize(q, TEXT);
     long found = rail.coocs(dic); // populate the wordlist
+    dic.sort(OptionOrder.freq.order(), count);
 }
-dic.sort(OptionOrder.occs.order(), count);
 
 String format = tools.getString("format", null);
 if (format == null)

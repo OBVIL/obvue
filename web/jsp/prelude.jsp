@@ -53,6 +53,8 @@ final static Query QUERY_CHAPTER = new TermQuery(new Term(Alix.TYPE, DocType.cha
 final static DecimalFormatSymbols frsyms = DecimalFormatSymbols.getInstance(Locale.FRANCE);
 final static DecimalFormat dfScoreFr = new DecimalFormat("0.00000", frsyms);
 final static DecimalFormat dfint = new DecimalFormat("###,###,##0", frsyms);
+final static DecimalFormatSymbols ensyms = DecimalFormatSymbols.getInstance(Locale.ENGLISH);
+static final DecimalFormat dfdec3 = new DecimalFormat("0.###", ensyms);
 
     /**
      * Control proliferation of cookies. All of them are user interface customization, 

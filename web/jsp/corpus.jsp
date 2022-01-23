@@ -5,9 +5,10 @@
 <%@ page import="alix.lucene.search.FieldInt"%>
 <%@ page import="alix.lucene.search.TermList"%>
 <%@ page import="alix.lucene.search.FormEnum"%>
-<%!final static HashSet<String> FIELDS = new HashSet<String>(
+<%!
+final static HashSet<String> FIELDS = new HashSet<String>(
             Arrays.asList(new String[]{Alix.BOOKID, "byline", "year", "title"}));
-    static Sort SORT = new Sort(new SortField("author1", SortField.Type.STRING),
+static Sort SORT = new Sort(new SortField("author1", SortField.Type.STRING),
             new SortField("year", SortField.Type.INT));%>
 <%
 // params for this page
@@ -80,6 +81,9 @@ const base = "<%=base%>
         <form method="post" id="corpus" target="_top" action=".">
             <table class="sortable" id="bib">
                 <caption>
+                    <%
+                    if (score) out.println();
+                    %>
                     <%=(bits != null) ? bits.cardinality() : facet.docsAll()%>
                     chapitres. <input type="hidden" name="q"
                         value="<%=JspTools.escape(q)%>" />
@@ -150,8 +154,10 @@ while (dic.hasNext()) {
     // String bookid = doc.get(Alix.BOOKID);
     Document doc = reader.document(alix.getDocId(bookid), FIELDS);
     // for results, do not diplay not relevant results
+    /*
     if (score && dic.occs() == 0)
         continue;
+    */
 
     out.println("<tr>");
     out.println("  <td class=\"checkbox\">");
@@ -184,7 +190,7 @@ while (dic.hasNext()) {
     out.println("  <td class=\"length num\">" + dfint.format(dic.occs()) + "</td>");
     out.println("  <td class=\"docs num\">" + dic.docs() + "</td>");
     if (score) {
-        out.println("  <td class=\"occs num\">" + dic.occs() + "</td>");
+        out.println("  <td class=\"occs num\">" + dic.freq() + "</td>");
         out.println("  <td class=\"score num\">" + dfScoreFr.format(dic.score()) + "</td>");
     }
     out.println("</tr>");

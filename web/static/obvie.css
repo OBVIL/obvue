@@ -481,7 +481,7 @@ iframe {
 #header {
     padding: 5px 2px 0 2px;
     position: relative;
-    height: 65px;
+    height: 75px;
     margin: 0;
     width: 100%;
     overflow: hidden;
@@ -490,7 +490,7 @@ iframe {
 }
 
 #win {
-    top: 68px;
+    top: 78px;
     /* check #header height */
     position: absolute;
     width: 100%;
@@ -520,9 +520,12 @@ iframe {
 #header .base {
     position: absolute;
     bottom: 0;
-    left: 75px;
+    left: 10px;
+    font-size: 20px;
+}
+
+#header .base .label {
     font-style: italic;
-    font-size: 23px;
 }
 
 #header .base mark {
@@ -534,7 +537,9 @@ iframe {
 }
 
 #tabs {
-    margin-top: 3px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 }
 
 #tabs button,
@@ -564,11 +569,7 @@ body.view_doc #tabs a.comparer {
     display: inline;
 }
 
-#tabs .help {
-    position: absolute;
-    right: 67px;
-    bottom: -3px;
-}
+#tabs .help {}
 
 #alert {
     font-weight: bold;
