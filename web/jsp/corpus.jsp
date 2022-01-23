@@ -105,9 +105,6 @@ else {
                 </caption>
                 <thead>
                     <tr>
-                        <th class="checkbox"><input id="checkall"
-                            type="checkbox"
-                            title="Sélectionner/déselectionner les lignes visibles" /></th>
                         <th class="author">auteur</th>
                         <th class="year">date</th>
                         <th class="title">titre</th>
@@ -124,6 +121,9 @@ else {
                         %>
                         
                         
+                        <th class="checkbox"><input id="checkall" <%= (score)?" checked=\"checked\"":"" %>
+                            type="checkbox"
+                            title="Sélectionner/déselectionner les lignes visibles" /></th>
                         
                     </tr>
                 </thead>
@@ -169,12 +169,6 @@ while (dic.hasNext()) {
     */
 
     out.println("<tr>");
-    out.println("  <td class=\"checkbox\">");
-    out.print("    <input type=\"checkbox\" name=\"book\" id=\"" + bookid + "\" value=\"" + bookid + "\"");
-    if (bookids != null && bookids.contains(bookid))
-        out.print(" checked=\"checked\"");
-    out.println(" />");
-    out.println("  </td>");
     out.print("  <td class=\"author\">");
     out.print("<label for=\"" + bookid + "\">");
     String byline = doc.get("byline");
@@ -205,6 +199,15 @@ while (dic.hasNext()) {
         out.println("  <td class=\"length num\">" + dfint.format(dic.occs()) + "</td>");
         out.println("  <td class=\"docs num\">" + dic.docs() + "</td>");
     }
+    // checkbox
+    out.println("  <td class=\"checkbox\">");
+    out.print("    <input type=\"checkbox\" name=\"book\" id=\"" + bookid + "\" value=\"" + bookid + "\"");
+    if (bookids != null && bookids.contains(bookid))
+        out.print(" checked=\"checked\"");
+    if (score)
+        out.print(" checked=\"checked\"");
+    out.println(" />");
+    out.println("  </td>");
     out.println("</tr>");
 }
 // TermQuery filterQuery = null;
