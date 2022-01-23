@@ -50,7 +50,7 @@ if (!queried && sort == OptionFacetSort.score) {
     <main>
         <%
 FieldFacet facet = alix.fieldFacet(field.name(), TEXT);
-FormEnum dic = facet.results(forms, bits, null);
+FormEnum dic = facet.results(forms, bits, OptionDistrib.g.scorer());
 //Hack to use facet as a navigator in results, cache results in the facet order
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
 int[] nos = facet.nos(topDocs);
@@ -122,9 +122,9 @@ while (dic.hasNext()) {
     out.print(dic.form());
     out.print(" <span class=\"stats\">(");
     if (queried)
-        out.print(dfint.format(dic.freq()) + " — ");
+        out.print(dic.freq() + " o. — ");
     if (filtered || queried)
-        out.print(hits + " / " + docs);
+        out.print(hits + " ch. / " + docs);
     else
         out.print(docs);
     out.print(")</span>");

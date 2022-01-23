@@ -221,9 +221,7 @@ else {
     <%
     out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->");
     %>
-    <script src="../static/js/list.js">
-                    //
-                </script>
+    <script src="../static/js/list.js">//</script>
 </body>
 </html>
 <%

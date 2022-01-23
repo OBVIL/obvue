@@ -44,8 +44,8 @@ boolean author = (alix.info("author") != null);
 <link href="../static/obvie.css" rel="stylesheet" />
 <script src="../static/js/common.js">//</script>
 <script type="text/javascript">
-const base = "<%=base%>
-    "; // give code of texts base to further Javascript
+//give code of texts base to further Javascript
+const base = "<%=base%>"; 
 </script>
 <script src="../static/js/corpus.js">
     //
@@ -79,7 +79,7 @@ const base = "<%=base%>
                 list="title-data" type="text" size="50"
                 onclick="select()" placeholder="Chercher un titre" />
         </details>
-        <form method="post" id="corpus" target="_top" action=".">
+        <form method="post" id="corpus" target="_top" action=".?view=corpus">
             <table class="sortable" id="bib">
                 <caption>
                     <%
