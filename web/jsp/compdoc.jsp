@@ -9,11 +9,12 @@ static String wordList(Top<String> top) {
     int max = 50;
     boolean first = true;
     for (Top.Entry<String> entry : top) {
+        final String form = entry.value();
+        if (form == null || form.isBlank()) continue;
         if (first)
             first = false;
         else
             sb.append(", ");
-        final String form = entry.value();
         sb.append("<a class=\"" + Doc.csstok(form) + "\">");
         sb.append(JspTools.escape(form));
         sb.append("</a>");
