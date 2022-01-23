@@ -223,7 +223,8 @@ select {
 .mark a.prev,
 .mark a.next {
     color: rgba(128, 70, 13, 0.5);
-    font-variant: normal;
+    font-style: normal;
+    font-size: inherit;
 }
 
 
@@ -716,6 +717,11 @@ td.title a:hover {}
 
 td.num {
     text-align: right;
+}
+
+td.no {
+    font-size: 80%;
+    color: #666;
 }
 
 #corpora {

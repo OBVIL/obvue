@@ -39,7 +39,7 @@ catch (IllegalArgumentException e) { // doc not found
 
 
 // if a query, or a sort specification, provide navigation in documents
-if (doc == null && start > 0) {
+if (doc == null && start > 0 && hits != null && hits.length > start) {
   docId = hits[start - 1].doc;
   doc = new Doc(alix, docId);
   id = doc.id();
@@ -78,13 +78,14 @@ if (doc != null) { // document id is verified, give it to javascript
 <body class="document">
     <%--  <a title="Comparer ce document" href="comparer?leftid=<%=id%>" target="_top" class="goright">⮞</a> --%>
     <%
-  if (doc != null) {
+if (doc != null) {
     out.println("<header class=\"biblbar\" title=\""+title+"\">");
     out.print("<a href=\"#\" class=\"bibl\">");
     out.println(doc.doc().get("bibl"));
     out.print("</a>");
     out.println("</header>");
-  }
+}
+    
   %>
     <main>
         <form id="qform" action="#">
@@ -94,18 +95,15 @@ if (doc != null) { // document id is verified, give it to javascript
                 value="<%=JspTools.escape(q)%>" autocomplete="off"
                 type="hidden" />
             <script>
-                                                    if (self == top) {
-                                                        input = document
-                                                                .getElementById("q");
-                                                        if (input
-                                                                && input.type == "hidden")
-                                                            input.type = "text";
-                                                    }
-                                                </script>
+if (self == top) {
+    input = document.getElementById("q");
+    if (input && input.type == "hidden") input.type = "text";
+}
+            </script>
             <%
-        if (topDocs != null && start > 1) {
-          out.println("<button name=\"prev\" type=\"submit\" onclick=\"this.form['start'].value="+(start - 1)+"\">◀</button>");
-        }
+if (topDocs != null && start > 1) {
+    out.println("<button name=\"prev\" type=\"submit\" onclick=\"this.form['start'].value="+(start - 1)+"\">◀</button>");
+}
         %>
             <select name="sort"
                 onchange="this.form['start'].value=''; this.form.submit()"
@@ -137,6 +135,9 @@ if (doc != null) { // document id is verified, give it to javascript
       else {
         out.print(doc.doc().get(TEXT));
       }
+    }
+    else {
+    	out.println("<h4>Aucun document trouvé.</h4>");
     }
     %>
     </main>

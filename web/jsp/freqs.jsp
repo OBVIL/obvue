@@ -77,6 +77,8 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
 private static void htmlLine(StringBuilder sb, final FormEnum dic, final int flag, final int no, final String q) {
     String term = dic.form();
     // .replace('_', ' ') ?
+    sb.append("  <tr>\n");
+    sb.append("    <td class=\"no\">" + no + ".</td>\n");
     sb.append("    <td><a");
     if (q != null) {
         sb.append(" href=\"kwic?sort=score&amp;q=");
@@ -257,6 +259,7 @@ else {
         <thead>
             <tr>
                 <%
+                out.println("<th>No</th>");
                 out.println("<th>Mot</th>");
                 out.println("<th>Type</th>");
                 out.println("<th>Chapitres</th>");
