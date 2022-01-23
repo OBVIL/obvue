@@ -1,12 +1,11 @@
 package obvie;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -34,7 +33,7 @@ public class Dispatch extends HttpServlet
     /** Request attribute name: internal messages for the servlet */
     public static final String OBVIE = "obvie";
     /** Request attribute name: the directory containing bases */
-    public static final String BASE_DIR = "baseDir";
+    public static final String CONTEXT_DIR = "baseDir";
     /** Request attribute name: set of bases, with their properties */
     public static final String BASE_LIST = "baseList";
     /** Request attribute name: the base name */
@@ -53,12 +52,12 @@ public class Dispatch extends HttpServlet
     static HashSet<String> STOP = new HashSet<String>(
             Arrays.asList(new String[] { "WEB-INF", "static", "jsp", "reload" }));
     /** Absolute folder of properties file and lucene index */
-    private String baseDir;
+    private File contextDir;
 
     public void init(ServletConfig config) throws ServletException
     {
         super.init(config);
-        baseDir = getServletContext().getRealPath("WEB-INF/bases");
+        contextDir = new File(getServletContext().getRealPath(""));
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -71,7 +70,7 @@ public class Dispatch extends HttpServlet
         if (path.getNameCount() > 5) {
             throw new ServletException("Infinite loop");
         }
-        request.setAttribute(BASE_DIR, baseDir);
+        request.setAttribute(CONTEXT_DIR, contextDir);
         if (path.getNameCount() == 0) {
             request.getRequestDispatcher("/jsp/bases.jsp").forward(request, response);
             return;
@@ -145,11 +144,18 @@ public class Dispatch extends HttpServlet
         if (action.getNameCount() > 1)
             pathinfo = action.subpath(1, action.getNameCount()).toString();
         // action with no extension
-        jsp += ".jsp";
+        url = "/jsp/" + jsp + ".jsp";
+        if(!new File(contextDir, url).exists()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            request.setAttribute(MESSAGE, "[Obvie] \"" + url + "\" script not found ");
+            /* request.setAttribute(REDIRECT, base + "/"); */
+            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
+        }
+        
         request.setAttribute(EXT, ext);
         request.setAttribute(PATHINFO, pathinfo);
         // original path will be available as a request attribute
-        request.getRequestDispatcher("/jsp/" + jsp).forward(request, response);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     /**

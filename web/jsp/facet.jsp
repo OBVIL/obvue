@@ -1,6 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"
-    contentType="text/html; charset=UTF-8"
-    trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="prelude.jsp"%>
 
 <%
@@ -54,6 +52,8 @@ FormEnum dic = facet.results(forms, bits, OptionDistrib.g.scorer());
 //Hack to use facet as a navigator in results, cache results in the facet order
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
 int[] nos = facet.nos(topDocs);
+dic.setNos(nos);
+
 out.println("<h4>");
 out.print(field.label);
 out.print(" <span class=\"stats\">(");
@@ -106,11 +106,10 @@ while (dic.hasNext()) {
         if (hits < 1) continue; // in alpha order, try next
     }
     href.setLength(hrefLen);
-    href.append("&amp;start=" + start); // parenthesis for addition!
+    href.append("&amp;start=" +  (dic.no() + 1)); // parenthesis for addition!
     href.append("&amp;hpp=");
     if (filtered || queried) {
         href.append(hits);
-        start = start + hits;
     }
     else {
         href.append(docs);

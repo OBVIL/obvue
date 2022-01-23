@@ -77,6 +77,7 @@ if (self != top) {
         switch (selfName) {
             case "freqs":
             case "cloud":
+                parTop("view", selfName);
                 let cat = pars.get("cat");
                 if (cat) parTop("cat", cat);
                 break;
