@@ -33,7 +33,8 @@ if (!queried && sort == OptionFacetSort.score) {
     <%
     if (alix.info(field.name()) == null) {
         out.println("<p>Cette base de textes ne comporte pas d’auteurs.</p>");
-    } else {
+    } 
+    else {
     %>
     <form id="qform" target="_self">
         <input type="submit"

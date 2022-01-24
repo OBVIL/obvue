@@ -9,15 +9,13 @@ final int hppDefault = 100;
 final int hppMax = 1000;
 // parameters
 int hpp = tools.getInt("hpp", hppDefault);
-if (hpp > hppMax || hpp < 1)
-    hpp = hppDefault;
+if (hpp > hppMax || hpp < 1) hpp = hppDefault;
 final String q = tools.getString("q", null);
 OptionSort sort = (OptionSort) tools.getEnum("sort", OptionSort.score, Cookies.docSort);
 boolean expression = tools.getBoolean("expression", false);
 
 int start = tools.getInt("start", 1);
-if (start < 1)
-    start = 1;
+if (start < 1) start = 1;
 // global variables
 Corpus corpus = (Corpus) session.getAttribute(corpusKey);
 long nanos = System.nanoTime();
