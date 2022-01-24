@@ -16,7 +16,7 @@ private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
 
 private static String lines(final FormEnum dic, int max, final OptionMime mime, final OptionCat cat,
-        final String q) {
+        final String q, final boolean filtered) {
     if (max <= 0)
         max = dic.limit();
     else
@@ -33,19 +33,6 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
         dic.form(term);
         if (term.isEmpty())
             continue; // empty position
-        // filter some unuseful words
-        // if (STOPLIST.contains(term)) continue;
-        LexEntry entry = FrDics.word(term);
-        if (entry != null) {
-            flag = entry.tag;
-        } else if (Char.isUpperCase(term.charAt(0))) {
-            flag = Tag.NAME.flag;
-        } else {
-            flag = 0;
-        }
-        
-        if (cat == cat.NOSTOP && FrDics.isStop(term)) continue;
-        else if (!cat.tags().accept(flag)) continue;
         if (dic.occs() == 0)
             break;
         if (no >= max)
@@ -55,13 +42,13 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
             case json :
                 if (!first)
                     sb.append(",\n");
-                jsonLine(sb, dic, flag, no, q);
+                jsonLine(sb, dic, no, q, filtered);
                 break;
             case csv :
-                csvLine(sb, dic, flag, no, q);
+                csvLine(sb, dic, no, q, filtered);
                 break;
             default :
-                htmlLine(sb, dic, flag, no, q);
+                htmlLine(sb, dic, no, q, filtered);
         }
         no++;
         first = false;
@@ -73,7 +60,7 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
 /**
  * An html table row &lt;tr&gt; for lexical frequence result.
  */
-private static void htmlLine(StringBuilder sb, final FormEnum dic, final int flag, final int no, final String q) {
+private static void htmlLine(StringBuilder sb, final FormEnum dic, final int no, final String q, final boolean filtered) {
     String term = dic.form();
     // .replace('_', ' ') ?
     sb.append("  <tr>\n");
@@ -95,6 +82,7 @@ private static void htmlLine(StringBuilder sb, final FormEnum dic, final int fla
     sb.append(term);
     sb.append("</a></td>\n");
     sb.append("    <td>");
+    final int flag = dic.tag();
     sb.append(Tag.label(flag));
     sb.append("</td>\n");
     sb.append("    <td class=\"num\">");
@@ -102,29 +90,34 @@ private static void htmlLine(StringBuilder sb, final FormEnum dic, final int fla
     sb.append("</td>\n");
     sb.append("    <td class=\"num\">");
     if (q != null) sb.append(dic.freq());
+    else if (filtered) sb.append(dic.freq());
     else sb.append(dic.occs());
     sb.append("</td>\n");
     sb.append("  </tr>\n");
 }
 
-private static void csvLine(StringBuilder sb, final FormEnum dic, final int flag, final int no, final String q) {
+private static void csvLine(StringBuilder sb, final FormEnum dic, final int no, final String q, final boolean filtered) {
     sb.append(dic.form().replaceAll("\t\n", " "));
+    final int flag = dic.tag();
     sb.append("\t").append(Tag.label(flag));
     sb.append("\t").append(dic.hits());
     sb.append("\t");
     if (q != null) sb.append(dic.freq());
+    else if (filtered) sb.append(dic.freq());
     else sb.append(dic.occs());
     sb.append("\n");
 }
 
-static private void jsonLine(StringBuilder sb, final FormEnum dic, final int flag, final int no, final String q) {
+static private void jsonLine(StringBuilder sb, final FormEnum dic, final int no, final String q, final boolean filtered) {
     sb.append("    {\"word\" : \"");
     sb.append(dic.form().replace("\"", "\\\"").replace('_', ' '));
     sb.append("\"");
     sb.append(", \"weight\" : ");
     if (q != null) sb.append(dfdec3.format(dic.freq()));
+    else if (filtered) sb.append(dfdec3.format(dic.freq()));
     else sb.append(dfdec3.format(dic.occs()));
     sb.append(", \"attributes\" : {\"class\" : \"");
+    final int flag = dic.tag();
     sb.append(Tag.name(flag));
     sb.append("\"}");
     sb.append("}");
@@ -161,8 +154,8 @@ if (corpus != null)
 
 FieldText ftext = alix.fieldText(field);
 if (q == null) {
-    dic = ftext.results(null, null, filter);
-    dic.sort(OptionOrder.occs.order(), count);
+    dic = ftext.results(cat.tags(), null, filter);
+    dic.sort(OptionOrder.freq.order(), count);
 } 
 else {
     FieldRail rail = alix.fieldRail(field);
@@ -171,6 +164,7 @@ else {
     dic.left = left; // left context
     dic.right = right; // right context
     dic.search = alix.tokenize(q, TEXT);
+    dic.tags = cat.tags();
     long found = rail.coocs(dic); // populate the wordlist
     dic.sort(OptionOrder.freq.order(), count);
 }
@@ -189,7 +183,7 @@ if (OptionMime.json.equals(mime)) {
     response.setContentType(OptionMime.json.type);
     out.println("{");
     out.println("  \"data\":[");
-    out.println(lines(dic, count, mime, cat, q));
+    out.println(lines(dic, count, mime, cat, q, (filter != null)));
     out.println("\n  ]");
     out.println("\n}");
 }
@@ -210,7 +204,7 @@ else if (OptionMime.csv.equals(mime)) {
     response.setHeader("Content-Disposition", "attachment; filename=\"" + sb + ".csv\"");
     out.print("Mot\tType\tChapitres\tOccurrences");
     out.println();
-    out.print(lines(dic, -1, mime, cat, q));
+    out.print(lines(dic, -1, mime, cat, q, (filter != null)));
 } 
 else {
 %>
@@ -268,7 +262,7 @@ else {
             <tr>
         </thead>
         <tbody>
-            <%=lines(dic, count, mime, cat, q)%>
+            <%=lines(dic, count, mime, cat, q, (filter != null))%>
         </tbody>
     </table>
     <%
