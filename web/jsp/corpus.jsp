@@ -148,7 +148,6 @@ switch (sort) {
     default :
         order = FormEnum.Order.alpha;
 }
-out.println("<h1>" + order + "</h1>");
 dic.sort(order);
 
 // Hack to use facet as a navigator in results
