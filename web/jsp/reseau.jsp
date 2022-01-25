@@ -173,6 +173,8 @@ else {
     <script src="<%=hrefHome%>static/vendor/sigma/sigma.layout.forceAtlas2.js"></script>
     <script src="<%=hrefHome%>static/vendor/sigma/sigma.layout.noverlap.js"></script>
     <script src="<%=hrefHome%>static/js/sigmot.js"></script>
+    <!-- interface -->
+    <script src="../static/js/common.js">//</script>
     <style>
 html,
 body {
