@@ -125,8 +125,8 @@ if (planets > planetMax)
 if (planets < 1)
   planets = planetMid;
 
-pars.left = tools.getInt("left", 20);
-pars.right = tools.getInt("right", 20);
+pars.left = tools.getInt("left", 10);
+pars.right = tools.getInt("right", 10);
 pars.limit = tools.getInt("limit", 50);
 if (pars.limit > 200)
   pars.limit = 200;
