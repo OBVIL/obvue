@@ -352,7 +352,7 @@ for (Node node : nodeMap.values()) {
   String color = "rgba(255, 255, 255, 1)";
   if (Tag.SUB.flag == tag)
     color = "rgba(0, 0, 0, 0.8)";
-  else if (Tag.ADJ.flag == tag)
+  else if (Tag.ADJ.flag == tag || Tag.VERBger.flag == tag)
     color = "rgba(92, 128, 92, 0.7)";
   // if (node.type() == STAR) color = "rgba(255, 0, 0, 0.9)";
   else if (Tag.NAME.sameParent(tag))
