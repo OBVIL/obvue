@@ -20,13 +20,11 @@ if (!queried && sort == OptionFacetSort.score) {
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>Facettes</title>
-<link rel="stylesheet" type="text/css" href="../static/obvie.css" />
-<script src="../static/js/common.js">
-    //
-</script>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Facettes</title>
+        <link rel="stylesheet" type="text/css" href="../static/obvie.css" />
+<script src="../static/js/common.js">//</script>
 <base target="page" href="snip" />
 </head>
 <body class="facet">

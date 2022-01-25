@@ -110,6 +110,7 @@ corpus = (Corpus)session.getAttribute(corpusKey);
         <div id="tabs">
           <a href="corpus" target="page">Corpus</a>
           <a href="cloud" target="page">Nuage</a>
+          <a href="reseau" target="page">Réseau</a>
           <a href="freqs" target="page">Fréquences</a>
           <a href="snip" target="page">Extraits</a>
           <a href="kwic" target="page">Concordance</a>

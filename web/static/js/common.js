@@ -75,6 +75,7 @@ if (self != top) {
 
         if (selfName != "cloud" && selfName != "freqs") parTop("cat", null);
         switch (selfName) {
+            case "reseau":
             case "freqs":
             case "cloud":
                 parTop("view", selfName);

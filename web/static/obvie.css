@@ -181,20 +181,12 @@ div.term a:hover,
 article.res mark,
 table.sortable th,
 button.magnify,
+a.csv,
 a.reset,
 .sortable td.title a:hover,
 article.res header a:hover,
-
-/* title in short result */
-
 article.res div.line a,
-
-/* pivot word in kwic */
-
 #chapters mark,
-
-/* hilite in chapter research */
-
 a.delete,
 body.facet .active,
 h4 .occs,
@@ -931,6 +923,11 @@ a.reset {
     margin-left: -1.5rem;
 }
 
+a.csv {
+    font-size: 1.5rem;
+    float: right;
+}
+
 button.magnify {
     margin-left: -2rem;
 }
@@ -1270,6 +1267,10 @@ article.res div.line {
     white-space: nowrap;
 }
 
+article.res div.line span.left {
+    width: 70ex;
+}
+
 article.res div.line a:hover {
     text-decoration: none;
     color: #000;
@@ -1508,6 +1509,11 @@ body.chrono form {
 .sortable thead th {
     font-weight: normal;
     font-size: 16px;
+}
+
+caption div.flex {
+    display: flex;
+    justify-content: space-between;
 }
 
 

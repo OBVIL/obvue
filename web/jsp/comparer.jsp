@@ -90,6 +90,7 @@ body, html {
                 <button name="view" value="snip">Extraits</button>
                 <button name="view" value="kwic">Concordance</button>
                 <a class="here" href="">Comparer</a>
+                <a class="help" href="../static/aide.html" target="aide">Aide</a>
             </div>
         </form>
     </header>

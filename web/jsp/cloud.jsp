@@ -32,19 +32,19 @@ else if (right > 10)
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Nuage de mots</title>
-<link rel="stylesheet" type="text/css" href="../static/obvie.css" />
-<script src="../static/js/common.js">
-    //
-</script>
-<script>
-    var count =
-<%=count%>
-    ;
-</script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Nuage de mots</title>
+        <link rel="stylesheet" type="text/css" href="../static/obvie.css" />
+        <script src="../static/js/common.js">
+            //
+        </script>
+        <script>
+            var count =
+        <%=count%>
+            ;
+        </script>
+    </head>
 <body class="cloud">
     <form id="filter">
         <%

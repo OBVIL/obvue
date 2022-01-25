@@ -111,13 +111,13 @@ function showSelected() {
 
 function authorFilter(evt) {
     if (!authors[this.value]) return true;
-    Sortable.filter(table, 0, this.value);
+    Sortable.filter(table, 1, this.value);
     Sortable.zebra(table);
 }
 
 function titleFilter(evt) {
     if (!titles[this.value]) return true;
-    Sortable.filter(table, 2, this.value);
+    Sortable.filter(table, 3, this.value);
     Sortable.zebra(table);
     this.value = "";
 }
@@ -131,7 +131,7 @@ function filterEnter(evt) {
 function titleEnter(evt) {
     // return false;
     if (evt.key != 'Enter') return true;
-    Sortable.filter(table, 2, this.value);
+    Sortable.filter(table, 3, this.value);
     Sortable.zebra(table);
     this.value = "";
     return false;

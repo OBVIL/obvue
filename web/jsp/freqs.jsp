@@ -146,13 +146,12 @@ else if (right > 10)
 
 // global variables
 final String field = TEXT; // the field to process
-FormEnum dic; // the dictionary to extract
 BitSet filter = null; // if a corpus is selected, filter results with a bitset
 Corpus corpus = (Corpus) session.getAttribute(corpusKey);
-if (corpus != null)
-    filter = corpus.bits();
+if (corpus != null) filter = corpus.bits();
 
 FieldText ftext = alix.fieldText(field);
+FormEnum dic; // the dictionary to extract
 if (q == null) {
     dic = ftext.results(cat.tags(), null, filter);
     dic.sort(OptionOrder.freq.order(), count);
@@ -210,23 +209,18 @@ else {
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Fréquences, <%=(corpus != null) ? JspTools.escape(corpus.name()) + ", " : ""%><%=alix.props.get("label")%>
-    [Obvie]
-</title>
-<script src="../static/js/common.js">
-    //
-</script>
-<link href="../static/vendor/sortable.css" rel="stylesheet" />
-<link href="../static/obvie.css" rel="stylesheet" />
-</head>
-<body>
-    <a class="reset"
-        href="freqs.csv?q=<%=JspTools.escape(q)%>&amp;left=<%=left%>&amp;right=<%=right%>&amp;cat=<%=cat%>&amp;sort=<%=sort%>">csv
-        🡵</a>
-    <table class="sortable" style="float: left;">
+    <head>
+        <meta charset="UTF-8">
+        <title>Fréquences, <%=(corpus != null) ? JspTools.escape(corpus.name()) + ", " : ""%><%=alix.props.get("label")%> [Obvie]</title>
+        <script src="../static/js/common.js">//</script>
+        <link href="../static/vendor/sortable.css" rel="stylesheet" />
+        <link href="../static/obvie.css" rel="stylesheet" />
+    </head>
+    <body>
+    <table class="sortable">
         <caption>
+            <a class="csv"
+            href="freqs.csv?q=<%=JspTools.escape(q)%>&amp;left=<%=left%>&amp;right=<%=right%>&amp;cat=<%=cat%>&amp;sort=<%=sort%>">csv 🡵</a>
             <form id="sortForm">
                 <%
                 if (corpus != null) {

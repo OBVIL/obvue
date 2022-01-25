@@ -36,74 +36,76 @@ boolean author = (alix.info("author") != null);
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Corpus [Alix]</title>
-<link href="../static/vendor/sortable.css" rel="stylesheet" />
-<link href="../static/obvie.css" rel="stylesheet" />
-<script src="../static/js/common.js">//</script>
-<script type="text/javascript">
+    <head>
+        <meta charset="UTF-8">
+        <title>Corpus [Obvie]</title>
+        <link href="../static/vendor/sortable.css" rel="stylesheet" />
+        <link href="../static/obvie.css" rel="stylesheet" />
+        <script src="../static/js/common.js">//</script>
+        <script type="text/javascript">
 //give code of texts base to further Javascript
 const base = "<%=base%>"; 
-</script>
-<script src="../static/js/corpus.js">
-    //
-</script>
-</head>
-<body class="corpus">
-    <main>
-        <details id="filter">
-            <summary>Filtres</summary>
-            <%
-            if (author) {
-            %>
-            <label for="author">Auteur</label>
-            <input id="author" name="author" autocomplete="off"
-                list="author-data" size="50" type="text"
-                onclick="select()" placeholder="Nom, Prénom" />
-            <%
-            }
-            %>
-            <br />
-            <label for="start">Dates</label>
-            <input id="start" name="start" type="number"
-                min="<%=years.min()%>" max="<%=years.max()%>"
-                placeholder="Début" class="year" />
-            <input id="end" name="end" type="number"
-                min="<%=years.min()%>" max="<%=years.max()%>"
-                placeholder="Fin" class="year" />
-            <br />
-            <label for="title">Titre</label>
-            <input id="title" name="title" autocomplete="off"
-                list="title-data" type="text" size="50"
-                onclick="select()" placeholder="Chercher un titre" />
-        </details>
-        <form method="post" id="corpus" target="_top" action=".?view=corpus">
-            <table class="sortable" id="bib">
-                <caption>
-                    <%
+        </script>
+        <script src="../static/js/corpus.js">//</script>
+    </head>
+    <body class="corpus">
+        <main>
+            <details id="filter">
+                <summary>Filtres</summary>
+                <% if (author) { %>
+                <label for="author">Auteur</label>
+                <input id="author" name="author" autocomplete="off"
+                    list="author-data" size="50" type="text"
+                    onclick="select()" placeholder="Nom, Prénom" />
+                <%}%>
+                <br />
+                <label for="start">Dates</label>
+                <input id="start" name="start" type="number"
+                    min="<%=years.min()%>" max="<%=years.max()%>"
+                    placeholder="Début" class="year" />
+                <input id="end" name="end" type="number"
+                    min="<%=years.min()%>" max="<%=years.max()%>"
+                    placeholder="Fin" class="year" />
+                <br />
+                <label for="title">Titre</label>
+                <input id="title" name="title" autocomplete="off"
+                    list="title-data" type="text" size="50"
+                    onclick="select()" placeholder="Chercher un titre" />
+            </details>
+            <form method="post" id="corpus" target="_top" action=".?view=corpus">
+                <table class="sortable" id="bib">
+                    <caption>
+                        <div class="flex">
+                            <div style="float: left">
+<input type="hidden" name="q" value="<%=JspTools.escape(q)%>" />
+<%
 if (score) {
     out.println(dic.occsFreq() + " occurrences trouvées dans " + dic.docsHit() + " chapitres");
 }
 else {
     out.println(((bits != null) ? bits.cardinality() : facet.docsAll()) + " chapitres");
 }
-                    %>
-                    <input type="hidden" name="q"
-                        value="<%=JspTools.escape(q)%>" />
-                    <button style="float: right;" name="save"
-                        type="submit">Enregistrer</button>
-                    <input style="float: right;" type="text" size="10"
-                        id="name" name="name"
-                        value="<%=(corpus != null) ? JspTools.escape(corpus.name()) : ""%>"
-                        title="Donner un nom à cette sélection"
-                        placeholder="Nommer cette séelection ?"
-                        oninvalid="this.setCustomValidity('Un nom est nécessaire pour enregistrer votre sélection.')"
-                        oninput="this.setCustomValidity('')"
-                        required="required" />
-                </caption>
+%>
+                            </div>
+                            <div style="text-align:right">
+<input style="float: right;" type="text" size="10"
+    id="name" name="name"
+    value="<%=(corpus != null) ? JspTools.escape(corpus.name()) : ""%>"
+    title="Donner un nom à cette sélection"
+    placeholder="Nommer cette séelection ?"
+    oninvalid="this.setCustomValidity('Un nom est nécessaire pour enregistrer votre sélection.')"
+    oninput="this.setCustomValidity('')"
+    required="required" />
+<button name="save"
+    type="submit">Enregistrer</button>
+                            </div>
+                        </div>
+                    </caption>
                 <thead>
                     <tr>
+                        <th class="checkbox"><input id="checkall" <%= (score)?" checked=\"checked\"":"" %>
+                            type="checkbox"
+                            title="Sélectionner/déselectionner les lignes visibles" /></th>
                         <th class="author">auteur</th>
                         <th class="year">date</th>
                         <th class="title">titre</th>
@@ -118,11 +120,6 @@ else {
     out.println("<th class=\"docs\" title=\"Chapitres\">chaps.</th>");
 }
                         %>
-                        
-                        
-                        <th class="checkbox"><input id="checkall" <%= (score)?" checked=\"checked\"":"" %>
-                            type="checkbox"
-                            title="Sélectionner/déselectionner les lignes visibles" /></th>
                         
                     </tr>
                 </thead>
@@ -168,6 +165,15 @@ while (dic.hasNext()) {
     */
 
     out.println("<tr>");
+    // checkbox
+    out.println("  <td class=\"checkbox\">");
+    out.print("    <input type=\"checkbox\" name=\"book\" id=\"" + bookid + "\" value=\"" + bookid + "\"");
+    if (bookids != null && bookids.contains(bookid))
+        out.print(" checked=\"checked\"");
+    if (score)
+        out.print(" checked=\"checked\"");
+    out.println(" />");
+    out.println("  </td>");
     out.print("  <td class=\"author\">");
     out.print("<label for=\"" + bookid + "\">");
     String byline = doc.get("byline");
@@ -198,51 +204,39 @@ while (dic.hasNext()) {
         out.println("  <td class=\"length num\">" + dfint.format(dic.occs()) + "</td>");
         out.println("  <td class=\"docs num\">" + dic.docs() + "</td>");
     }
-    // checkbox
-    out.println("  <td class=\"checkbox\">");
-    out.print("    <input type=\"checkbox\" name=\"book\" id=\"" + bookid + "\" value=\"" + bookid + "\"");
-    if (bookids != null && bookids.contains(bookid))
-        out.print(" checked=\"checked\"");
-    if (score)
-        out.print(" checked=\"checked\"");
-    out.println(" />");
-    out.println("  </td>");
     out.println("</tr>");
 }
 // TermQuery filterQuery = null;
 // put metas
 %>
-                </tbody>
-            </table>
-        </form>
-    </main>
+                    </tbody>
+                </table>
+            </form>
+        </main>
 
-    <script src="../static/vendor/sortable.js">
-                    //
-                </script>
+        <script src="../static/vendor/sortable.js">//</script>
     <%
-    // Loop on metadata fields to provide lists for suggestion
-    for (String field : new String[]{"author", "title"}) {
-        if (alix.info(field) == null)
-            continue;
-        facet = alix.fieldFacet(field, TEXT);
-        dic = facet.results();
-        out.println("<datalist id=\"" + field + "-data\">");
-        dic.sort(FormEnum.Order.alpha);
-        while (dic.hasNext()) {
-            dic.next();
-            // long weight = facetEnum.weight();
-            out.println("  <option value=\"" + JspTools.escape(dic.form()) + "\"/>");
-        }
-        out.println("</datalist>");
+// Loop on metadata fields to provide lists for suggestion
+for (String field : new String[]{"author", "title"}) {
+    if (alix.info(field) == null)
+        continue;
+    facet = alix.fieldFacet(field, TEXT);
+    dic = facet.results();
+    out.println("<datalist id=\"" + field + "-data\">");
+    dic.sort(FormEnum.Order.alpha);
+    while (dic.hasNext()) {
+        dic.next();
+        // long weight = facetEnum.weight();
+        out.println("  <option value=\"" + JspTools.escape(dic.form()) + "\"/>");
     }
-    %>
-    <a href="#" id="gotop">▲</a>
-    <script>
-                    bottomLoad();
-                <%if (corpus != null)
-    out.println("showSelected();");%>
+    out.println("</datalist>");
+}
+%>
+        <a href="#" id="gotop">▲</a>
+        <script>
+bottomLoad();
+<%if (corpus != null) out.println("showSelected();");%>
                     
-                </script>
-</body>
+        </script>
+    </body>
 </html>

@@ -15,10 +15,10 @@ var form = document.getElementById("qform");
 const tabs = document.getElementById('tabs').getElementsByTagName('a');
 for (var i = 0; i < tabs.length; i++) {
     if (tabs[i].className == 'help') continue;
-    var name = url4name(tabs[i]);
-    tabs[i].id = name;
-    tabs[i].name = name;
-    tabs[i].className = name;
+    var page = url4name(tabs[i]);
+    tabs[i].id = page;
+    tabs[i].name = page;
+    tabs[i].className = page;
     // do not add an event to a tab that will not go in frame
     if (!tabs[i].target) continue;
     tabs[i].onclick = function(e) {

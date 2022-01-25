@@ -60,8 +60,104 @@ static final DecimalFormat dfdec3 = new DecimalFormat("0.###", ensyms);
  * Control proliferation of cookies. All of them are user interface customization, 
  * without personal information. Do not require consent.
  */
-public enum Cookies {
+public enum Cookies
+{
     count, coocLeft, coocRight, corpusSort, docSort, expression, facetSort, freqsSort, cat,;
+}
+
+/** 
+ * All pars for all page 
+ */
+public class Pars
+{
+    String book; // restrict to a book
+    String q; // word query
+    OptionCat cat; // word categories to filter
+    OptionOrder order;// order in list of terms and facets
+    int limit; // results, limit of result to show
+    int nodes; // number of nodes in wordnet
+    int context; // coocs, context width in words
+    int left; // coocs, left context in words
+    int right; // coocs, right context in words
+    boolean expression; // kwic, filter multi word expression
+    OptionMime mime; // mime type for output
+
+    // too much scoring algo
+    OptionDistrib distrib; // ranking algorithm, tf-idf like
+    OptionMI mi; // proba kind of scoring, not tf-idf, [2, 2]
+
+    int start; // start record in search results
+    int hpp; // hits per page
+    String href;
+    String[] forms;
+    OptionSort sort;
+}
+
+public Pars pars(final PageContext page)
+{
+    Pars pars = new Pars();
+    JspTools tools = new JspTools(page);
+
+    // pars.field = (Field) tools.getEnum("f", Field.text, "alixField");
+    pars.q = tools.getString("q", null);
+    pars.book = tools.getString("book", null); // limit to a book
+    // Words
+    pars.cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP); // 
+
+    // ranking, sort… a bit a mess
+    pars.distrib = (OptionDistrib) tools.getEnum("distrib", OptionDistrib.g);
+    pars.mi = (OptionMI) tools.getEnum("mi", OptionMI.g);
+    // default sort in documents
+    pars.sort = (OptionSort) tools.getEnum("sort", OptionSort.score, "alixSort");
+    //final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
+    pars.order = (OptionOrder) tools.getEnum("order", OptionOrder.score, "alixOrder");
+
+    String format = tools.getString("format", null);
+    //if (format == null) format = (String)request.getAttribute(Dispatch.EXT);
+    pars.mime = (OptionMime) tools.getEnum("format", OptionMime.html);
+
+    pars.limit = 100;
+    pars.limit = tools.getInt("limit", pars.limit);
+    // user should know his limits
+
+    final int nodesMax = 300;
+    final int nodesMid = 50;
+    pars.nodes = tools.getInt("nodes", nodesMid);
+    if (pars.nodes < 1)
+        pars.nodes = nodesMid;
+    if (pars.nodes > nodesMax)
+        pars.nodes = nodesMax;
+
+    // coocs
+    pars.left = tools.getInt("left", 0);
+    pars.right = tools.getInt("right", 0);
+    if (pars.left < 0)
+        pars.left = 0;
+    if (pars.right < 0)
+        pars.right = 0;
+    if (pars.left + pars.right == 0) {
+        pars.left = 5;
+        pars.right = 5;
+    }
+    /*
+    else if (pars.left > 10) pars.left = 50;
+    pars.right = tools.getInt("right", 5);
+    else if (pars.right > 10) pars.right = 50;
+    */
+
+    // paging
+    final int hppDefault = 100;
+    final int hppMax = 1000;
+    pars.expression = tools.getBoolean("expression", false);
+    pars.hpp = tools.getInt("hpp", hppDefault);
+    if (pars.hpp > hppMax || pars.hpp < 1)
+        pars.hpp = hppDefault;
+    pars.sort = (OptionSort) tools.getEnum("sort", OptionSort.year);
+    pars.start = tools.getInt("start", 1);
+    if (pars.start < 1)
+        pars.start = 1;
+
+    return pars;
 }
 
 /**
@@ -246,4 +342,5 @@ final Alix alix = Alix.instance(base);
 final IndexSearcher searcher = alix.searcher();
 final IndexReader reader = alix.reader();
 final String corpusKey = CORPUS_ + base;
+final String hrefHome = "../";
 %>
