@@ -7,7 +7,7 @@
 <%@ page import="alix.util.Top"%>
 <%!
 final static Analyzer ANAMET = new MetaAnalyzer();
-final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new String[]{Alix.ID, Alix.BOOKID, "bibl"}));
+final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new String[]{Names.ALIX_ID, Names.ALIX_BOOKID, "bibl"}));
 
 private Query mlt(Doc doc, String field) throws IOException, NoSuchFieldException
 {
@@ -121,11 +121,11 @@ private String results(final JspTools tools, final Corpus corpus, final Doc refD
         // fast hack because of links in links
         text = text.replaceAll("<(/?)a([ >])", "<$1span$2");
         if (marker != null) {
-            sb.append("<a class=\"bibl\" href=\"compdoc.jsp?id=" + doc.get(Alix.ID) + paging + back + "\">");
+            sb.append("<a class=\"bibl\" href=\"compdoc.jsp?id=" + doc.get(Names.ALIX_ID) + paging + back + "\">");
             sb.append(marker.mark(text));
             sb.append("</a>\n");
         } else {
-            sb.append("<a class=\"bibl\" href=\"compdoc.jsp?id=" + doc.get(Alix.ID) + paging + back + "\">");
+            sb.append("<a class=\"bibl\" href=\"compdoc.jsp?id=" + doc.get(Names.ALIX_ID) + paging + back + "\">");
             sb.append(text);
             sb.append("</a>\n");
         }

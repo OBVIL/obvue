@@ -46,12 +46,18 @@ if (!queried && sort == OptionFacetSort.score) {
     </form>
     <main>
         <%
-FieldFacet facet = alix.fieldFacet(field.name(), TEXT);
-FormEnum dic = facet.results(forms, bits, OptionDistrib.g.scorer());
-//Hack to use facet as a navigator in results, cache results in the facet order
+FieldFacet facet = alix.fieldFacet(field.name());
+FormEnum results;
+if (queried) {
+    results = facet.results(alix.fieldText(TEXT), forms, bits, OptionDistrib.g.scorer());
+}
+else {
+    results = facet.results(bits);
+}
+// Hack to use facet as a navigator in results, cache results in the facet order
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
 int[] nos = facet.nos(topDocs);
-dic.setNos(nos);
+results.setNos(nos);
 
 out.println("<h4>");
 out.print(field.label);
@@ -66,7 +72,7 @@ out.println("</h4>");
 FormEnum.Order order;
 switch (sort) {
     case alpha :
-    	order = FormEnum.Order.alpha;
+        order = FormEnum.Order.alpha;
         break;
     case freq :
         if (queried) order = FormEnum.Order.freq;
@@ -81,7 +87,7 @@ switch (sort) {
     default :
     	order = FormEnum.Order.alpha;
 }
-dic.sort(order);
+results.sort(order);
 
 
 int hits = 0, docs = 0, start = 1;
@@ -93,19 +99,19 @@ if (q != null)
     href.append("&amp;q=").append(JspTools.escUrl(q));;
 final int hrefLen = href.length();
 
-while (dic.hasNext()) {
-    dic.next();
-    docs = dic.docs();
+while (results.hasNext()) {
+    results.next();
+    docs = results.docs();
     if (filtered) {
-        hits = dic.hits();
+        hits = results.hits();
         if (hits < 1) continue; // in alpha order, try next
     }
     if (queried) {
-        occs = dic.occs();
+        occs = results.occs();
         if (hits < 1) continue; // in alpha order, try next
     }
     href.setLength(hrefLen);
-    href.append("&amp;start=" +  (dic.no() + 1)); // parenthesis for addition!
+    href.append("&amp;start=" +  (results.no() + 1)); // parenthesis for addition!
     href.append("&amp;hpp=");
     if (filtered || queried) {
         href.append(hits);
@@ -117,14 +123,17 @@ while (dic.hasNext()) {
 
     out.print("<div class=\"term\">");
     out.print("<a href=\"" + href + "\">");
-    out.print(dic.form());
+    out.print(results.form());
     out.print(" <span class=\"stats\">(");
-    if (queried)
-        out.print(dic.freq() + " o. — ");
-    if (filtered || queried)
+    if (queried) {
+        out.print(results.freq() + " o. — ");
+    }
+    if (filtered || queried) {
         out.print(hits + " ch. / " + docs);
-    else
+    }
+    else {
         out.print(docs);
+    }
     out.print(")</span>");
     out.println("</div>");
 }

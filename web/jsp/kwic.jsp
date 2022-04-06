@@ -136,12 +136,14 @@ span.left {
                 final int docId = scoreDocs[i].doc;
                 i++; // is now a public start
                 final Doc doc = new Doc(alix, docId);
-                String type = doc.doc().get(Alix.TYPE);
+                String type = doc.doc().get(Names.ALIX_TYPE);
                 // TODO Enenum
-                if (type.equals(DocType.book.name()))
-            continue;
-                if (doc.doc().get(TEXT) == null)
-            continue;
+                if (type.equals(Names.BOOK)) {
+                    continue;
+                }
+                if (doc.doc().get(TEXT) == null) {
+                    continue;
+                }
                 href.setLength(hrefLen); // reset href
                 href.append("&amp;id=").append(doc.id()).append("&amp;start=").append(i);
 

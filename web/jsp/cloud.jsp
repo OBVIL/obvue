@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
 <%!
+
 private String options(int[] values, int value) {
     StringBuilder sb = new StringBuilder();
     for (int i = 0, lim = values.length; i < lim; i++) {
@@ -13,6 +14,7 @@ private String options(int[] values, int value) {
     }
     return sb.toString();
 }
+
 %>
 <%
 final String q = tools.getString("q", null);

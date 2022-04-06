@@ -53,7 +53,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
   String desc = tools.getString("desc", null);
   if (name == null) name = "Ma sélection";
   if (checks != null) {
-    corpus = new Corpus(alix, Alix.BOOKID, name, desc);
+    corpus = new Corpus(alix, Names.ALIX_BOOKID, name, desc);
     corpus.add(checks);
     session.setAttribute(corpusKey, corpus);
     json = corpus.json();
@@ -62,7 +62,7 @@ if ("POST".equalsIgnoreCase(request.getMethod())) {
   }
   //json send, client wants to load a new corpus
   else if (json != null) {
-   corpus = new Corpus(alix, Alix.BOOKID, json);
+   corpus = new Corpus(alix, Names.ALIX_BOOKID, json);
    name = corpus.name();
    desc = corpus.desc();
    session.setAttribute(corpusKey, corpus);

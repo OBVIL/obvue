@@ -162,9 +162,10 @@ else {
     dic.filter = filter; // corpus
     dic.left = left; // left context
     dic.right = right; // right context
-    dic.search = alix.tokenize(q, TEXT);
     dic.tags = cat.tags();
-    long found = rail.coocs(dic); // populate the wordlist
+    String[] words = alix.tokenize(q, TEXT);;
+    int[] pivotIds = ftext.formIds(words, filter);
+    long found = rail.coocs(pivotIds, dic); // populate the wordlist
     dic.sort(OptionOrder.freq.order(), count);
 }
 

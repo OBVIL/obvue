@@ -6,7 +6,7 @@
 <%@ page import="alix.lucene.search.FormEnum"%>
 <%!
 final static HashSet<String> FIELDS = new HashSet<String>(
-            Arrays.asList(new String[]{Alix.BOOKID, "byline", "year", "title"}));
+            Arrays.asList(new String[]{Names.ALIX_BOOKID, "byline", "year", "title"}));
 static Sort SORT = new Sort(new SortField("author1", SortField.Type.STRING),
             new SortField("year", SortField.Type.INT));%>
 <%
@@ -16,22 +16,28 @@ String q = tools.getString("q", null);
 // global variables
 Corpus corpus = (Corpus) session.getAttribute(corpusKey);
 Set<String> bookids = null;
-if (corpus != null)
+if (corpus != null) {
     bookids = corpus.books();
-FieldFacet facet = alix.fieldFacet(Alix.BOOKID, TEXT);
+}
+FieldFacet facet = alix.fieldFacet(Names.ALIX_BOOKID);
+FieldText ftext = alix.fieldText(TEXT);
 
 FieldInt years = alix.fieldInt(YEAR, null); // to get min() max() year
 String[] qterms = alix.tokenize(q, TEXT);
 final boolean score = (qterms != null && qterms.length > 0);
 
+// get an order for terms
 OptionFacetSort fallback = OptionFacetSort.alpha;
-if (score)
+if (score) {
     fallback = OptionFacetSort.score;
+}
 OptionFacetSort sort = (OptionFacetSort) tools.getEnum("ord", fallback, Cookies.corpusSort);
+
 
 BitSet bits = bits(alix, corpus, q);
 // out.println()
-FormEnum dic = facet.results(qterms, bits, OptionDistrib.g.scorer()); // .topTerms(bits, qTerms, null);
+
+FormEnum results = facet.results(ftext, qterms, bits, OptionDistrib.g.scorer()); // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
 %>
 <!DOCTYPE html>
@@ -80,10 +86,10 @@ const base = "<%=base%>";
 <input type="hidden" name="q" value="<%=JspTools.escape(q)%>" />
 <%
 if (score) {
-    out.println(dic.occsFreq() + " occurrences trouvées dans " + dic.docsHit() + " chapitres");
+    out.println(results.freqAll() + " occurrences trouvées dans " + results.hitsAll() + " chapitres");
 }
 else {
-    out.println(((bits != null) ? bits.cardinality() : facet.docsAll()) + " chapitres");
+    out.println(((bits != null) ? bits.cardinality() : facet.docs()) + " chapitres");
 }
 %>
                             </div>
@@ -131,36 +137,40 @@ switch (sort) {
         order = FormEnum.Order.alpha;
         break;
     case score :
-        if (score)
-    order = FormEnum.Order.score;
-        else
-    order = FormEnum.Order.alpha;
+        if (score) {
+            order = FormEnum.Order.score;
+        }
+        else {
+            order = FormEnum.Order.alpha;
+        }
         break;
     case freq :
-        if (score)
-    order = FormEnum.Order.occs;
-        else
-    order = FormEnum.Order.alpha;
+        if (score) {
+            order = FormEnum.Order.occs;
+        }
+        else {
+            order = FormEnum.Order.alpha;
+        }
         break;
     default :
         order = FormEnum.Order.alpha;
 }
-dic.sort(order);
+results.sort(order);
 
 // Hack to use facet as a navigator in results
 // get and cache results in facet order, find a index 
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
 int[] nos = facet.nos(topDocs);
-dic.setNos(nos);
+results.setNos(nos);
 
-while (dic.hasNext()) {
-    dic.next();
-    String bookid = dic.form();
+while (results.hasNext()) {
+    results.next();
+    String bookid = results.form();
     // String bookid = doc.get(Alix.BOOKID);
     Document doc = reader.document(alix.getDocId(bookid), FIELDS);
     // for results, do not diplay not relevant results
     /*
-    if (score && dic.occs() == 0)
+    if (score && results.occs() == 0)
         continue;
     */
 
@@ -183,7 +193,7 @@ while (dic.hasNext()) {
     out.println("</td>");
     out.println("  <td class=\"year\">" + doc.get("year") + "</td>");
     out.println("  <td class=\"title\">");
-    int n = dic.no();
+    int n = results.no();
     String href;
     // hpp?
     if (score)
@@ -196,13 +206,13 @@ while (dic.hasNext()) {
     out.println("</a>");
     out.println("  </td>");
     if (score) {
-        out.println("  <td class=\"occs num\">" + dic.freq() + "</td>");
-        out.println("  <td class=\"docs num\">" + dic.hits() + "</td>");
-               out.println("  <td class=\"score num\">" + dfScoreFr.format(dic.score()) + "</td>");
+        out.println("  <td class=\"occs num\">" + results.freq() + "</td>");
+        out.println("  <td class=\"docs num\">" + results.hits() + "</td>");
+               out.println("  <td class=\"score num\">" + dfScoreFr.format(results.score()) + "</td>");
     }
     else {
-        out.println("  <td class=\"length num\">" + dfint.format(dic.occs()) + "</td>");
-        out.println("  <td class=\"docs num\">" + dic.docs() + "</td>");
+        out.println("  <td class=\"length num\">" + dfint.format(results.occs()) + "</td>");
+        out.println("  <td class=\"docs num\">" + results.docs() + "</td>");
     }
     out.println("</tr>");
 }
@@ -218,16 +228,17 @@ while (dic.hasNext()) {
     <%
 // Loop on metadata fields to provide lists for suggestion
 for (String field : new String[]{"author", "title"}) {
-    if (alix.info(field) == null)
+    if (alix.info(field) == null) {
         continue;
-    facet = alix.fieldFacet(field, TEXT);
-    dic = facet.results();
+    }
+    facet = alix.fieldFacet(field);
+    results = facet.results();
     out.println("<datalist id=\"" + field + "-data\">");
-    dic.sort(FormEnum.Order.alpha);
-    while (dic.hasNext()) {
-        dic.next();
+    results.sort(FormEnum.Order.alpha);
+    while (results.hasNext()) {
+        results.next();
         // long weight = facetEnum.weight();
-        out.println("  <option value=\"" + JspTools.escape(dic.form()) + "\"/>");
+        out.println("  <option value=\"" + JspTools.escape(results.form()) + "\"/>");
     }
     out.println("</datalist>");
 }
