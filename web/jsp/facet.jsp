@@ -12,8 +12,8 @@ Corpus corpus = (Corpus) session.getAttribute(corpusKey);
 BitSet bits = bits(alix, corpus, q);
 final boolean filtered = (bits != null);
 // is there a query and scores to get ?
-String[] forms = alix.tokenize(q, TEXT);
-final boolean queried = (forms != null && forms.length > 0);
+String[] qforms = alix.tokenize(q, TEXT);
+final boolean queried = (qforms != null && qforms.length > 0);
 if (!queried && sort == OptionFacetSort.score) {
     sort = OptionFacetSort.freq;
 }
@@ -49,10 +49,10 @@ if (!queried && sort == OptionFacetSort.score) {
 FieldFacet facet = alix.fieldFacet(field.name());
 FormEnum results;
 if (queried) {
-    results = facet.results(alix.fieldText(TEXT), forms, bits, OptionDistrib.g.scorer());
+    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.g.scorer());
 }
 else {
-    results = facet.results(bits);
+    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.g.scorer());
 }
 // Hack to use facet as a navigator in results, cache results in the facet order
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);

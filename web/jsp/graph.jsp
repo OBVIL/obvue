@@ -146,15 +146,13 @@ if (pars.q == null) {
     freqList.sort(OptionOrder.freq.order(), pars.limit);
 } else {
     FieldRail rail = alix.fieldRail(field);
-    freqList = ftext.forms();
+    freqList = new FormEnum(ftext);
     freqList.filter = filter; // corpus
     freqList.left = pars.left; // left context
     freqList.right = pars.right; // right context
     freqList.search = alix.tokenize(pars.q, TEXT);
     freqList.tags = pars.cat.tags();
-    String[] words = alix.tokenize(pars.q, TEXT);;
-    int[] pivotIds = ftext.formIds(words, filter);
-    long found = rail.coocs(pivotIds, freqList); // populate the wordlist
+    long found = rail.coocs(freqList); // populate the wordlist
     freqList.sort(OptionOrder.freq.order(), pars.limit);
 }
 %>
@@ -313,20 +311,12 @@ freqList.left = pars.left;
 freqList.right = pars.right;
 for (Node src : nodeMap.values()) {
     freqList.search = new String[]{src.form}; // set pivot of the coocs
-    
-    int[] pivotIds = ftext.formIds(new String[]{src.form}, filter);
-    if (pivotIds == null || pivotIds.length < 1) {
+    long found = frail.coocs(freqList);
+    if (found < 1)
         continue;
-    }
-    long found = frail.coocs(pivotIds, freqList);
-    if (found < 1) {
-        continue;
-    }
     // score the coocs found before loop on it
     final int srcId = src.formId;
-    
-    // freqList.sort(OptionOrder.freq.order(), pars.limit);
-    frail.score(pivotIds,freqList);
+    frail.score(freqList, ftext.formOccs(srcId));
     int count = 0;
     while (freqList.hasNext()) {
         freqList.next();

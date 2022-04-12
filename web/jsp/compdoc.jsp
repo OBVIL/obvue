@@ -154,7 +154,7 @@ try { // load full document
         out.println("</nav>");
     }
 
-    forms = doc.results(TEXT, OptionDistrib.g.scorer(), OptionCat.STRONG.tags());
+    forms = doc.forms(TEXT, OptionDistrib.g.scorer(), OptionCat.STRONG.tags());
     out.println("<nav class=\"biflex\">");
     out.println("<p class=\"keywords\">");
     out.println("<label onclick=\"clickSet(this)\">Mots fréquents</label> : ");
@@ -176,7 +176,7 @@ try { // load full document
       out.println("</nav>");
     */
 
-    forms = doc.results(TEXT, OptionDistrib.g.scorer(), OptionCat.NAME.tags());
+    forms = doc.forms(TEXT, OptionDistrib.g.scorer(), OptionCat.NAME.tags());
     out.println("<nav class=\"biflex\">");
     out.println("<p class=\"keywords\">");
     out.println("<label onclick=\"clickSet(this)\">Noms cités</label> : ");

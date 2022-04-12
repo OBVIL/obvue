@@ -37,8 +37,9 @@ OptionFacetSort sort = (OptionFacetSort) tools.getEnum("ord", fallback, Cookies.
 BitSet bits = bits(alix, corpus, q);
 // out.println()
 
-FormEnum results = facet.results(ftext, qterms, bits, OptionDistrib.g.scorer()); // .topTerms(bits, qTerms, null);
+FormEnum results = facet.forms(ftext, bits, qterms, OptionDistrib.g.scorer()); // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
+
 %>
 <!DOCTYPE html>
 <html>
@@ -232,7 +233,7 @@ for (String field : new String[]{"author", "title"}) {
         continue;
     }
     facet = alix.fieldFacet(field);
-    results = facet.results();
+    results = facet.forms();
     out.println("<datalist id=\"" + field + "-data\">");
     results.sort(FormEnum.Order.alpha);
     while (results.hasNext()) {
