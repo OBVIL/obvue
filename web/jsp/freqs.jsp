@@ -15,7 +15,8 @@ private static final int OUT_HTML = 0;
 private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
 static final DecimalFormat frdec = new DecimalFormat("###,###,###,###", frsyms);
-static final DecimalFormat dfdec5 = new DecimalFormat("0.0000E0", ensyms);
+static final DecimalFormat dfdec5 = new DecimalFormat("0.00000", ensyms);
+static final DecimalFormat dfsc = new DecimalFormat("0.00000E0", frsyms);
 static final DecimalFormat frdec2 = new DecimalFormat("###,###,###,##0.00", frsyms);
 
 static String formatScore(double real) {
@@ -23,8 +24,10 @@ static String formatScore(double real) {
         return "0";
     if (real == (int) real)
         return frdec.format(real);
-    int offset = (int) Math.log10(real);
+    double offset = Math.log10(real);
     if (offset < -3)
+        return dfsc.format(real);
+    if (offset < -2)
         return dfdec5.format(real);
     if (offset > 4)
         return frdec.format((int)real);
