@@ -144,7 +144,6 @@ tr.even th, tr.odd th {
 .sortable th.num {
   text-align: right;
   font-weight: 100;
-  font-size: 85%;
   padding: 0 1px;
 }
 

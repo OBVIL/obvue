@@ -101,10 +101,12 @@ try { // load full document
 </script>
 <script>
     
-<%if (doc != null) {
+<%
+if (doc != null) {
     out.println("const docLength=" + doc.length(TEXT) + ";");
     out.println("const id=\"" + doc.id() + "\";");
-}%>
+}
+%>
     
 </script>
 </head>
@@ -154,7 +156,7 @@ try { // load full document
         out.println("</nav>");
     }
 
-    forms = doc.forms(TEXT, OptionDistrib.g.scorer(), OptionCat.STRONG.tags());
+    forms = doc.forms(TEXT, OptionDistrib.G, OptionCat.STRONG.tags());
     out.println("<nav class=\"biflex\">");
     out.println("<p class=\"keywords\">");
     out.println("<label onclick=\"clickSet(this)\">Mots fréquents</label> : ");
@@ -176,7 +178,7 @@ try { // load full document
       out.println("</nav>");
     */
 
-    forms = doc.forms(TEXT, OptionDistrib.g.scorer(), OptionCat.NAME.tags());
+    forms = doc.forms(TEXT, OptionDistrib.G, OptionCat.NAME.tags());
     out.println("<nav class=\"biflex\">");
     out.println("<p class=\"keywords\">");
     out.println("<label onclick=\"clickSet(this)\">Noms cités</label> : ");

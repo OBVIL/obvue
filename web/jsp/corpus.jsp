@@ -37,7 +37,7 @@ OptionFacetSort sort = (OptionFacetSort) tools.getEnum("ord", fallback, Cookies.
 BitSet bits = bits(alix, corpus, q);
 // out.println()
 
-FormEnum results = facet.forms(ftext, bits, qterms, OptionDistrib.g.scorer()); // .topTerms(bits, qTerms, null);
+FormEnum results = facet.forms(ftext, bits, qterms, OptionDistrib.G); // .topTerms(bits, qTerms, null);
 boolean author = (alix.info("author") != null);
 
 %>

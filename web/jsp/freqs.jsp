@@ -14,14 +14,31 @@
 private static final int OUT_HTML = 0;
 private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
+static final DecimalFormat frdec = new DecimalFormat("###,###,###,###", frsyms);
+static final DecimalFormat dfdec5 = new DecimalFormat("0.0000E0", ensyms);
+static final DecimalFormat frdec2 = new DecimalFormat("###,###,###,##0.00", frsyms);
 
-private static String lines(final FormEnum dic, int max, final OptionMime mime, final OptionCat cat,
-        final String q, final boolean filtered) {
+static String formatScore(double real) {
+    if (real == 0)
+        return "0";
+    if (real == (int) real)
+        return frdec.format(real);
+    int offset = (int) Math.log10(real);
+    if (offset < -3)
+        return dfdec5.format(real);
+    if (offset > 4)
+        return frdec.format((int)real);
+
+    // return String.format("%,." + (digits - offset) + "f", real)+" "+offset;
+    return frdec2.format(real);
+}
+
+private static void lines(JspWriter out, final FormEnum dic, int max, final OptionMime mime, final OptionCat cat,
+        final String q, final boolean filtered) throws IOException {
     if (max <= 0)
         max = dic.limit();
     else
         max = Math.min(max, dic.limit());
-    StringBuilder sb = new StringBuilder();
 
     int no = 1;
     int flag;
@@ -41,86 +58,105 @@ private static String lines(final FormEnum dic, int max, final OptionMime mime, 
         switch (mime) {
             case json :
                 if (!first)
-                    sb.append(",\n");
-                jsonLine(sb, dic, no, q, filtered);
+                    out.append(",\n");
+                jsonLine(out, dic, no, q, filtered);
                 break;
             case csv :
-                csvLine(sb, dic, no, q, filtered);
+                csvLine(out, dic, no, q, filtered);
                 break;
             default :
-                htmlLine(sb, dic, no, q, filtered);
+                htmlLine(out, dic, no, q, filtered);
         }
         no++;
         first = false;
     }
-
-    return sb.toString();
 }
 
 /**
  * An html table row &lt;tr&gt; for lexical frequence result.
  */
-private static void htmlLine(StringBuilder sb, final FormEnum dic, final int no, final String q, final boolean filtered) {
+private static void htmlLine(JspWriter out, final FormEnum dic, final int no, final String q, final boolean filtered) throws IOException {
     String term = dic.form();
     // .replace('_', ' ') ?
-    sb.append("  <tr>\n");
-    sb.append("    <td class=\"no\">" + no + ".</td>\n");
-    sb.append("    <td><a");
+    out.append("  <tr>\n");
+    out.append("    <td class=\"no\">" + no + ".</td>\n");
+    out.append("    <td><a");
     if (q != null) {
-        sb.append(" href=\"kwic?sort=score&amp;q=");
-        sb.append(q);
-        sb.append(" %2B").append(term);
-        sb.append("&amp;expression=on");
-        sb.append("\"");
+        out.append(" href=\"kwic?sort=score&amp;q=");
+        out.append(q);
+        out.append(" %2B").append(term);
+        out.append("&amp;expression=on");
+        out.append("\"");
     } else {
-        sb.append(" href=\".?q=");
-        sb.append(term);
-        sb.append("\"");
-        sb.append(" target=\"_top\"");
+        out.append(" href=\".?q=");
+        out.append(term);
+        out.append("\"");
+        out.append(" target=\"_top\"");
     }
-    sb.append(">");
-    sb.append(term);
-    sb.append("</a></td>\n");
-    sb.append("    <td>");
+    out.append(">");
+    out.append(term);
+    out.append("</a></td>\n");
+    // tag
+    out.append("    <td>");
     final int flag = dic.tag();
-    sb.append(Tag.label(flag));
-    sb.append("</td>\n");
-    sb.append("    <td class=\"num\">");
-    sb.append(dic.hits());
-    sb.append("</td>\n");
-    sb.append("    <td class=\"num\">");
-    if (q != null) sb.append(dic.freq());
-    else if (filtered) sb.append(dic.freq());
-    else sb.append(dic.occs());
-    sb.append("</td>\n");
-    sb.append("  </tr>\n");
+    out.append(Tag.label(flag));
+    out.append("</td>\n");
+    
+    // doc founds
+    out.append("    <td class=\"num\">");
+    out.append(""+dic.hits());
+    out.append("</td>\n");
+    
+    if (q != null || filtered) {
+        out.append("    <td class=\"num all\">");
+        out.append("/ "+frdec.format(dic.docs()));
+        out.append("</td>");
+    }
+
+    // occs found
+    out.append("    <td class=\"num\">");
+    out.append(frdec.format(dic.freq()));
+    out.append("</td>");
+
+    if (q != null || filtered) {
+        out.append("    <td class=\"num all\">");
+        out.append("/ "+frdec.format(dic.occs()));
+        out.append("</td>");
+    }
+
+    // score
+    out.append("    <td class=\"num\">");
+    out.append(formatScore(dic.score()));
+    out.append("</td>");
+    
+    out.append("  </tr>\n");
 }
 
-private static void csvLine(StringBuilder sb, final FormEnum dic, final int no, final String q, final boolean filtered) {
-    sb.append(dic.form().replaceAll("\t\n", " "));
+private static void csvLine(JspWriter out, final FormEnum dic, final int no, final String q, final boolean filtered) throws IOException {
+    out.append(dic.form().replaceAll("\t\n", " "));
     final int flag = dic.tag();
-    sb.append("\t").append(Tag.label(flag));
-    sb.append("\t").append(dic.hits());
-    sb.append("\t");
-    if (q != null) sb.append(dic.freq());
-    else if (filtered) sb.append(dic.freq());
-    else sb.append(dic.occs());
-    sb.append("\n");
+    out.append("\t").append(Tag.label(flag));
+    out.append("\t").append(""+dic.hits());
+    out.append("\t");
+    if (q != null) out.append(""+dic.freq());
+    else if (filtered) out.append(""+dic.freq());
+    else out.append(""+dic.occs());
+    out.append("\n");
 }
 
-static private void jsonLine(StringBuilder sb, final FormEnum dic, final int no, final String q, final boolean filtered) {
-    sb.append("    {\"word\" : \"");
-    sb.append(dic.form().replace("\"", "\\\"").replace('_', ' '));
-    sb.append("\"");
-    sb.append(", \"weight\" : ");
-    if (q != null) sb.append(dfdec3.format(dic.freq()));
-    else if (filtered) sb.append(dfdec3.format(dic.freq()));
-    else sb.append(dfdec3.format(dic.occs()));
-    sb.append(", \"attributes\" : {\"class\" : \"");
+static private void jsonLine(JspWriter out, final FormEnum dic, final int no, final String q, final boolean filtered) throws IOException {
+    out.append("    {\"word\" : \"");
+    out.append(dic.form().replace("\"", "\\\"").replace('_', ' '));
+    out.append("\"");
+    out.append(", \"weight\" : ");
+    if (q != null) out.append(dfdec3.format(dic.freq()));
+    else if (filtered) out.append(dfdec3.format(dic.freq()));
+    else out.append(dfdec3.format(dic.occs()));
+    out.append(", \"attributes\" : {\"class\" : \"");
     final int flag = dic.tag();
-    sb.append(Tag.name(flag));
-    sb.append("\"}");
-    sb.append("}");
+    out.append(Tag.name(flag));
+    out.append("\"}");
+    out.append("}");
 }
 %>
 <%
@@ -132,6 +168,9 @@ if (count < 1 || count > 2000)
 
 final OptionFacetSort sort = (OptionFacetSort) tools.getEnum("sort", OptionFacetSort.freq, Cookies.freqsSort);
 OptionCat cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);
+
+OptionDistrib distrib = (OptionDistrib) tools.getEnum("distrib", OptionDistrib.OCCS, Cookies.distrib);
+OptionMI mi = (OptionMI) tools.getEnum("mi", OptionMI.OCCS, Cookies.mi);
 
 int left = tools.getInt("left", 5, Cookies.coocLeft);
 if (left < 0)
@@ -151,22 +190,23 @@ Corpus corpus = (Corpus) session.getAttribute(corpusKey);
 if (corpus != null) filter = corpus.bits();
 
 FieldText ftext = alix.fieldText(field);
-FormEnum dic; // the dictionary to extract
+FormEnum dic = null; // the dictionary to extract
+String[] words = alix.tokenize(q, TEXT);;
+int[] pivotIds = ftext.formIds(words, filter);
 if (q == null) {
-    dic = ftext.results(cat.tags(), null, filter);
-    dic.sort(OptionOrder.freq.order(), count);
+    dic = ftext.forms(filter, cat.tags(), distrib);
+    dic.sort(OptionOrder.score.order(), count);
 } 
+else if (pivotIds == null) {
+    // what should be done here ?
+}
 else {
     FieldRail rail = alix.fieldRail(field);
-    dic = new FormEnum(ftext);
+    dic = ftext.forms();
     dic.filter = filter; // corpus
-    dic.left = left; // left context
-    dic.right = right; // right context
     dic.tags = cat.tags();
-    String[] words = alix.tokenize(q, TEXT);;
-    int[] pivotIds = ftext.formIds(words, filter);
-    long found = rail.coocs(pivotIds, dic); // populate the wordlist
-    dic.sort(OptionOrder.freq.order(), count);
+    long found = rail.coocs(dic, pivotIds, left, right, mi); // populate the wordlist
+    dic.sort(OptionOrder.score.order(), count);
 }
 
 String format = tools.getString("format", null);
@@ -182,9 +222,14 @@ try {
 if (OptionMime.json.equals(mime)) {
     response.setContentType(OptionMime.json.type);
     out.println("{");
-    out.println("  \"data\":[");
-    out.println(lines(dic, count, mime, cat, q, (filter != null)));
-    out.println("\n  ]");
+    if (dic == null && q != null) {
+        out.println("\"error\":\"Mots non trouvés:" + q + "\"");
+    }
+    else {
+        out.println("  \"data\":[");
+        lines(out, dic, count, mime, cat, q, (filter != null));
+        out.println("\n  ]");
+    }
     out.println("\n}");
 }
 else if (OptionMime.csv.equals(mime)) {
@@ -202,9 +247,14 @@ else if (OptionMime.csv.equals(mime)) {
         sb.append('_').append(zeqchars, 0, limit);
     }
     response.setHeader("Content-Disposition", "attachment; filename=\"" + sb + ".csv\"");
-    out.print("Mot\tType\tChapitres\tOccurrences");
-    out.println();
-    out.print(lines(dic, -1, mime, cat, q, (filter != null)));
+    if (dic == null && q != null) {
+        out.println("Mots non trouvés : \"" + q + "\"");
+    }
+    else {
+        out.print("Mot\tType\tChapitres\tOccurrences");
+        out.println();
+        lines(out, dic, -1, mime, cat, q, (filter != null));
+    }
 } 
 else {
 %>
@@ -218,11 +268,11 @@ else {
         <link href="../static/obvie.css" rel="stylesheet" />
     </head>
     <body>
+    <form id="sortForm">
     <table class="sortable">
         <caption>
             <a class="csv"
             href="freqs.csv?q=<%=JspTools.escape(q)%>&amp;left=<%=left%>&amp;right=<%=right%>&amp;cat=<%=cat%>&amp;sort=<%=sort%>">csv 🡵</a>
-            <form id="sortForm">
                 <%
                 if (corpus != null) {
                     out.println("<i>" + corpus.name() + "</i>");
@@ -242,28 +292,66 @@ else {
                     <%=cat.options("NOSTOP, SUB, NAME, VERB, ADJ, ADV, ALL")%>
                 </select>
                 <button type="submit">▼</button>
-            </form>
         </caption>
         <thead>
             <tr>
-                <%
-                out.println("<th>No</th>");
-                out.println("<th>Mot</th>");
-                out.println("<th>Type</th>");
-                out.println("<th>Chapitres</th>");
-                out.println("<th>Occurrences</th>");
+                <th>No</th>
+                <th title="Forme graphique indexée" class="form">Mot</th>
+                <th title="Catégorie grammaticale">Type</th>
+                
+                <% 
+if (q != null || filter != null) {
+    out.println("<th title=\"Nombre de textes trouvés contenant le mot\" class=\"num\"> Textes</th>");
+    out.println("<th title=\"Nombre total de textes contenant le mot\" class=\"all\">/textes</th>");
+}
+else {
+    out.println("<th title=\"Nombre de textes contenant le mot\" class=\"num\"> Textes</th>");
+}
                 %>
-            
+                
+                <% 
+if (q != null || filter != null) {
+    out.println("<th title=\"Nombre d’occurrences trouvées\" class=\"num\"> Occurrences</th>");
+    out.println("<th title=\"Sur total des occurences de cette graphie\" class=\"all\">/occurrences</td>");
+}
+else {
+    out.println("<th title=\"Nombre total d’occurences de ce mot\" class=\"all\">Occurrences</td>");
+    
+}
+out.println("<th title=\"Score, avec algorithme\">");
+if (q != null) {
+    out.println("<select name=\"mi\" onchange=\"this.form.submit()\"><option/>");
+    out.println(mi.options());
+    out.println("</select>");
+}
+else {
+    out.println("<select name=\"distrib\" onchange=\"this.form.submit()\"><option/>");
+    out.println(distrib.options());
+    out.println("</select>");
+}
+out.println("</th>");
+
+                
+                %>
             <tr>
         </thead>
         <tbody>
-            <%=lines(dic, count, mime, cat, q, (filter != null))%>
+            <%
+if (dic == null && q != null) {
+    out.println("<td colspan=\"7\">Aucune occurrences trouvées pour la requête : \"" + q + "\"<td>");
+}
+else {
+    lines(out, dic, count, mime, cat, q, (filter != null));
+}
+            %>
         </tbody>
     </table>
+    </form>
+
     <%
     out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->");
+// <script src="../static/vendor/sortable.js">
     %>
-    <script src="../static/vendor/sortable.js">
                     //
                 </script>
     </body>

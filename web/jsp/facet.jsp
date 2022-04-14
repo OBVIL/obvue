@@ -49,10 +49,10 @@ if (!queried && sort == OptionFacetSort.score) {
 FieldFacet facet = alix.fieldFacet(field.name());
 FormEnum results;
 if (queried) {
-    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.g.scorer());
+    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.G);
 }
 else {
-    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.g.scorer());
+    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.G);
 }
 // Hack to use facet as a navigator in results, cache results in the facet order
 TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);

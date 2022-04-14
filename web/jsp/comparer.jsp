@@ -86,6 +86,7 @@ body, html {
             <div id="tabs">
                 <button name="view" value="corpus">Corpus</button>
                 <button name="view" value="cloud">Nuage</button>
+                <button name="view" value="reseau">Réseau</a>
                 <button name="view" value="freqs">Fréquences</button>
                 <button name="view" value="snip">Extraits</button>
                 <button name="view" value="kwic">Concordance</button>

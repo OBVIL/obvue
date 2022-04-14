@@ -142,19 +142,16 @@ if (corpus != null)
     filter = corpus.bits();
 FormEnum freqList;
 if (pars.q == null) {
-    freqList = ftext.results(pars.cat.tags(), null, filter);
+    freqList = ftext.forms(filter, pars.cat.tags(), null);
     freqList.sort(OptionOrder.freq.order(), pars.limit);
 } else {
     FieldRail rail = alix.fieldRail(field);
     freqList = ftext.forms();
     freqList.filter = filter; // corpus
-    freqList.left = pars.left; // left context
-    freqList.right = pars.right; // right context
-    freqList.search = alix.tokenize(pars.q, TEXT);
     freqList.tags = pars.cat.tags();
     String[] words = alix.tokenize(pars.q, TEXT);;
     int[] pivotIds = ftext.formIds(words, filter);
-    long found = rail.coocs(pivotIds, freqList); // populate the wordlist
+    long found = rail.coocs(freqList, pivotIds, pars.left, pars.right, null); // populate the wordlist
     freqList.sort(OptionOrder.freq.order(), pars.limit);
 }
 %>
@@ -309,8 +306,6 @@ int edgeId = 0;
 
 // Set<Node> nodeSet = new TreeSet<Node>(starSet);
 freqList.limit = nodeMap.size() * 2; // collect enough edges
-freqList.left = pars.left;
-freqList.right = pars.right;
 for (Node src : nodeMap.values()) {
     freqList.search = new String[]{src.form}; // set pivot of the coocs
     
@@ -318,15 +313,14 @@ for (Node src : nodeMap.values()) {
     if (pivotIds == null || pivotIds.length < 1) {
         continue;
     }
-    long found = frail.coocs(pivotIds, freqList);
+    long found = frail.coocs(freqList, pivotIds, pars.left, pars.right, null);
     if (found < 1) {
         continue;
     }
     // score the coocs found before loop on it
     final int srcId = src.formId;
     
-    // freqList.sort(OptionOrder.freq.order(), pars.limit);
-    frail.score(pivotIds,freqList);
+    freqList.sort(FormEnum.Order.freq);
     int count = 0;
     while (freqList.hasNext()) {
         freqList.next();

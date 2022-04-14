@@ -19,8 +19,7 @@
 <%@ page import="alix.util.ML"%>
 <%@ page import="alix.web.*"%>
 <%@ page import="obvie.*"%>
-<%!
-/** Field name containing canonized text */
+<%!/** Field name containing canonized text */
 public static String TEXT = "text";
 /** Field Name with int date */
 final static String YEAR = "year";
@@ -41,7 +40,7 @@ static final DecimalFormat dfdec3 = new DecimalFormat("0.###", ensyms);
  */
 public enum Cookies
 {
-    count, coocLeft, coocRight, corpusSort, docSort, expression, facetSort, freqsSort, cat,;
+    count, coocLeft, coocRight, corpusSort, docSort, expression, facetSort, freqsSort, cat, distrib, mi;
 }
 
 /** 
@@ -84,8 +83,8 @@ public Pars pars(final PageContext page)
     pars.cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP); // 
 
     // ranking, sort… a bit a mess
-    pars.distrib = (OptionDistrib) tools.getEnum("distrib", OptionDistrib.g);
-    pars.mi = (OptionMI) tools.getEnum("mi", OptionMI.g);
+    pars.distrib = (OptionDistrib) tools.getEnum("distrib", OptionDistrib.BM25);
+    pars.mi = (OptionMI) tools.getEnum("mi", OptionMI.G);
     // default sort in documents
     pars.sort = (OptionSort) tools.getEnum("sort", OptionSort.score, "alixSort");
     //final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
@@ -282,10 +281,7 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
     topDocs = collector.topDocs();
     // page.getSession().setAttribute(key, topDocs);
     return topDocs;
-}
-
-
-%>
+}%>
 <%
 final long time = System.nanoTime();
 final JspTools tools = new JspTools(pageContext);
