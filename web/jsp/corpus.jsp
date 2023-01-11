@@ -22,7 +22,7 @@ if (corpus != null) {
 FieldFacet facet = alix.fieldFacet(Names.ALIX_BOOKID);
 FieldText ftext = alix.fieldText(TEXT);
 
-FieldInt years = alix.fieldInt(YEAR, null); // to get min() max() year
+FieldInt years = alix.fieldInt(YEAR); // to get min() max() year
 String[] qterms = alix.tokenize(q, TEXT);
 final boolean score = (qterms != null && qterms.length > 0);
 
@@ -135,26 +135,26 @@ else {
 FormEnum.Order order;
 switch (sort) {
     case alpha :
-        order = FormEnum.Order.alpha;
+        order = FormEnum.Order.ALPHA;
         break;
     case score :
         if (score) {
-            order = FormEnum.Order.score;
+            order = FormEnum.Order.SCORE;
         }
         else {
-            order = FormEnum.Order.alpha;
+            order = FormEnum.Order.ALPHA;
         }
         break;
     case freq :
         if (score) {
-            order = FormEnum.Order.occs;
+            order = FormEnum.Order.OCCS;
         }
         else {
-            order = FormEnum.Order.alpha;
+            order = FormEnum.Order.ALPHA;
         }
         break;
     default :
-        order = FormEnum.Order.alpha;
+        order = FormEnum.Order.ALPHA;
 }
 results.sort(order);
 
@@ -209,7 +209,7 @@ while (results.hasNext()) {
     if (score) {
         out.println("  <td class=\"occs num\">" + results.freq() + "</td>");
         out.println("  <td class=\"docs num\">" + results.hits() + "</td>");
-               out.println("  <td class=\"score num\">" + dfScoreFr.format(results.score()) + "</td>");
+       out.println("  <td class=\"score num\">" + dfScoreFr.format(results.score()) + "</td>");
     }
     else {
         out.println("  <td class=\"length num\">" + dfint.format(results.occs()) + "</td>");
@@ -227,23 +227,23 @@ while (results.hasNext()) {
 
         <script src="../static/vendor/sortable.js">//</script>
     <%
-// Loop on metadata fields to provide lists for suggestion
-for (String field : new String[]{"author", "title"}) {
-    if (alix.info(field) == null) {
-        continue;
+    // Loop on metadata fields to provide lists for suggestion
+    for (String field : new String[]{"author", "title"}) {
+        if (alix.info(field) == null) {
+            continue;
+        }
+        facet = alix.fieldFacet(field);
+        results = facet.forms();
+        out.println("<datalist id=\"" + field + "-data\">");
+        results.sort(FormEnum.Order.ALPHA);
+        while (results.hasNext()) {
+            results.next();
+            // long weight = facetEnum.weight();
+            out.println("  <option value=\"" + JspTools.escape(results.form()) + "\"/>");
+        }
+        out.println("</datalist>");
     }
-    facet = alix.fieldFacet(field);
-    results = facet.forms();
-    out.println("<datalist id=\"" + field + "-data\">");
-    results.sort(FormEnum.Order.alpha);
-    while (results.hasNext()) {
-        results.next();
-        // long weight = facetEnum.weight();
-        out.println("  <option value=\"" + JspTools.escape(results.form()) + "\"/>");
-    }
-    out.println("</datalist>");
-}
-%>
+    %>
         <a href="#" id="gotop">▲</a>
         <script>
 bottomLoad();

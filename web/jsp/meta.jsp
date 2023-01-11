@@ -5,8 +5,7 @@
 <%@ page import="alix.lucene.search.Doc"%>
 <%@ page import="alix.lucene.search.Marker"%>
 <%@ page import="alix.util.Top"%>
-<%!
-final static Analyzer ANAMET = new MetaAnalyzer();
+<%!final static Analyzer ANAMET = new MetaAnalyzer();
 final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new String[]{Names.ALIX_ID, Names.ALIX_BOOKID, "bibl"}));
 
 private Query mlt(Doc doc, String field) throws IOException, NoSuchFieldException
@@ -15,7 +14,7 @@ private Query mlt(Doc doc, String field) throws IOException, NoSuchFieldExceptio
     Query mlt = null;
     BooleanQuery.Builder qBuilder = new BooleanQuery.Builder();
     FormEnum forms = doc.forms(field, OptionDistrib.G, OptionCat.STRONG.tags());
-    forms.sort(FormEnum.Order.score, mltLimit, false);
+    forms.sort(FormEnum.Order.SCORE, mltLimit, false);
     forms.reset();
     while (forms.hasNext()) {
         forms.next();

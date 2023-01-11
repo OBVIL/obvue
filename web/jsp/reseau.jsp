@@ -143,7 +143,7 @@ if (corpus != null)
 FormEnum freqList;
 if (pars.q == null) {
     freqList = ftext.forms(filter, pars.cat.tags(), null);
-    freqList.sort(OptionOrder.freq.order(), pars.limit);
+    freqList.sort(OptionOrder.FREQ.order(), pars.limit);
 } else {
     FieldRail rail = alix.fieldRail(field);
     freqList = ftext.forms();
@@ -152,7 +152,7 @@ if (pars.q == null) {
     String[] words = alix.tokenize(pars.q, TEXT);;
     int[] pivotIds = ftext.formIds(words, filter);
     long found = rail.coocs(freqList, pivotIds, pars.left, pars.right, null); // populate the wordlist
-    freqList.sort(OptionOrder.freq.order(), pars.limit);
+    freqList.sort(OptionOrder.FREQ.order(), pars.limit);
 }
 %>
 <!DOCTYPE html>
@@ -226,7 +226,7 @@ form.search {
             final int formId = freqList.formId();
             // add a linked node candidate
             long count = 1;
-            if (pars.order.equals(OptionOrder.hits))
+            if (pars.order.equals(OptionOrder.HITS))
                 count = freqList.hits();
             else
                 count = freqList.freq();
@@ -320,7 +320,7 @@ for (Node src : nodeMap.values()) {
     // score the coocs found before loop on it
     final int srcId = src.formId;
     
-    freqList.sort(FormEnum.Order.freq);
+    freqList.sort(FormEnum.Order.FREQ);
     int count = 0;
     while (freqList.hasNext()) {
         freqList.next();

@@ -143,7 +143,7 @@ if (corpus != null)
 FormEnum freqList;
 if (pars.q == null) {
     freqList = ftext.results(pars.cat.tags(), null, filter);
-    freqList.sort(OptionOrder.freq.order(), pars.limit);
+    freqList.sort(OptionOrder.FREQ.order(), pars.limit);
 } else {
     FieldRail rail = alix.fieldRail(field);
     freqList = new FormEnum(ftext);
@@ -153,7 +153,7 @@ if (pars.q == null) {
     freqList.search = alix.tokenize(pars.q, TEXT);
     freqList.tags = pars.cat.tags();
     long found = rail.coocs(freqList); // populate the wordlist
-    freqList.sort(OptionOrder.freq.order(), pars.limit);
+    freqList.sort(OptionOrder.FREQ.order(), pars.limit);
 }
 %>
 <!DOCTYPE html>

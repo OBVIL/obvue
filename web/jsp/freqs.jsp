@@ -10,8 +10,7 @@
 <%@ page import="alix.lucene.analysis.FrDics"%>
 <%@ page import="alix.lucene.analysis.FrDics.LexEntry"%>
 <%@ page import="alix.util.Char"%>
-<%!
-private static final int OUT_HTML = 0;
+<%!private static final int OUT_HTML = 0;
 private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;
 static final DecimalFormat frdec = new DecimalFormat("###,###,###,###", frsyms);
@@ -160,8 +159,7 @@ static private void jsonLine(JspWriter out, final FormEnum dic, final int no, fi
     out.append(Tag.name(flag));
     out.append("\"}");
     out.append("}");
-}
-%>
+}%>
 <%
 //parameters
 final String q = tools.getString("q", null);
@@ -198,7 +196,7 @@ String[] words = alix.tokenize(q, TEXT);;
 int[] pivotIds = ftext.formIds(words, filter);
 if (q == null) {
     dic = ftext.forms(filter, cat.tags(), distrib);
-    dic.sort(OptionOrder.score.order(), count);
+    dic.sort(OptionOrder.SCORE.order(), count);
 } 
 else if (pivotIds == null) {
     // what should be done here ?
@@ -209,7 +207,7 @@ else {
     dic.filter = filter; // corpus
     dic.tags = cat.tags();
     long found = rail.coocs(dic, pivotIds, left, right, mi); // populate the wordlist
-    dic.sort(OptionOrder.score.order(), count);
+    dic.sort(OptionOrder.SCORE.order(), count);
 }
 
 String format = tools.getString("format", null);
@@ -353,10 +351,8 @@ else {
 
     <%
     out.println("<!-- time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\" -->");
-// <script src="../static/vendor/sortable.js">
+// <script src="../static/vendor/sortable.js">//</script>
     %>
-                    //
-                </script>
     </body>
 <!--((System.nanoTime() - time) / 1000000.0).0) %> ms  -->
 </html>

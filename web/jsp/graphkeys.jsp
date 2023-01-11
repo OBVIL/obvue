@@ -31,9 +31,9 @@ String field = tools.getString("f", TEXT);
 TagFilter tags = OptionCat.NOSTOP.tags();
 // OptionDistrib.Scorer scorer = OptionDistrib.bm25.scorer();
 OptionDistrib.Scorer scorer = null;
-FormEnum.Order nodesOrder = FormEnum.Order.score; // sort the nodes
+FormEnum.Order nodesOrder = FormEnum.Order.SCORE; // sort the nodes
 if (scorer == null) {
-    nodesOrder = FormEnum.Order.freq; // global occs will not be tag filtered
+    nodesOrder = FormEnum.Order.FREQ; // global occs will not be tag filtered
 }
 //-----------
 // check parameters

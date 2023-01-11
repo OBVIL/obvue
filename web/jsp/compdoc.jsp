@@ -28,7 +28,7 @@ static String wordList(Top<String> top) {
 
 static String ahref(FormEnum forms) {
     int max = 50;
-    forms.sort(FormEnum.Order.score, max, false);
+    forms.sort(FormEnum.Order.SCORE, max, false);
     forms.reset();
     StringBuilder sb = new StringBuilder();
     boolean first = true;
@@ -48,9 +48,7 @@ static String ahref(FormEnum forms) {
             break;
     }
     return sb.toString();
-}
-
-%>
+}%>
 <%
 // Parameters
 // get a doc, by String id is preferred (more persistant)

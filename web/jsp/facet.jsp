@@ -46,99 +46,99 @@ if (!queried && sort == OptionFacetSort.score) {
     </form>
     <main>
         <%
-FieldFacet facet = alix.fieldFacet(field.name());
-FormEnum results;
-if (queried) {
-    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.G);
-}
-else {
-    results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.G);
-}
-// Hack to use facet as a navigator in results, cache results in the facet order
-TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
-int[] nos = facet.nos(topDocs);
-results.setNos(nos);
+        FieldFacet facet = alix.fieldFacet(field.name());
+                FormEnum results;
+                if (queried) {
+            results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.G);
+                }
+                else {
+            results = facet.forms(alix.fieldText(TEXT), bits, qforms, OptionDistrib.G);
+                }
+                // Hack to use facet as a navigator in results, cache results in the facet order
+                TopDocs topDocs = getTopDocs(pageContext, alix, corpus, q, OptionSort.author);
+                int[] nos = facet.nos(topDocs);
+                results.setNos(nos);
 
-out.println("<h4>");
-out.print(field.label);
-out.print(" <span class=\"stats\">(");
-if (queried) out.print("occurrences — ");
-if (queried) out.print("chapitres trouvés / total chapitres");
-else if (filtered) out.print("chapitres sélectionnés / total chapitres");
-else out.print("total chapitres");
-out.print(")</span>");
-out.println("</h4>");
+                out.println("<h4>");
+                out.print(field.label);
+                out.print(" <span class=\"stats\">(");
+                if (queried) out.print("occurrences — ");
+                if (queried) out.print("chapitres trouvés / total chapitres");
+                else if (filtered) out.print("chapitres sélectionnés / total chapitres");
+                else out.print("total chapitres");
+                out.print(")</span>");
+                out.println("</h4>");
 
-FormEnum.Order order;
-switch (sort) {
-    case alpha :
-        order = FormEnum.Order.alpha;
-        break;
-    case freq :
-        if (queried) order = FormEnum.Order.freq;
-        else if (filtered) order = FormEnum.Order.hits;
-        else order = FormEnum.Order.occs;
-        break;
-    case score :
-        if (queried) order = FormEnum.Order.score;
-        else if (filtered) order = FormEnum.Order.hits;
-        else order = FormEnum.Order.occs;
-        break;
-    default :
-    	order = FormEnum.Order.alpha;
-}
-results.sort(order);
+                FormEnum.Order order;
+                switch (sort) {
+            case alpha :
+                order = FormEnum.Order.ALPHA;
+                break;
+            case freq :
+                if (queried) order = FormEnum.Order.FREQ;
+                else if (filtered) order = FormEnum.Order.HITS;
+                else order = FormEnum.Order.OCCS;
+                break;
+            case score :
+                if (queried) order = FormEnum.Order.SCORE;
+                else if (filtered) order = FormEnum.Order.HITS;
+                else order = FormEnum.Order.OCCS;
+                break;
+            default :
+            	order = FormEnum.Order.ALPHA;
+                }
+                results.sort(order);
 
 
-int hits = 0, docs = 0, start = 1;
-long occs = 0;
+                int hits = 0, docs = 0, start = 1;
+                long occs = 0;
 
-final StringBuilder href = new StringBuilder();
-href.append("?sort=author");
-if (q != null)
-    href.append("&amp;q=").append(JspTools.escUrl(q));;
-final int hrefLen = href.length();
+                final StringBuilder href = new StringBuilder();
+                href.append("?sort=author");
+                if (q != null)
+            href.append("&amp;q=").append(JspTools.escUrl(q));;
+                final int hrefLen = href.length();
 
-while (results.hasNext()) {
-    results.next();
-    docs = results.docs();
-    if (filtered) {
-        hits = results.hits();
-        if (hits < 1) continue; // in alpha order, try next
-    }
-    if (queried) {
-        occs = results.occs();
-        if (hits < 1) continue; // in alpha order, try next
-    }
-    href.setLength(hrefLen);
-    href.append("&amp;start=" +  (results.no() + 1)); // parenthesis for addition!
-    href.append("&amp;hpp=");
-    if (filtered || queried) {
-        href.append(hits);
-    }
-    else {
-        href.append(docs);
-        start = start + docs;
-    }
+                while (results.hasNext()) {
+            results.next();
+            docs = results.docs();
+            if (filtered) {
+                hits = results.hits();
+                if (hits < 1) continue; // in alpha order, try next
+            }
+            if (queried) {
+                occs = results.occs();
+                if (hits < 1) continue; // in alpha order, try next
+            }
+            href.setLength(hrefLen);
+            href.append("&amp;start=" +  (results.no() + 1)); // parenthesis for addition!
+            href.append("&amp;hpp=");
+            if (filtered || queried) {
+                href.append(hits);
+            }
+            else {
+                href.append(docs);
+                start = start + docs;
+            }
 
-    out.print("<div class=\"term\">");
-    out.print("<a href=\"" + href + "\">");
-    out.print(results.form());
-    out.print(" <span class=\"stats\">(");
-    if (queried) {
-        out.print(results.freq() + " o. — ");
-    }
-    if (filtered || queried) {
-        out.print(hits + " ch. / " + docs);
-    }
-    else {
-        out.print(docs);
-    }
-    out.print(")</span>");
-    out.println("</div>");
-}
-        }
-    out.print("</a>");
+            out.print("<div class=\"term\">");
+            out.print("<a href=\"" + href + "\">");
+            out.print(results.form());
+            out.print(" <span class=\"stats\">(");
+            if (queried) {
+                out.print(results.freq() + " o. — ");
+            }
+            if (filtered || queried) {
+                out.print(hits + " ch. / " + docs);
+            }
+            else {
+                out.print(docs);
+            }
+            out.print(")</span>");
+            out.println("</div>");
+                }
+                }
+            out.print("</a>");
         %>
     </main>
     <script src="../static/js/facet.js">

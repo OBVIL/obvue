@@ -88,7 +88,7 @@ public Pars pars(final PageContext page)
     // default sort in documents
     pars.sort = (OptionSort) tools.getEnum("sort", OptionSort.score, "alixSort");
     //final FacetSort sort = (FacetSort)tools.getEnum("sort", FacetSort.freq, Cookies.freqsSort);
-    pars.order = (OptionOrder) tools.getEnum("order", OptionOrder.score, "alixOrder");
+    pars.order = (OptionOrder) tools.getEnum("order", OptionOrder.SCORE, "alixOrder");
 
     String format = tools.getString("format", null);
     //if (format == null) format = (String)request.getAttribute(Dispatch.EXT);
