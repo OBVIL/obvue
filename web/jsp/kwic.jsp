@@ -157,20 +157,35 @@ span.left {
             out.println("</article>");
             if (++docs >= hpp)
                 break;
-            continue;
-                }
+                continue;
+            }
 
-                String[] lines = doc.kwic(field, automat, href.toString(), 200, left, right, gap, expression, repetitions);
-                if (lines == null || lines.length < 1)
-            continue;
-                // doc.kwic(field, include, 50, 50, 100);
+                List<String[]> lines = doc.kwic(
+                    field, 
+                    automat, 
+                    200, 
+                    left, 
+                    right, 
+                    gap, 
+                    expression, 
+                    repetitions
+                );
+                if (lines == null || lines.size() < 1) continue;
                 out.println("<article class=\"res\">");
                 out.println("<header>");
                 out.println("<small>" + (i) + "</small> ");
-
                 out.println("<a href=\"" + href + "\">" + doc.get("bibl") + "</a></header>");
-                for (String l : lines) {
-            out.println("<div class=\"line\">" + l + "</div>");
+
+                for (String[] l: lines) {
+                    out.println("  <div class=\"line\">");
+                    // out.println("    <small class=\"num\">" + ++occ +"</small>");
+                    out.println("    <span class=\"left\">" + l[1] + "</span>");
+                    out.println("    <a class=\"concline\" href=\""+ href + "#" + l[0] +"\">");
+                    // out.println("      <span class=\"pivot\">" + l[2] + "</span>");
+                    out.println(l[2]);
+                    out.println("</a>");
+                    out.println("    <span class=\"right\">" + l[3] + "</span>");
+                    out.println("  </div>");
                 }
                 out.println("</article>");
                 if (++docs >= hpp)
