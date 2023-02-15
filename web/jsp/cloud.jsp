@@ -19,18 +19,10 @@ private String options(int[] values, int value) {
 <%
 final String q = tools.getString("q", null);
 OptionCat cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);
-final int count = tools.getInt("count", 500, Cookies.count);
+final int count = tools.getInt("count", 0, 1000, 500, Cookies.count.name());
 Corpus corpus = (Corpus) session.getAttribute(corpusKey);
-int left = tools.getInt("left", 5, Cookies.coocLeft);
-if (left < 0)
-    left = 0;
-else if (left > 10)
-    left = 10;
-int right = tools.getInt("right", 5, Cookies.coocRight);
-if (right < 0)
-    right = 0;
-else if (right > 10)
-    right = 10;
+int left = tools.getInt("left", 0, 10, 5, Cookies.coocLeft.name());
+int right = tools.getInt("right", 0, 10, 5, Cookies.coocRight.name());
 %>
 <!DOCTYPE html>
 <html>

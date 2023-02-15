@@ -173,16 +173,8 @@ OptionCat cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);
 OptionDistrib distrib = (OptionDistrib) tools.getEnum("distrib", OptionDistrib.OCCS, Cookies.distrib);
 OptionMI mi = (OptionMI) tools.getEnum("mi", OptionMI.OCCS, Cookies.mi);
 
-int left = tools.getInt("left", 5, Cookies.coocLeft);
-if (left < 0)
-    left = 0;
-else if (left > 10)
-    left = 10;
-int right = tools.getInt("right", 5, Cookies.coocRight);
-if (right < 0)
-    right = 0;
-else if (right > 10)
-    right = 10;
+int left = tools.getInt("left", 0, 10, 5, Cookies.coocLeft.name());
+int right = tools.getInt("right", 0, 10, 5, Cookies.coocRight.name());
 
 // global variables
 final String field = TEXT; // the field to process
