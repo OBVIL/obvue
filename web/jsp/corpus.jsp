@@ -207,9 +207,18 @@ while (results.hasNext()) {
     out.println("</a>");
     out.println("  </td>");
     if (score) {
+        String scoreString;
+        double scoreDouble = results.score();
+        if (scoreDouble ==  Double.NEGATIVE_INFINITY || scoreDouble ==  Double.POSITIVE_INFINITY) {
+            scoreString = "" + scoreDouble;
+        }
+        else {
+            scoreString = dfScoreFr.format(results.score());
+        }
+
         out.println("  <td class=\"occs num\">" + results.freq() + "</td>");
         out.println("  <td class=\"docs num\">" + results.hits() + "</td>");
-       out.println("  <td class=\"score num\">" + dfScoreFr.format(results.score()) + "</td>");
+        out.println("  <td class=\"score num\">" + dfScoreFr.format(results.score()) + "</td>");
     }
     else {
         out.println("  <td class=\"length num\">" + dfint.format(results.occs()) + "</td>");
