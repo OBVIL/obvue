@@ -39,6 +39,8 @@ public String ticks(Scale scale) throws IOException {
     int lastYear = Integer.MIN_VALUE;
     long cumul = 0;
     for (int i = 0, length = axis.length; i < length; i++) {
+        if (axis[i] == null)
+            continue; // a doc without date
         if (axis[i].length == 0)
             continue; // A deleted doc
         int year = axis[i].value;
@@ -78,8 +80,13 @@ final String q = tools.getString("q", null);
 Corpus corpus = (Corpus) session.getAttribute(corpusKey);
 BitSet bits = bits(alix, corpus, q);
 Scale scale = new Scale(alix, bits, YEAR, TEXT);
+
+
+// out.print(Arrays.toString(scale.tickByOrder));
+// out.print(Arrays.toString(scale.tickByDocid));
+
 // number of fots by curve, could be a parameter
-int dots = tools.getInt("dots", 200);
+final int dots = tools.getInt("dots", 200);
 
 out.println("{");
 if (q != null)
@@ -164,4 +171,5 @@ if (forms.length > 0) {
 }
 out.println("  \"time\" : \"" + (System.nanoTime() - time) / 1000000.0 + "ms\"");
 out.println("\n}");
+
 %>

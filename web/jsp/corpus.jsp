@@ -192,7 +192,9 @@ while (results.hasNext()) {
         out.print(byline);
     out.print("</label>");
     out.println("</td>");
-    out.println("  <td class=\"year\">" + doc.get("year") + "</td>");
+    String year = doc.get("year");
+    if (year == null) year ="";
+    out.println("  <td class=\"year\">" + year + "</td>");
     out.println("  <td class=\"title\">");
     int n = results.no();
     String href;
