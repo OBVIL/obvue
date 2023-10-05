@@ -4,6 +4,8 @@
 <%@ page import="alix.lucene.search.FieldInt"%>
 <%@ page import="alix.lucene.search.TermList"%>
 <%@ page import="alix.lucene.search.FormEnum"%>
+<%@ page import="org.apache.lucene.index.FieldInfos"%>
+<%@ page import="org.apache.lucene.index.FieldInfo"%>
 <%!
 final static HashSet<String> FIELDS = new HashSet<String>(
             Arrays.asList(new String[]{Names.ALIX_BOOKID, "byline", "year", "title"}));
@@ -22,7 +24,12 @@ if (corpus != null) {
 FieldFacet facet = alix.fieldFacet(Names.ALIX_BOOKID);
 FieldText ftext = alix.fieldText(TEXT);
 
-FieldInt years = alix.fieldInt(YEAR); // to get min() max() year
+FieldInt years = null;
+try {
+    years = alix.fieldInt(YEAR); // to get min() max() year
+}
+catch (Exception e) {
+}
 String[] qterms = alix.tokenize(q, TEXT);
 final boolean score = (qterms != null && qterms.length > 0);
 
@@ -65,6 +72,7 @@ const base = "<%=base%>";
                     list="author-data" size="50" type="text"
                     onclick="select()" placeholder="Nom, Prénom" />
                 <%}%>
+                <% if (years != null ) { %>
                 <br />
                 <label for="start">Dates</label>
                 <input id="start" name="start" type="number"
@@ -73,6 +81,7 @@ const base = "<%=base%>";
                 <input id="end" name="end" type="number"
                     min="<%=years.min()%>" max="<%=years.max()%>"
                     placeholder="Fin" class="year" />
+                <%}%>
                 <br />
                 <label for="title">Titre</label>
                 <input id="title" name="title" autocomplete="off"
@@ -114,9 +123,11 @@ else {
                             type="checkbox"
                             title="Sélectionner/déselectionner les lignes visibles" /></th>
                         <th class="author">auteur</th>
-                        <th class="year">date</th>
                         <th class="title">titre</th>
                         <%
+if (years != null) {
+    out.println("<th class=\"year\">date</th>");
+}
 if (score) {
     out.println("<th class=\"occs\" title=\"Occurrences\">occs</th>");
     out.println("<th class=\"docs\" title=\"Chapitres\">chaps.</th>");
@@ -170,10 +181,7 @@ while (results.hasNext()) {
     // String bookid = doc.get(Alix.BOOKID);
     Document doc = reader.document(alix.getDocId(bookid), FIELDS);
     // for results, do not diplay not relevant results
-    /*
-    if (score && results.occs() == 0)
-        continue;
-    */
+    // if (score && results.occs() == 0) continue;
 
     out.println("<tr>");
     // checkbox
@@ -192,9 +200,6 @@ while (results.hasNext()) {
         out.print(byline);
     out.print("</label>");
     out.println("</td>");
-    String year = doc.get("year");
-    if (year == null) year ="";
-    out.println("  <td class=\"year\">" + year + "</td>");
     out.println("  <td class=\"title\">");
     int n = results.no();
     String href;
@@ -208,6 +213,11 @@ while (results.hasNext()) {
     out.print(doc.get("title"));
     out.println("</a>");
     out.println("  </td>");
+    String year = doc.get("year");
+    if (year == null) year ="";
+    if (years != null) {
+        out.println("  <td class=\"year\">" + year + "</td>");
+    }
     if (score) {
         String scoreString;
         double scoreDouble = results.score();
