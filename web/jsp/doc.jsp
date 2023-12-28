@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="prelude.jsp"%>
-<%@ page import="alix.lucene.search.Doc"%>
-<%@ page import="alix.util.Top"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Doc"%>
+<%@ page import="com.github.oeuvres.alix.util.Top"%>
 
 <%
 // params for the page

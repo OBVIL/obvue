@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import alix.lucene.Alix;
-import alix.web.Webinf;
+import com.github.oeuvres.alix.lucene.Alix;
+import com.github.oeuvres.alix.web.Webinf;
 
 /**
  * Url dispatcher.

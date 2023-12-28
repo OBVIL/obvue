@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
-<%@ page import="alix.lucene.search.Doc"%>
-<%@ page import="alix.util.Top"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Doc"%>
+<%@ page import="com.github.oeuvres.alix.util.Top"%>
 <%!final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new String[]{Names.ALIX_ID, Names.ALIX_BOOKID, "bibl"}));
 
 static String wordList(Top<String> top) {

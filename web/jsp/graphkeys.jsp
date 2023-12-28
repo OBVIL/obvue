@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
-<%@ page import="alix.util.Edge" %>
-<%@ page import="alix.util.EdgeSquare" %>
+<%@ page import="com.github.oeuvres.alix.util.Edge" %>
+<%@ page import="com.github.oeuvres.alix.util.EdgeSquare" %>
 
 <%!
 /**

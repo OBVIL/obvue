@@ -5,11 +5,11 @@
 <%@ page import="java.util.Locale"%>
 <%@ page
     import="org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter"%>
-<%@ page import="alix.fr.Tag"%>
-<%@ page import="alix.lucene.analysis.tokenattributes.CharsAtt"%>
-<%@ page import="alix.lucene.analysis.FrDics"%>
-<%@ page import="alix.lucene.analysis.FrDics.LexEntry"%>
-<%@ page import="alix.util.Char"%>
+<%@ page import="com.github.oeuvres.alix.fr.Tag"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.tokenattributes.CharsAtt"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.FrDics"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.FrDics.LexEntry"%>
+<%@ page import="com.github.oeuvres.alix.util.Char"%>
 <%!private static final int OUT_HTML = 0;
 private static final int OUT_CSV = 1;
 private static final int OUT_JSON = 2;

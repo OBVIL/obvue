@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/javascript; charset=UTF-8"
     pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="prelude.jsp"%>
-<%@ page import="alix.lucene.search.Scale"%>
-<%@ page import="alix.lucene.search.Scale.Tick"%>
-<%@ page import="alix.lucene.search.TermList"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Scale"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Scale.Tick"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.TermList"%>
 
 <%!/** A record used to sort docid by date */
 

@@ -2,7 +2,7 @@
 <%@ include file="prelude.jsp" %>
 <%@ page import="org.apache.lucene.search.uhighlight.UnifiedHighlighter" %>
 <%@ page import="org.apache.lucene.search.uhighlight.DefaultPassageFormatter" %>
-<%@ page import="alix.lucene.search.HiliteFormatter" %>
+<%@ page import="com.github.oeuvres.alix.lucene.search.HiliteFormatter" %>
 <%
 final int hppDefault = 100;
 final int hppMax = 1000;

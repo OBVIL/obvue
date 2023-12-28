@@ -3,7 +3,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="obvie.Dispatch" %>
-<%@ page import="alix.lucene.Alix" %>
+<%@ page import="com.github.oeuvres.alix.lucene.Alix" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
   <head>

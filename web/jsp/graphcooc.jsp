@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="alix.util.EdgeSquare" %>
-<%@ page import="alix.util.Edge" %>
+<%@ page import="com.github.oeuvres.alix.util.EdgeSquare" %>
+<%@ page import="com.github.oeuvres.alix.util.Edge" %>
 
 
 <%!

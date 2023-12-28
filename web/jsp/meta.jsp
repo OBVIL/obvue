@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
 <%@ page import="org.apache.lucene.search.BooleanClause"%>
-<%@ page import="alix.lucene.analysis.MetaAnalyzer"%>
-<%@ page import="alix.lucene.search.Doc"%>
-<%@ page import="alix.lucene.search.Marker"%>
-<%@ page import="alix.util.Top"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.MetaAnalyzer"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Doc"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Marker"%>
+<%@ page import="com.github.oeuvres.alix.util.Top"%>
 <%!final static Analyzer ANAMET = new MetaAnalyzer();
 final static HashSet<String> DOC_SHORT = new HashSet<String>(Arrays.asList(new String[]{Names.ALIX_ID, Names.ALIX_BOOKID, "bibl"}));
 

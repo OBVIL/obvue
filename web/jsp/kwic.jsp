@@ -2,8 +2,8 @@
 <%@ include file="prelude.jsp"%>
 <%@ page import="org.apache.lucene.util.automaton.Automaton"%>
 <%@ page import="org.apache.lucene.util.automaton.ByteRunAutomaton"%>
-<%@ page import="alix.lucene.search.Doc"%>
-<%@ page import="alix.lucene.util.WordsAutomatonBuilder"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.Doc"%>
+<%@ page import="com.github.oeuvres.alix.lucene.util.WordsAutomatonBuilder"%>
 <%
 final int hppDefault = 100;
 final int hppMax = 1000;

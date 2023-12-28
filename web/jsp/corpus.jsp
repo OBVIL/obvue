@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@include file="prelude.jsp"%>
-<%@ page import="alix.lucene.search.FieldFacet"%>
-<%@ page import="alix.lucene.search.FieldInt"%>
-<%@ page import="alix.lucene.search.TermList"%>
-<%@ page import="alix.lucene.search.FormEnum"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.FieldFacet"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.FieldInt"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.TermList"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.FormEnum"%>
 <%@ page import="org.apache.lucene.index.FieldInfos"%>
 <%@ page import="org.apache.lucene.index.FieldInfo"%>
 <%!

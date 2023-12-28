@@ -11,13 +11,13 @@
 <%@ page import="org.apache.lucene.search.*"%>
 <%@ page import="org.apache.lucene.search.BooleanClause.Occur"%>
 <%@ page import="org.apache.lucene.util.BitSet"%>
-<%@ page import="alix.Names"%>
-<%@ page import="alix.lucene.Alix"%>
-<%@ page import="alix.lucene.Alix.FSDirectoryType"%>
-<%@ page import="alix.lucene.analysis.FrAnalyzer"%>
-<%@ page import="alix.lucene.search.*"%>
-<%@ page import="alix.util.ML"%>
-<%@ page import="alix.web.*"%>
+<%@ page import="com.github.oeuvres.alix.Names"%>
+<%@ page import="com.github.oeuvres.alix.lucene.Alix"%>
+<%@ page import="com.github.oeuvres.alix.lucene.Alix.FSDirectoryType"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.FrAnalyzer"%>
+<%@ page import="com.github.oeuvres.alix.lucene.search.*"%>
+<%@ page import="com.github.oeuvres.alix.util.ML"%>
+<%@ page import="com.github.oeuvres.alix.web.*"%>
 <%@ page import="obvie.*"%>
 <%!/** Field name containing canonized text */
 public static String TEXT = "text";

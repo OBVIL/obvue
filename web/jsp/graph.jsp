@@ -22,18 +22,18 @@
 <%@ page import="org.apache.lucene.analysis.tokenattributes.FlagsAttribute"%>
 <%@ page import="org.apache.lucene.analysis.tokenattributes.OffsetAttribute"%>
 <%@ page import="org.apache.lucene.util.BytesRef"%>
-<%@ page import="alix.lucene.analysis.CharsNet"%>
-<%@ page import="alix.lucene.analysis.CharsNet.Node"%>
-<%@ page import="alix.lucene.analysis.CharsNet.Edge"%>
-<%@ page import="alix.lucene.analysis.FrDics"%>
-<%@ page import="alix.lucene.analysis.tokenattributes.CharsAtt"%>
-<%@ page import="alix.lucene.analysis.tokenattributes.CharsLemAtt"%>
-<%@ page import="alix.lucene.analysis.tokenattributes.CharsOrthAtt"%>
-<%@ page import="alix.fr.Tag"%>
-<%@ page import="alix.fr.Tag.TagFilter"%>
-<%@ page import="alix.util.Dir"%>
-<%@ page import="alix.util.IntList"%>
-<%@ page import="alix.util.IntPair"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.CharsNet"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.CharsNet.Node"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.CharsNet.Edge"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.FrDics"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.tokenattributes.CharsAtt"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.tokenattributes.CharsLemAtt"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.tokenattributes.CharsOrthAtt"%>
+<%@ page import="com.github.oeuvres.alix.fr.Tag"%>
+<%@ page import="com.github.oeuvres.alix.fr.Tag.TagFilter"%>
+<%@ page import="com.github.oeuvres.alix.util.Dir"%>
+<%@ page import="com.github.oeuvres.alix.util.IntList"%>
+<%@ page import="com.github.oeuvres.alix.util.IntPair"%>
 
 
 <%!/** most significant words, no happax (could bug for smal texts) */
