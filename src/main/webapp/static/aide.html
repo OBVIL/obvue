@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Aide [Obvie]</title>
+    <link href="obvie.css" rel="stylesheet"/>
+  </head>
+  <body class="help">
+    <header>
+      <h1>Obvie Aide</h1>
+    </header>
+    <main>
+      <article>
+
+        <section id="presentation">
+          <h1>Présentation</h1>
+          <p>Obvie est un logiciel en ligne pour explorer des textes. Il permet de retrouver des passages, comme dans un moteur de recherche conventionnel, selon différentes présentations paginées ; mais aussi, de calculer des statistiques globales, pour toute la collection, ou une sélection personnalisée. Il en résulte un bureau redimensionnable qui compose plusieurs vues, le plus possible intuitives et reliées. La lecture de cette documentation n’est pas requise pour découvrir la plupart des fonctionnalités. Elles sont expliquées ici pour assurer l’utilisateur qu’il a tout découvert par lui-même. Le texte est ordonné comme un scénario conventionnel d’exploration, expliquant chaque vue.</p>
+          <ul>
+            <li><a href="#recherche">Recherche</a></li>
+            <li>
+              <span>Statistiques globales</span>
+              <ul>
+                <li><a href="#corpus">Corpus</a></li>
+                <li><a href="#chrono">Chronologie</a></li>
+                <li><a href="#auteurs">Auteurs</a></li>
+                <li><a href="#nuage">Nuage</a></li>
+                <li><a href="#frequences">Fréquences</a></li>
+              </ul>
+            </li>
+            <li>
+              <span>Résultats paginés</span>
+              <ul>
+                <li><a href="#extraits">Extraits</a></li>
+                <li><a href="#concordance">Concordance</a></li>
+                <li><a href="#document">Document</a></li>
+                <li><a href="#comparer">Comparer</a></li>
+              </ul>
+            </li>
+          </ul>
+          <img src="doc/gout-critique.png"/>
+        </section>
+        <section id="recherche">
+          <h1>Recherche</h1>
+          <p>Le champ de recherche est toujours visible, dans toutes les vues, il affecte la plupart des vues. Quand aucun mot n’est cherché, les vues se rapportent à la totalité de la collection ou à la sélection personnalisée en cours, sinon, elles se rapportent aux mots recherchés. Pour chaque vue seront précisés les comportements avec ou sans mots recherchés.</p>
+          <p><b>Lemmatisation —</b> Les textes sont indexés par les lemmes, c’est-à-dire que l’on trouve toutes les formes d’un verbe conjugué en cherchant son infinitif, de même, les noms et les adjectifs sont ramenés à une forme canonique au masculin singulier. Les noms propres doivent être cherchés avec une majuscule initiale. Les accents sont significatifs.</p>
+          <p><b>Pertinence –</b> Outre le tri par auteur ou dates, un moteur de recherche permet de proposer les résultats en ordre de pertinence selon les mots recherchés. Après une expérimentation systématique, Obvie a choisi l’algorithme <a href="https://fr.wikipedia.org/wiki/Okapi_BM25">BM25</a> qui est apparu le plus robuste. Il est utilisé à tous les endroits où l’on parlera de <i>pertinence</i>. Le principe consiste à pondérer le nombre de d’occurrences trouvées dans des textes, la taille de ces textes, et le nombre de documents trouvés. Cet ordre est souvent plus précis que le nombre brut d’occurrences qui favorise les documents les plus longs.</p>
+          <p><b>Opérateurs —</b> Rechercher plusieurs mots revient à un <i>ou</i> implicite. Deux opérateurs fonctionnent et peuvent se combiner :</p>
+          <ul>
+            <li><b>+</b> (et). <i>+amour +gloire +beauté</i>, trouve tous les textes qui contiennent à la fois les mots <i>amour</i>, <i>gloire</i>, et <i>beauté</i>.</li>
+            <li><b>-</b> (non). <i>intuition -pur</i>, trouve tous les documents avec le mot <i>intuition</i> mais sans l’adjectif <i>pur</i>.</li>
+          </ul>
+          <img src="doc/amour-gloire-beaute.png"/>
+          <p>La lemmatisation dans Obvie est réalisée automatiquement par le logiciel <a href="https://github.com/oeuvres/alix">Alix</a>, selon un algorithme imparfait mais aux erreurs prévisibles. Toute graphie rencontrée est ramenée au lemme le plus fréquent dans un dictionnaire. Par exemple, la graphie <i>suis</i> est toujours ramenée au verbe <i>être</i>, sans essayer de résoudre les équivoques (ex : <i>je suis son ombre</i>, <i>être</i> ou <i>suivre</i> ?). Des progrès sont attendus prochainement sur la prise en compte de graphies d’Ancien-Régime, et les locutions (<i>parce que</i>, <i>Conseil d’État</i>…).</p>
+        </section>
+        <section id="corpus">
+          <h1>Corpus</h1>
+          <p>La vue corpus se présente principalement comme un tableau bibliographique de livres. Dans Obvie, un livre est un groupe de chapitres, le chapitre est l’unité documentaire de référence qui est trouvée et comptée (<i>docs</i>). Cliquer une cellule en tête de colonne permet de trier les lignes selon les valeurs dans cette colonne (mots ou nombres). C’est l’interface la plus complexe, elle a trois usages :</p>
+          <ul>
+            <li>Liste de tous les livres de la collection proposée (quand aucune sélection ou recherche est en cours).</li>
+            <li>Avec une recherche active, statistiques par livre.</li>
+            <li>Composition et enregistrement d’une sélection personnalisée de livres pour limiter les recherches et les statistiques. Mode d’emploi :
+              <ul>
+                <li>Cliquer la case à cocher d’une ligne pour sélectionner ou déselectionner un livre.</li>
+                <li>Nommer la sélection dans le champ texte.</li>
+                <li>Ne pas oublier d’enregistrer pour transmettre la liste au serveur.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>Ces différents usages conditionnent l’affichage de certaines sections ou colonnes.</p>
+          <img src="doc/corpus.png"/>
+          <p><b>Colonnes</b></p>
+          <ul>
+            <li><input type="checkbox"/>, <input type="checkbox" checked="checked"/> — Sur une ligne, cliquer une case à cocher sélectionne ou déselectionne un livre dans une sélection personnalisée. En tête de colonne, cliquer la case à cocher sélectionne ou déselectionne toutes les lignes visibles.</li>
+            <li><b>auteur —</b> Forme normalisée du ou des auteurs, tel qu’inscrit dans le fichier indexé.</li>
+            <li><b>date —</b> Année de publication, telle qu’inscrite dans le fichier indexé.</li>
+            <li><b>titre —</b> Cliquer un titre permet d’arriver à des résultats de recherche qui commencent avec le premier chapitre trouvé de ce livre.</li>
+            <li><b>taille —</b> Nombre total de mots du livre (indice utilisé dans les calculs statistiques).</li>
+            <li><b>docs —</b> Nombre de chapitres (<i>documents</i>) : soit le nombre total de chapitres du livre quand aucune recherche n’est en cours, soit le nombre de chapitres contenant les mots recherchés.</li>
+            <li><b>occs —</b> Nombre d’occurrences trouvées quand une recherche de mots est en cours.</li>
+            <li><b>pertinence —</b> Score de pertinence du livre selon la recherche en cours.</li>
+          </ul>
+          <b>Sélection</b>
+          <ul>
+            <li><input type="text" size="4"/> <button>Enregistre</button><b> —</b> Nom de la sélection personnalisée en cours ou à enregistrer.</li>
+            <li><a title="Déselectionner ce corpus" class="xred">🗙</a> Nom de sélection<b> —</b> Cliquer la croix rouge annule la sélection personnalisée en cours.</li>
+            <li>
+              <b>Filtres —</b> Cliquer la flèche pour ouvrir le bloc et accéder à des champs réactifs avec suggestion pour sélectionner des lignes dans le tableau (auteur, date, titre).
+            </li>
+          </ul>
+        </section>
+        <section id="auteurs">
+          <h1>Auteurs</h1>
+          <p>Le volet latéral présente une liste de facettes : les auteurs. Il fonctionne aussi comme un instrument de navigation dans la requête en cours, cliquer un auteur ouvre la page qui le concerne. Les noms sont accompagnés de chiffres, selon le contexte en cours :</p>
+          <ul>
+            <li>collection complète, pas de sélection ou de requête en cours — Nom, Prénom (nombre total de documents=chapitres)</li>
+            <li>sélection personnalisée, pas de requête en cours — Nom, Prénom (nombre de chapitres dans les livres sélectionnés / nombre de chapitres total)</li>
+            <li>requêtes en cours — nombre d’occurrences trouvées. Nom, Prénom (nombre de chapitres trouvés / nombre de chapitres total)</li>
+          </ul>
+          <p><b>Tris —</b> Ces chiffres permettent de se faire une idée de l’importance d’un auteur, dans la totalité d’un corpus, ou en fonction d’une requête. La liste peut être triée selon trois ordres : alphabétique, fréquence, pertinence.</p>
+          <ul>
+            <li>Alphabétique — de A à Z.</li>
+            <li>Fréquence — du plus ou moins <i>fréquent</i>, ce qui a une signification différente selon le contexte ; pas de requête en cours : la taille de l’auteur (en nombre de mots, pas en nombre de chapitres) ; requête en cours : nombre d’occurrences trouvées (sans pondération relative à la taille de l’auteur).</li>
+            <li>Pertinence — uniquement significatif quand une requête est en cours, pondération BM25 pour relever les auteurs pour lesquels les mots cherchés sont particulièrement spécifiques (cf. illustration, pour une requête sur le mot <i>intuition</i>, Bergson est évidemment très important, mais aussi le critique littéraire Visan, ou le scientifique Poincaré)</li>
+          </ul>
+          <img src="doc/auteurs.png"/>
+        </section>
+        <section id="chrono">
+          <h1>Chronologie</h1>
+          <p>La vue chronologique montre la fréquence des termes cherchés dans les documents trouvés (soit dans toute la collection, soit dans une sélection personnalisée). S’il n’y a pas de recherche en cours, cette fenêtre est vide. La chronologie fonctionne aussi comme un instrument de navigation dans la requête en cours, cliquer une année  ouvre la page qui la concerne.</p>
+          <p><b>Lecture –</b> L’échelle horizontale de cette chronologie est <i>égale</i> en nombre de mots (longueur des textes), afin d’assurer que les fréquences soient comparables. Il en résulte qu’une même longueur ne représente pas un nombre égal d’années. Un corpus historique réel a nécessairement une densité variable (par exemple, il se publiait beaucoup moins de livres durant l’Ancien-Régime que maintenant, les guerres diminuent beaucoup la production éditoriale). 
+            Les points sur le graphique sont posés à distance horizontale presque égales (toujours à la frontière d’un chapitre, l’unité documentaire). La courbe proposée est une interpolation avec un peu de lissage, pour aider à lire les points, qui sont les seules données réelles. L’échelle verticale est ramenée à des <i>ppm</i> (parties par million), c’est à dire à un nombre d’occurrences par million de mots. L’échelle verticale est logarithmique, ce qui permet de comparer les pentes entre courbes, même si les mots ne sont pas dans la même couche de fréquence (un mot 10x plus fréquent entre deux sections d’un corpus est un phénomène aussi important, relativement, que ce mot soit rare ou commun).</p>
+          <img src="doc/chrono.png"/>
+        </section>
+        <section id="nuage">
+          <h1>Nuage</h1>
+          <p>Un nuage de mots propose une présentation synthétique d’une liste de mots en ordre de fréquence (ce sont les mêmes données que la vue <a href="#freqs">Fréquences</a>). Quand il n’y a pas de recherche en cours, le nuage présente la liste des mots les plus fréquents du corpus en cours (collection complète ou sélection personnalisée). Quand une recherche est en cours, le nuage présente les cooccurrents les plus fréquents des mots recherchés. Par défaut, 5 mots à droite et 5 mots à gauche du pivot (mot trouvé) sont repris dans la liste de fréquence. Il est possible de modifier la taille de ces contextes gauche et droit. Ainsi par exemple pour le mot <i>campagne</i> avec un contexte gauche à 0, les mots plus fréquents peuvent être <i>Italie</i> ou <i>Russie</i> (<i>campagne de …</i>), avec un contexte droit à 0, ce seront plutôt <i>maison</i> ou <i>curé</i> (<i>… de campagne</i>). Un sélecteur permet de modifier le nombre de mots du nuage, et le type grammatical des mots affichés.</p>
+          <p><b>Lecture –</b> Un mot plus gros est plus fréquent. Sa position sur la surface n’est pas significative. L’algorithme commence par placer les mots les plus gros au début, et au centre. Ensuite, il recherche des emplacements libres pour placer les autres mots. La rotation aléatoire des mots permet d’aérer le nuage. L’angle varie de -45° à +45°, selon 4 positions qui ne passent pas par l’horizontale, afin de ne pas privilégier certains mots par le sens de lecture. Les mots peuvent être trouvés avec la fonction de recherche native du navigateur (Ctrl+F). La couleur est significative (rouge pour les noms propres, bleu pour les substantifs, gris pour le reste). La graisse et l’opacité ne sont pas significatives, elle servent à adoucir les mots les plus gros pour laisser de l’attention aux mots plus petits.</p>
+          <img src="doc/nuage.png"/>
+        </section>
+        <section id="freqs">
+          <h1>Fréquences</h1>
+          <p>La vue des fréquences présente une liste de mots avec différents chiffres sous forme d’un tableau triable sur chaque colonne, ce sont les mêmes données que le <a href="#nuage">Nuage</a>. Quand il n’y a pas de recherche en cours, le tableau présente la liste des mots les plus fréquents du corpus en cours (collection complète ou sélection personnalisée). Quand une recherche est en cours, le tableau présente les cooccurrents les plus fréquents des mots recherchés. Par défaut, 5 mots à droite et 5 mots à gauche du pivot (mot trouvé) sont repris dans la liste de fréquence. Il est possible de modifier la taille de ces contextes gauche et droit. Ainsi par exemple pour le mot <i>campagne</i> avec un contexte gauche à 0, les mots plus fréquents peuvent être <i>Italie</i> ou <i>Russie</i> (<i>campagne de …</i>), avec un contexte droit à 0, ce seront plutôt <i>maison</i> ou <i>curé</i> (<i>… de campagne</i>). Un sélecteur permet de modifier le type grammatical des mots affichés. Le bouton CSV permet de télécharger la totalité des données selon les paramètres en cours, pour étudier les données dans un autre logiciel de type tableur (<i>LibreOffice Calc</i>, <i>Microsoft Excel</i>…).</p>
+        </section>
+        <section id="extraits">
+          <h1>Extraits</h1>
+          <p>Comme les vues <a href="#concordance">Concordance</a> et <a href="#document">Document</a>, la vue extraits propose une version paginée des résultats de la recherche en cours.
+           Pour chaque texte, un algorithme sélectionne les phrases les plus <i>pertinentes</i> pour les mots recherchés. Cette présentation désormais courante dans les moteurs de recherche doit permettre de se faire une idée rapide du contenu d’un texte. 
+          </p>
+          <p>
+            Une navigation précédent|suivant (par page de 100 documents) permet de parcourir tous les résultats de la requête en cours.
+            Plusieurs ordre de tri sont proposés : par auteur, par date, et par <i>pertinence</i>. Bien que le même algorithme soit utilisé pour trier les documents (chapitres) et les auteurs, le texte le plus <i>pertinent</i> peut ne pas être du premier auteur, car l’ensemble de mots sur laquelle la pertinence est calculée n’est pas le même.
+            
+          </p>
+          <img src="doc/extraits.png"/>
+        </section>
+        <section id="concordance">
+          <h1>Concordance</h1>
+          <p>Comme les vues <a href="#extraits">Extraits</a> et <a href="#document">Document</a>, la vue concordance propose une version paginée des résultats de la recherche en cours. Les lignes sont centrées sur la requête avec un court contexte à droite et à gauche. La coche <b>Locutions</b> permet de regrouper
+les expressions composées avec au moins deux mots de la requête, séparés de moins de trois mots. Attention, il ne s’agit pas (encore) d’une recherche
+d’expressions dont les statistiques seraient portées dans toutes les vues.
+          </p>
+          <p>
+            Une navigation précédent|suivant (par page de 100 documents) permet de parcourir tous les résultats.
+            Plusieurs ordre de tri sont proposés : par auteur, par date, et par <i>pertinence</i>. Bien que le même algorithme soit utilisé pour trier les documents (chapitres) et les auteurs, le texte le plus <i>pertinent</i> peut ne pas être du premier auteur, car l’ensemble de mots sur laquelle la pertinence est calculée n’est pas le même.
+          </p>
+          <img src="doc/kwic.png"/>
+        </section>
+        <section id="document">
+          <h1>Document</h1>
+          <p>Comme les vues <a href="#extraits">Extraits</a> et <a href="#concordance">Concordance</a>, la vue document (chapitre) propose une version paginée des résultats de la recherche en cours. Il est possible de naviguer dans les occurrences trouvées en cliquant des repères sur une réglette, ou par les flèches précédent|suivant qui les encadrent. 
+Le document est présenté avec une typographie riche, distingant par exemple les notes ou les citations en vers, selon la source XML/TEI.  
+La vue document permet d’accéder à l’interface <a href="#comparer">Comparer</a>
+          </p>
+          <p>
+            Une navigation précédent|suivant permet de parcourir tous les résultats de la requête en cours.
+          </p>
+          <img src="doc/document.png"/>
+        </section>
+        <section id="comparer">
+          <h1>Comparer</h1>
+          <p>L'interface comparer permet de trouver des textes similaires à un texte de référence. On y accède par la vue document.</p>
+          <p>L'entête du texte de référence comporte différentes listes de mots significatifs (en ordre de fréquence). Cliquer la flèche ⮞ lance une recherche avec ces mots. Les textes trouvés sont les plus <i>pertinents</i> pour ces mots (algorithme BM25). La liste de documents commence en général par le document de référence, ce qui assure bien de la pertinence.</p>
+          <p>Une fois un texte choisi dans la fenêtre de droite, une entête propose différentes listes de mots significatifs, notamment les <b>Mots en commun</b> entre les deux textes.</p>
+          <p>
+            Cliquer une catégorie comme <b>Mots en commun</b>, ou <b>Mots fréquents</b>, surlignera toutes les occurrences de ces mots dans les deux textes.
+            Pour chaque texte, une réglette donne une idée de la densité des occurrences et permet de naviguer de l’une à l’autre.
+            Cliquer un mot surligné effacera le surlignement de toutes les occurrences.
+            Tous les mots pleins sont clicables et surlignables.
+          </p>
+          <img src="doc/comparer.png"/>
+        </section>
+        <hr/>
+      <p>Projet réalisé sous la direction de Didier Alexandre 2018-2020 <br/>
+Idée et conception: Motasem Alrahabi<br/>
+Contributeurs: Glenn Roe, Marine Riguet, Frédéric Glorieux<br/>
+Développement: Frédéric Glorieux</p>
+
+<p>Présentation:
+<a href="https://docs.google.com/presentation/d/1jrqjm-XuSFpCiIelS30eXD3Utrk15R9eIW9NbsnZ1go/edit#slide=id.g6e92d9f579_0_41" target="_blank">
+lien</a></p>
+
+<p>Prise en main rapide:
+<a href="https://docs.google.com/document/d/19h8oWHOMlJyMDIhRqxc0odLAjo-M9GoxDnWe3wwUFHM" target="_blank">
+lien</a></p>
+
+<p>Guide détaillé:
+<a href="https://obvil.huma-num.fr/obvie/static/aide.html" target="_blank">
+lien</a></p>
+
+<p>Pour indexer votre propre corpus, merci d'écrire un message à motasem.alrahabi@gmail.com</p>
+      </article>
+    </main>
+  </body>
+</html>
