@@ -30,8 +30,9 @@ String baseHref = request.getContextPath() + '/';
                 <li><a href="https://gallica.bnf.fr/">Gallica</a> : la Bibliothèque numérique de la Bibliothèque nationale de France (BnF)</li>
                 <li><a href=".">Gallicobvie</a> : construire son corpus de textes avec Gallica et l’explorer avec Obvie</li>
             </ul>
-                <a class="button" href="<%=(baseHref + name) %>">Créer un nouveau corpus</a>
-            </form>
+            <div class="buts">
+                <a class="but" href="<%=(baseHref + name) %>">Enregistrer un nouveau corpus</a>
+            </div>
         </div>
     </article>
 </body>

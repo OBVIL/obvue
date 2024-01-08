@@ -2031,6 +2031,61 @@ div.scatter div.legend div.dot {
 
 div.landing {
     max-width: 55rem;
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
     word-wrap: normal;
+    padding-top: 2rem;
+}
+
+div.landing h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+div.landing > .buts {
+    display: flex;
+    justify-content: center;
+}
+
+div.landing a.but {
+    font-size: 1.5rem;
+    background: rgba(120, 105, 101, 0.8);
+    color: #FFFFFF;
+    font-weight: bold;
+    line-height: 100%;
+    text-transform: uppercase;
+    padding: 5px 5px 5px 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+div.landing a.but:hover {
+    background: transparent;
+    color: rgba(120, 105, 101, 0.8);
+}
+div.table {
+    display: table;
+}
+div.table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+div.tr {
+    display: table-row;
+}
+div.td {
+    display: table-cell;
+    padding: 2px 0.2rem;
+}
+
+div.th {
+    display: table-cell;
+    padding: 2px 0.2rem;
+    width: 15rem;
+    vertical-align: top;
+    text-align: right;
+    color: rgba(120, 105, 101, 0.8);
+    font-weight: bold;
 }

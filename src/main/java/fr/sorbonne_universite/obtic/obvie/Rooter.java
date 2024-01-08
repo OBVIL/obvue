@@ -64,27 +64,27 @@ public class Rooter extends HttpServlet
         super.init(config);
         contextDir = new File(getServletContext().getRealPath(""));
         ServletContext context = getServletContext();
-        final int poolSize = getInt(POOLSIZE, 10);
+        final int poolSize = getInteger(POOLSIZE, 10);
         ExecutorService pool = Executors.newFixedThreadPool(poolSize);
         context.setAttribute(POOL, pool);
         context.setAttribute(DATADIR, dataDir());
-        context.setAttribute(BASELIFE, getInt(BASELIFE, 10));
+        context.setAttribute(BASELIFE, getInteger(BASELIFE, 10));
     }
     
-    public int getInt(final String name, final int fallback)
+    public Integer getInteger(final String name, final int fallback)
     {
         ServletContext context = getServletContext();
         String value = context.getInitParameter(name);
         if (value != null && !value.isEmpty()) {
             try {
-                int intVal = Integer.parseInt(value);
-                return intVal;
+                Integer val = Integer.valueOf(value);
+                return val;
             }
             catch(NumberFormatException e) {
                 // inform ?
             }
         }
-        return fallback;
+        return Integer.valueOf(fallback);
     }
 
     /**
