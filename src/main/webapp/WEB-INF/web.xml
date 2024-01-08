@@ -6,11 +6,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_0.xsd"
   >
-  <display-name>Obvie</display-name>
-  <description>L'Observatoire de l’Obvil</description>
+  <display-name>Gallicobvie</display-name>
   <servlet>
     <servlet-name>obvie</servlet-name>
-    <servlet-class>obvie.Dispatch</servlet-class>
+    <servlet-class>fr.sorbonne_universite.obtic.obvie.Rooter</servlet-class>
   </servlet>
   <!-- Override default servlet, limit to static resources -->
   <servlet-mapping>

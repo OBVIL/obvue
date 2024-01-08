@@ -2,7 +2,7 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Properties" %>
-<%@ page import="fr.sorbonne_universite.obtic.obvie.Dispatch" %>
+<%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter" %>
 <%@ page import="com.github.oeuvres.alix.lucene.Alix" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr">

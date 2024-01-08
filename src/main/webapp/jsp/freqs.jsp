@@ -204,7 +204,7 @@ else {
 
 String format = tools.getString("format", null);
 if (format == null)
-    format = (String) request.getAttribute(Dispatch.EXT);
+    format = (String) request.getAttribute(Rooter.EXT);
 OptionMime mime;
 try {
     mime = OptionMime.valueOf(format);

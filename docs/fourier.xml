@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<srw:searchRetrieveResponse xmlns:ns6="http://gallica.bnf.fr/namespaces/gallica/" xmlns:diag="http://www.loc.gov/zing/srw/diagnostic/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:srw="http://www.loc.gov/zing/srw/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <srw:version>1.2</srw:version>
+    <srw:echoedSearchRetrieveRequest>
+        <srw:query>(ocr.quality all "Texte disponible" and dc.creator all "Fourier, Charles)</srw:query>
+        <srw:version>1.2</srw:version>
+    </srw:echoedSearchRetrieveRequest>
+    <srw:numberOfRecords>31</srw:numberOfRecords>
+    <srw:extraResponseData>&lt;numberOfRecordsDecollapser&gt;31&lt;/numberOfRecordsDecollapser&gt;</srw:extraResponseData>
+    <srw:records>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1831</dc:date>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>VIII-72 p. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 90</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k6112906x</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher>Bossange père (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454497c</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, 8-LD190-221</dc:source>
+                    <dc:title>Pièges et charlatanisme des deux sectes : Saint-Simon et Owen, qui promettent l'association et le progrès. - Moyen d'organiser en deux mois le progrès réel, la vraie association, ou combinaison des travaux agricoles et domestiques donnant quadruple produit et élevant à 25 milliards le revenu de la France, borné aujourd'hui à 6 milliards un tiers / par Ch. Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>0</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k6112906x.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k6112906x</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k6112906x.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k6112906x.medres</medres>
+                <nqamoyen>99.98</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k6112906x.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k6112906x</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1847</dc:date>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>In-8° , II-128 p.</dc:format>
+                    <dc:format>Nombre total de vues : 138</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k6138466w</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher>bureau de la "Phalange" (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb304544919</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36335</dc:source>
+                    <dc:title>Égarement de la raison démontré par les ridicules des sciences incertaines et fragments, par Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>1</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k6138466w.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k6138466w</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k6138466w.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k6138466w.medres</medres>
+                <nqamoyen>99.98</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k6138466w.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k6138466w</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1848</dc:date>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>In-8° , 128 p.</dc:format>
+                    <dc:format>Nombre total de vues : 144</dc:format>
+                    <dc:format>application/epub+zip</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k61197992</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher>Librairie phalanstérienne (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb304544841</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36331</dc:source>
+                    <dc:title>Analyse du mécanisme de l'agiotage et de la méthode mixte en étude de l'attraction, par Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>2</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile>/ark:/12148/bpt6k61197992.epub</epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k61197992.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k61197992</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k61197992.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k61197992.medres</medres>
+                <nqamoyen>99.98</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k61197992.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k61197992</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Pellarin, Charles (1804-1883). Auteur du texte</dc:creator>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1874</dc:date>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>In-12, 105 p.</dc:format>
+                    <dc:format>Nombre total de vues : 132</dc:format>
+                    <dc:format>application/epub+zip</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k65341603</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher>Dentu (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb310747314</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-45926</dc:source>
+                    <dc:title>Lettre de Fourier au grand juge, 4 nivôse an XII. Fourier et ses contemporains : l'utopie et la routine, l'expérimentation et l'empirisme en matière sociale, par Charles Pellarin</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>3</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile>/ark:/12148/bpt6k65341603.epub</epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k65341603.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k65341603</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k65341603.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k65341603.medres</medres>
+                <nqamoyen>99.99</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k65341603.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k65341603</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1847</dc:date>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>1 vol. (70 p.) ; in-12</dc:format>
+                    <dc:format>Nombre total de vues : 89</dc:format>
+                    <dc:format>application/epub+zip 3.0 accessible</dc:format>
+                    <dc:format>Format adaptable de type XML DTBook, 2005-3</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k1045524z</dc:identifier>
+                    <dc:identifier>NUMM-1045524</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Librairie phalanstérienne (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454485c</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Réserve des livres rares, R-36332</dc:source>
+                    <dc:title>De l'anarchie industrielle et scientifique / par Charles Fourier,...</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>4</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile>/ark:/12148/bpt6k1045524z.epub</epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k1045524z.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k1045524z</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k1045524z.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k1045524z.medres</medres>
+                <nqamoyen>99.95</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k1045524z.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k1045524z</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1849</dc:date>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>2 vol. in-18</dc:format>
+                    <dc:format>Nombre total de vues : 412</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k6534184h</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher>Librairie phalanstérienne (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb304544930</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb304544930</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36340</dc:source>
+                    <dc:title>L'Harmonie universelle et le phalanstère, exposés par Fourier.... Tome 2</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>5</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k6534184h.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k6534184h</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k6534184h.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k6534184h.medres</medres>
+                <nqamoyen>99.93</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k6534184h.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k6534184h</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1849</dc:date>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>2 vol. in-18</dc:format>
+                    <dc:format>Nombre total de vues : 348</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k6534069g</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher>Librairie phalanstérienne (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb304544930</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb304544930</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36339</dc:source>
+                    <dc:title>L'Harmonie universelle et le phalanstère, exposés par Fourier.... Tome 1</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>6</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k6534069g.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k6534069g</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k6534069g.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k6534069g.medres</medres>
+                <nqamoyen>99.93</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k6534069g.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k6534069g</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1849</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>39 p. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 56</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k6553113p</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Librairie phalanstérienne (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb30454490z</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454490z</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Littérature et art, V-39519</dc:source>
+                    <dc:title>Des modifications à introduire dans l'architecture des villes, / par Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>7</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k6553113p.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k6553113p</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k6553113p.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k6553113p.medres</medres>
+                <nqamoyen>99.93</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k6553113p.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k6553113p</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1829-1830</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>XVI-664 p. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 707</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/btv1b86221373</dc:identifier>
+                    <dc:identifier>IFN-8622137</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Bossange père (Paris)</dc:publisher>
+                    <dc:publisher>P. Mongie aîné (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb304544961</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Réserve des livres rares, R-36347</dc:source>
+                    <dc:title>Le Nouveau monde industriel et sociétaire, ou Invention du procédé d'industrie attrayante et naturelle distribuée en séries passionnées . Par Ch. Fourier... [-Livret d'annonce]</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>8</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/btv1b86221373.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/btv1b86221373</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/btv1b86221373.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/btv1b86221373.medres</medres>
+                <nqamoyen>100.0</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/btv1b86221373.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>btv1b86221373</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:creator>Considerant, Victor (1808-1893). Auteur du texte</dc:creator>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>1 p. ; gr. in-fol. plano</dc:format>
+                    <dc:format>Nombre total de vues : 2</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k850954v</dc:identifier>
+                    <dc:identifier>NUMM-850954</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>impr. de H. Faye (Bordeaux)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb304544872</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Littérature et art, Z-286 (15)</dc:source>
+                    <dc:title>L'avenir : perspective d'un phalanstère ou palais sociétaire dédié à l'humanité [d'après le plan de Ch. Fourier] / [signé Victor Considérant]</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>9</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k850954v.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k850954v</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k850954v.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k850954v.medres</medres>
+                <nqamoyen>88.41</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k850954v.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k850954v</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1849</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>39 p. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 40</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k1091934v</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Librairie phalanstérienne (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb30454490z</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454490z</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque Carré d'art / Nîmes, 31144</dc:source>
+                    <dc:title>Des modifications à introduire dans l'architecture des villes, / par Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>10</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k1091934v.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k1091934v</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k1091934v.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k1091934v.medres</medres>
+                <nqamoyen>98.7</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k1091934v.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k1091934v</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:contributor>Gide, Charles (1847-1932). Préfacier</dc:contributor>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1932</dc:date>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>1 vol. ( LXV-232 p.) ; in-16</dc:format>
+                    <dc:format>Nombre total de vues : 324</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k3075880v</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher> (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb321210532</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, 8-R-38826</dc:source>
+                    <dc:title>Pages choisies / Charles Fourier ; introduction par Charles Gide</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>11</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k3075880v.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k3075880v</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k3075880v.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k3075880v.medres</medres>
+                <nqamoyen>89.58</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k3075880v.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k3075880v</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1845</dc:date>
+                    <dc:format>6 vol. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 550</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bd6t5368371z</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>bureaux de "la Phalange" (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36352</dc:source>
+                    <dc:title>Oeuvres complètes de Ch. Fourier.... Tome 1</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>12</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bd6t5368371z.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bd6t5368371z</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bd6t5368371z.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bd6t5368371z.medres</medres>
+                <nqamoyen>89.27</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bd6t5368371z.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bd6t5368371z</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1845</dc:date>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>6 vol. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 524</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bd6t53682153</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>bureaux de "la Phalange" (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36358</dc:source>
+                    <dc:title>Oeuvres complètes de Ch. Fourier.... Tome 6</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>13</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bd6t53682153.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bd6t53682153</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bd6t53682153.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bd6t53682153.medres</medres>
+                <nqamoyen>89.07</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bd6t53682153.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bd6t53682153</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1845</dc:date>
+                    <dc:format>6 vol. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 257</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bd6t53689082</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>bureaux de "la Phalange" (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36356</dc:source>
+                    <dc:title>Oeuvres complètes de Ch. Fourier.... Tome 4, volume 3</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>14</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bd6t53689082.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bd6t53689082</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bd6t53689082.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bd6t53689082.medres</medres>
+                <nqamoyen>88.58</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bd6t53689082.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bd6t53689082</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1845</dc:date>
+                    <dc:format>6 vol. ; in-8</dc:format>
+                    <dc:format>Nombre total de vues : 480</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bd6t5368791w</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>bureaux de "la Phalange" (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454480n</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes de Ch. Fourier.... Tome 2, volume 1</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>15</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bd6t5368791w.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bd6t5368791w</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bd6t5368791w.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bd6t5368791w.medres</medres>
+                <nqamoyen>88.43</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bd6t5368791w.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bd6t5368791w</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:contributor>Poupin, Victor (1838-1906). Préfacier</dc:contributor>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1873</dc:date>
+                    <dc:description>Collection : Bibliothèque démocratique ; n° 24</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>1 vol. (191 p.) ; in-16</dc:format>
+                    <dc:format>Nombre total de vues : 194</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k1198457j</dc:identifier>
+                    <dc:identifier>NUMM-1198457</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Librairie de la Bibliothèque démocratique (Paris)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb30454486q</dc:relation>
+                    <dc:rights>domaine public</dc:rights>
+                    <dc:rights>public domain</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, R-36333</dc:source>
+                    <dc:title>L'association et le travail attrayant / Charles Fourier ; [préface par Victor Poupin]</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>16</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k1198457j.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k1198457j</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k1198457j.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k1198457j.medres</medres>
+                <nqamoyen>88.13</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k1198457j.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k1198457j</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1842</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>4 vol. ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 616</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k9902m</dc:identifier>
+                    <dc:identifier>NUMM-9902</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105040</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 2-5. Théorie de l'unité universelle ; [Du libre arbitre]. Tome deuxième / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>17</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k9902m.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k9902m</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k9902m.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k9902m.medres</medres>
+                <nqamoyen>97.78</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k9902m.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k9902m</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1851-1852</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>1 t. en 2 vol. (352-352 p.) ; 23 cm</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k8058g</dc:identifier>
+                    <dc:identifier>NUMM-8058</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb37410518p</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 10-11. Manuscrits publiés par la Phalange, revue de la science sociale : 1851-1852. 10 / Volume II / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>18</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k8058g.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k8058g</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k8058g.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k8058g.medres</medres>
+                <nqamoyen>99.65</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k8058g.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k8058g</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>185.</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>1 vol. (III-717 p.) ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 730</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5491r</dc:identifier>
+                    <dc:identifier>NUMM-5491</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb37410530j</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier. 12, Manuscrits publiés par la Phalange [divers manuscrits ne figurant pas dans les quatre volumes de la Phalange reproduits dans les tomes X et XI de la présente édition / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>19</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5491r.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5491r</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5491r.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5491r.medres</medres>
+                <nqamoyen>98.67</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5491r.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5491r</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1842</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>4 vol. ; 23 cm</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5482s</dc:identifier>
+                    <dc:identifier>NUMM-5482</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105040</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 2-5. Théorie de l'unité universelle ; [Du libre arbitre]. Tome troisième / volume deuxième / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>20</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5482s.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5482s</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5482s.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5482s.medres</medres>
+                <nqamoyen>99.06</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5482s.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5482s</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1835-1836</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>2 vol. (Pagination multiple) ; 23 cm</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5488n</dc:identifier>
+                    <dc:identifier>NUMM-5488</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105160</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 8-9. La fausse industrie, morcellée, répugnante, mensongère, et l'antidote, l'industrie naturelle, combinée, attrayante, véridique, donnant quadruple produit. 09 / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>21</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5488n.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5488n</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5488n.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5488n.medres</medres>
+                <nqamoyen>99.61</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5488n.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5488n</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1842</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>4 vol. ; 23 cm</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k54833</dc:identifier>
+                    <dc:identifier>NUMM-5483</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105040</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 2-5. Théorie de l'unité universelle ; [Du libre arbitre]. Tome quatrième, volume troisième / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>22</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k54833.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k54833</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k54833.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k54833.medres</medres>
+                <nqamoyen>99.41</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k54833.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k54833</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1851-1852</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:format>1 t. en 2 vol. (352-352 p.) ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 358</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5489z</dc:identifier>
+                    <dc:identifier>NUMM-5489</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb37410518p</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 10-11. Manuscrits publiés par la Phalange, revue de la science sociale : 1851-1852. 10 / Volume 1 / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>23</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5489z.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5489z</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5489z.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5489z.medres</medres>
+                <nqamoyen>99.11</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5489z.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5489z</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1856-1858</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:format>2 t. en 1 vol. (352-360 p.) : ill. ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 362</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k8059s</dc:identifier>
+                    <dc:identifier>NUMM-8059</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105280</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 11. Manuscrits publiés par la Phalange, revue de la science sociale : 1853-1856, 1857-1858. Tome 11 / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>24</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k8059s.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k8059s</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k8059s.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k8059s.medres</medres>
+                <nqamoyen>99.1</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k8059s.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k8059s</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1835-1836</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>2 vol. (Pagination multiple) ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 398</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5487b</dc:identifier>
+                    <dc:identifier>NUMM-5487</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105160</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 8-9. La fausse industrie, morcellée, répugnante, mensongère, et l'antidote, l'industrie naturelle, combinée, attrayante, véridique, donnant quadruple produit. 08 / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>25</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5487b.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5487b</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5487b.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5487b.medres</medres>
+                <nqamoyen>99.87</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5487b.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5487b</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1841-1842</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>4 vol. ; 23 cm</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5484d</dc:identifier>
+                    <dc:identifier>NUMM-5484</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105040</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 2-5. Théorie de l'unité universelle ; [Du libre arbitre]. Tome cinquième / volume quatrième / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>26</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5484d.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5484d</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5484d.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5484d.medres</medres>
+                <nqamoyen>98.61</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5484d.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5484d</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1856-1858</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>2 t. en 1 vol. (352-360 p.) : ill. ; 23 cm</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5490f</dc:identifier>
+                    <dc:identifier>NUMM-5490</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb374105280</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier ; 11. Manuscrits publiés par la Phalange, revue de la science sociale : 1853-1856, 1857-1858. Tome11 / Volume IV / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>27</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5490f.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5490f</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5490f.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5490f.medres</medres>
+                <nqamoyen>99.1</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5490f.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5490f</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:contributor>Debout-Oleszkiewicz, Simone (1919-2020). Préfacier</dc:contributor>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1846</dc:date>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:format>1 vol. (XXXVI-336 p.-[1] f. de front.) : ill. ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 410</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k54805</dc:identifier>
+                    <dc:identifier>NUMM-5480</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb37388082m</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier. 1, Théorie des quatre mouvements et des destinées générales / Charles Fourier ; [introd. par S. Debout Oleszkiewicz]</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>28</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k54805.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k54805</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k54805.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k54805.medres</medres>
+                <nqamoyen>97.92</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k54805.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k54805</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1845</dc:date>
+                    <dc:description>[Le nouveau monde industriel et sociétaire (français)]</dc:description>
+                    <dc:description>Appartient à l’ensemble documentaire : GTextes1</dc:description>
+                    <dc:format>1 vol. (XVI-489 p.) : ill. ; 23 cm</dc:format>
+                    <dc:format>Nombre total de vues : 512</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k5485q</dc:identifier>
+                    <dc:identifier>NUMM-5485</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:publisher>Ed. Anthropos (Paris)</dc:publisher>
+                    <dc:relation>Notice d'ensemble : http://catalogue.bnf.fr/ark:/12148/cb37328606x</dc:relation>
+                    <dc:relation>Titre d'ensemble : Oeuvres complètes / de Charles Fourier</dc:relation>
+                    <dc:relation>Notice d’oeuvre : http://catalogue.bnf.fr/ark:/12148/cb17878475w</dc:relation>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb37410510x</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Microformes et reprints</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France</dc:source>
+                    <dc:title>Oeuvres complètes / de Charles Fourier. 6, Le nouveau monde industriel et sociétaire ou Invention du procédé d'industrie attrayante et naturelle distribuée en séries passionnées / Charles Fourier</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>printed monograph</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>29</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k5485q.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k5485q</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k5485q.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k5485q.medres</medres>
+                <nqamoyen>98.56</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k5485q.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k5485q</uri>
+            </srw:extraRecordData>
+        </srw:record>
+        <srw:record>
+            <srw:recordSchema>http://www.openarchives.org/OAI/2.0/OAIdc.xsd</srw:recordSchema>
+            <srw:recordPacking>xml</srw:recordPacking>
+            <srw:recordData>
+                <oai_dc:dc>
+                    <dc:creator>Schérer, René (1922-....). Auteur du texte</dc:creator>
+                    <dc:creator>Fourier, Charles (1772-1837). Auteur du texte</dc:creator>
+                    <dc:date>1996</dc:date>
+                    <dc:description>Collection : 2000 ; 2</dc:description>
+                    <dc:description>Collection : 2000 ; 2</dc:description>
+                    <dc:description>Comprend : [Textes choisis]</dc:description>
+                    <dc:description>Contient une table des matières</dc:description>
+                    <dc:description>Avec mode texte</dc:description>
+                    <dc:format>1 vol. (242 p.) : portr. ; 19 cm</dc:format>
+                    <dc:format>Nombre total de vues : 258</dc:format>
+                    <dc:identifier>https://gallica.bnf.fr/ark:/12148/bpt6k33222020</dc:identifier>
+                    <dc:identifier>ISBN 2840490994</dc:identifier>
+                    <dc:language>fre</dc:language>
+                    <dc:language>français</dc:language>
+                    <dc:publisher> (Biarritz)</dc:publisher>
+                    <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb37174962z</dc:relation>
+                    <dc:rights>conditions spécifiques d'utilisation - Projet de numérisation des indisponibles</dc:rights>
+                    <dc:rights>restricted use</dc:rights>
+                    <dc:source>Bibliothèque nationale de France, département Philosophie, histoire, sciences de l'homme, 2001-54037</dc:source>
+                    <dc:subject>Fourier, Charles (1772-1837) -- Critique et interprétation</dc:subject>
+                    <dc:title>Charles Fourier ou La contestation globale (Nouv. éd. corr. et augm.) / René Schérer</dc:title>
+                    <dc:type>text</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                    <dc:type>monographie imprimée</dc:type>
+                </oai_dc:dc>
+            </srw:recordData>
+            <srw:recordIdentifier>ark</srw:recordIdentifier>
+            <srw:recordPosition>30</srw:recordPosition>
+            <srw:extraRecordData>
+                <epubFile></epubFile>
+                <highres>https://gallica.bnf.fr/ark:/12148/bpt6k33222020.highres</highres>
+                <infoSupModifiable></infoSupModifiable>
+                <link>https://gallica.bnf.fr/ark:/12148/bpt6k33222020</link>
+                <lowres>https://gallica.bnf.fr/ark:/12148/bpt6k33222020.lowres</lowres>
+                <medres>https://gallica.bnf.fr/ark:/12148/bpt6k33222020.medres</medres>
+                <nqamoyen>99.99</nqamoyen>
+                <provenance>Gallica</provenance>
+                <thumbnail>https://gallica.bnf.fr/ark:/12148/bpt6k33222020.thumbnail</thumbnail>
+                <typedoc>monographies</typedoc>
+                <uri>bpt6k33222020</uri>
+            </srw:extraRecordData>
+        </srw:record>
+    </srw:records>
+    <srw:nextRecordPosition>51</srw:nextRecordPosition>
+</srw:searchRetrieveResponse>

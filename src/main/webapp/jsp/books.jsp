@@ -6,8 +6,7 @@
 <%@ page import="com.github.oeuvres.alix.lucene.search.FormEnum"%>
 <%@ page import="org.apache.lucene.index.FieldInfos"%>
 <%@ page import="org.apache.lucene.index.FieldInfo"%>
-<%!
-final static HashSet<String> FIELDS = new HashSet<String>(
+<%!final static HashSet<String> FIELDS = new HashSet<String>(
             Arrays.asList(new String[]{Names.ALIX_BOOKID, "byline", "year", "title"}));
 static Sort SORT = new Sort(new SortField("author1", SortField.Type.STRING),
             new SortField("year", SortField.Type.INT));%>

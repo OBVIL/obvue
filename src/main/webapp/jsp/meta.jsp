@@ -145,7 +145,7 @@ String refType = tools.getString("reftype", null);
 String q = tools.getString("q", null);
 String format = tools.getString("format", null);
 if (format == null)
-    format = (String) request.getAttribute(Dispatch.EXT);
+    format = (String) request.getAttribute(Rooter.EXT);
 
 // global varaiables
 Corpus corpus = (Corpus) session.getAttribute(corpusKey);

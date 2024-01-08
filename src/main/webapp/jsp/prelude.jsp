@@ -18,7 +18,7 @@
 <%@ page import="com.github.oeuvres.alix.lucene.search.*"%>
 <%@ page import="com.github.oeuvres.alix.util.ML"%>
 <%@ page import="com.github.oeuvres.alix.web.*"%>
-<%@ page import="fr.sorbonne_universite.obtic.obvie.Dispatch"%>
+<%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%!/** Field name containing canonized text */
 public static String TEXT = "text";
 /** Field Name with int date */
@@ -240,7 +240,7 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
     else
         query = QUERY_CHAPTER;
     Sort sort = sorter.sort;
-    String key = "" + page.getRequest().getAttribute(Dispatch.BASE) + "?" + query;
+    String key = "" + page.getRequest().getAttribute(Rooter.BASE) + "?" + query;
     if (sort != null)
         key += " " + sort;
     /*
@@ -283,10 +283,11 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
     return topDocs;
 }%>
 <%
+
 final long time = System.nanoTime();
 final JspTools tools = new JspTools(pageContext);
-final File contextDir = (File) request.getAttribute(Dispatch.CONTEXT_DIR);
-final String base = (String) request.getAttribute(Dispatch.BASE);
+// final File contextDir = (File) request.getAttribute(Rooter.CONTEXT_DIR);
+final String base = (String) request.getAttribute(Rooter.BASE);
 final Alix alix = Alix.instance(base);
 final IndexSearcher searcher = alix.searcher();
 final IndexReader reader = alix.reader();

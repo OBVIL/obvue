@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
-<%!
-
-private String options(int[] values, int value) {
+<%!private String options(int[] values, int value) {
     StringBuilder sb = new StringBuilder();
     for (int i = 0, lim = values.length; i < lim; i++) {
         sb.append("<option");
@@ -13,9 +11,7 @@ private String options(int[] values, int value) {
         sb.append("</option>\n");
     }
     return sb.toString();
-}
-
-%>
+}%>
 <%
 final String q = tools.getString("q", null);
 OptionCat cat = (OptionCat) tools.getEnum("cat", OptionCat.NOSTOP, Cookies.cat);

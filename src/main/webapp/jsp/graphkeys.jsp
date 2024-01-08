@@ -3,11 +3,9 @@
 <%@ page import="com.github.oeuvres.alix.util.Edge" %>
 <%@ page import="com.github.oeuvres.alix.util.EdgeSquare" %>
 
-<%!
-/**
+<%!/**
  * Frequent words linked by co-occurrence
- */
-%>
+ */%>
 <%
 //-----------
 //data common prelude
