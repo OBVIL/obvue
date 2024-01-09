@@ -8,6 +8,9 @@
 <%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%! @SuppressWarnings("unchecked") %>
 <%
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
+
+
 Logger logger = Logger.getLogger(this.getClass().getName());
 final ServletContext servletContext = pageContext.getServletContext();
 final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
@@ -29,6 +32,7 @@ if (!lockFile.exists()) {
 </head>
 <body>
     <article class="landing">
+        <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="static/img/obvie_50.png"/></a>
         <h1><%=base %>, indexation en cours</h1>
         <iframe id="report" name="report" src="report"></iframe>
     </article>

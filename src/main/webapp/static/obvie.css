@@ -2070,6 +2070,19 @@ div.scatter div.legend div.dot {
     background: transparent;
     color: rgba(120, 105, 101, 0.8);
 }
+
+.landing .logo {
+    float: left;
+}
+
+.logo img {
+    opacity: 0.7;
+}
+
+a.logo:hover img {
+    opacity: 1;
+}
+
 div.table {
     display: table;
 }

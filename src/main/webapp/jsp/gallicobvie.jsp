@@ -12,7 +12,7 @@ while (new File(dataDir, name).exists()) {
     }
     name = RandomName.name(10);
 }
-String baseHref = request.getContextPath() + '/';
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
 %>
 <!DOCTYPE html>
 <html>
@@ -24,6 +24,7 @@ String baseHref = request.getContextPath() + '/';
 <body>
     <article class="chapter">
         <div class="landing">
+            <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="static/img/obvie_50.png"/></a>
             <h1>Gallicobvie</h1>
             <ul>
                 <li><a href="https://obtic.huma-num.fr/obvie/">Obvie</a> : un moteur avancé de fouille de textes (ObTiC)</li>
@@ -31,7 +32,7 @@ String baseHref = request.getContextPath() + '/';
                 <li><a href=".">Gallicobvie</a> : construire son corpus de textes avec Gallica et l’explorer avec Obvie</li>
             </ul>
             <div class="buts">
-                <a class="but" href="<%=(baseHref + name) %>">Enregistrer un nouveau corpus</a>
+                <a class="but" href="<%=(request.getContextPath() + "/" + name + "/") %>">Enregistrer un nouveau corpus</a>
             </div>
         </div>
     </article>

@@ -16,6 +16,7 @@ if (lockFile.exists()) {
  request.getRequestDispatcher("").forward(request, response);
 }
 final int baselife = (Integer)servletContext.getAttribute(Rooter.BASELIFE);
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
 
 %>
 <!DOCTYPE html>
@@ -23,10 +24,11 @@ final int baselife = (Integer)servletContext.getAttribute(Rooter.BASELIFE);
 <head>
     <meta charset="UTF-8">
     <title>Arks — Gallicobvie</title>
-    <link href="../static/obvie.css" rel="stylesheet"/>
+    <link href="<%=hrefContext%>static/obvie.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="landing">
+    <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="<%=hrefContext%>static/img/obvie_50.png"/></a>
     <h1>Nouvelle base : <a href="."><%=base%></a></h1>
     <p>Notez bien le lien de cette base, elle sera supprimée après <%=baselife%> jours sans utilisation.</p>
     <p>Proposez une liste d’identifiants Gallica (arks) pour composer votre corpus de textes. 

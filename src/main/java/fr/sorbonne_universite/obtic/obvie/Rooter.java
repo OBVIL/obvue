@@ -2,6 +2,8 @@ package fr.sorbonne_universite.obtic.obvie;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.oeuvres.alix.util.Chain;
+
 /**
  * Url dispatcher for obvie indexer
  */
@@ -36,8 +40,12 @@ public class Rooter extends HttpServlet {
     public static final String BASE_LIST = "baseList";
     /** Context init param: directory of bases. */
     public static final String DATADIR = "datadir";
+    /** Request attribute: debug informations for the rewrite process. */
+    public static final String DEBUG = "ext";
     /** Request attribute: original extension requested, like csv or json. */
     public static final String EXT = "ext";
+    /** Request attribute: relative link to context. */
+    public static final String HREF_CONTEXT = "hrefcontext";
     /** Context attribute: handles on tasks submitted to pool. */
     public static final String FUTURES = "futures";
     /** Request attribute: error message for an error page. */
@@ -57,6 +65,8 @@ public class Rooter extends HttpServlet {
     /** Forbidden names for a corpus. */
     static final HashSet<String> STOP = new HashSet<String>(
             Arrays.asList(new String[] { "WEB-INF", "static", "jsp", "reload" }));
+    /** Request attribute: requested URL. */
+    public static final String URL = "url";
     /** Context directory, allow to check jsp existence. */
     private File contextDir;
     /** Directory of bases. */
@@ -163,21 +173,41 @@ public class Rooter extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String context = request.getContextPath();
         // url = /context/base/action
-        String url = request.getRequestURI().substring(context.length());
-        Path path = Paths.get(url).normalize();
-        if (path.getNameCount() > 5) {
+        // request.getPathInfo() does not return what is needed
+        // normalize odd /// //
+        String url = request.getRequestURI().replaceAll("/+", "/").substring(context.length());
+        String[] parts = new Chain(url).split('/');
+        // keep original url request after redirections
+        request.setAttribute(URL, url);
+        // Path.relativize() use \ on windows, URI.relativize() needs absolute URI with protocol
+        int count = (int)url.chars().filter(ch -> ch =='/').count() - 1;
+        String hrefContext = "../".repeat(count);
+        
+        final String debug = ""
+            + "  requestURI=" + request.getRequestURI().replaceAll("/+", "/")
+            + ", contextPath=" + request.getContextPath()
+            + ", url=" + url
+            + ", parts=" + Arrays.toString(parts)
+            + ", hrefContext=" + hrefContext;
+        
+        request.setAttribute(DEBUG, debug);
+        request.setAttribute(HREF_CONTEXT, hrefContext);
+        
+        if (parts.length > 5) {
             throw new ServletException("Infinite loop");
         }
-        if (path.getNameCount() == 0) {
+        if (parts.length == 0) {
             request.getRequestDispatcher("/jsp/gallicobvie.jsp").forward(request, response);
             return;
         }
-        String base = path.getName(0).toString();
+        String base = parts[0];
         // direct access to jsp directory, problem seen with tomcat7 and <jsp:include/>
+        /*
         if ("jsp".equals(base)) {
             request.getRequestDispatcher(path.toString()).forward(request, response);
             return;
         }
+        */
 
         if (STOP.contains(base)) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -188,13 +218,13 @@ public class Rooter extends HttpServlet {
         request.setAttribute(BASE, base); //
         File baseDir = new File(dataDir, base);
         // ensure trailing space, redirection
-        if (path.getNameCount() == 1 && !url.equals("/" + base + "/")) {
+        if (parts.length == 1 && !url.equals("/" + base + "/")) {
             response.sendRedirect(context + "/" + base + "/");
             return;
         }
         
         // base does not yet exist
-        if (path.getNameCount() == 1 && !baseDir.exists()) {
+        if (parts.length == 1 && !baseDir.exists()) {
             // arks are sended, start loading
             if (request.getParameter(ARKS) != null) {
                 request.getRequestDispatcher("/jsp/load.jsp").forward(request, response);
@@ -206,7 +236,7 @@ public class Rooter extends HttpServlet {
             return;
         }
         // base is created, welcome pages 
-        else if (path.getNameCount() == 1) {
+        else if (parts.length == 1) {
             // lock file, indexation in progress
             if (new File(baseDir, GallicaIndexer.LOCK_FILE).exists()) {
                 request.getRequestDispatcher("/jsp/progress.jsp").forward(request, response);
@@ -217,39 +247,50 @@ public class Rooter extends HttpServlet {
             return;
         }
         // path inside base
-        Path action = path.subpath(1, path.getNameCount());
+        String action = parts[1];
         // documentation
         if (action.startsWith("help") || action.startsWith("aide")) {
             String page = "";
-            if (action.getNameCount() > 1)
-                page = action.getName(1).toString();
+            if (parts.length > 2) {
+                page = parts[2];
+            }
             request.getRequestDispatcher("/jsp/help.jsp?page=" + page).forward(request, response);
         }
         // Should be a desk component
-        String jsp = action.subpath(0, 1).toString();
+        String jsp = action;
         String ext = "";
-        String pathinfo = "";
-        int i;
+        StringBuilder pathinfo = new StringBuilder();
+        final int pos;
         // a jsp could be accessed by multiple extensions to modify output format
-        if ((i = jsp.lastIndexOf('.')) > 0) {
-            ext = jsp.substring(i + 1);
-            jsp = jsp.substring(0, i);
+        if ((pos = action.lastIndexOf('.')) > 0) {
+            ext = action.substring(pos + 1);
+            jsp = action.substring(0, pos);
         }
-        if (action.getNameCount() > 1)
-            pathinfo = action.subpath(1, action.getNameCount()).toString();
+        // some more parameters for the action
+        if (parts.length > 2) {
+            boolean first = true;
+            for (int i = 2; i < parts.length; i++) {
+                if (first) {
+                    first = false;
+                }
+                else {
+                    pathinfo.append("/");
+                }
+                pathinfo.append(parts[i]);
+            }
+        }
         // action with no extension
-        url = "/jsp/" + jsp + ".jsp";
-        if (!new File(contextDir, url).exists()) {
+        final String jspFile = "/jsp/" + jsp + ".jsp";
+        if (!new File(contextDir, jspFile).exists()) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            request.setAttribute(MESSAGE, "[Obvie] \"" + url + "\" script not found ");
+            request.setAttribute(MESSAGE, "[Obvie] \"" + url + "\" script not found. url=" + request.getAttribute(URL));
             // request.setAttribute(REDIRECT, base + "/");
             request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
 
         request.setAttribute(EXT, ext);
-        request.setAttribute(PATHINFO, pathinfo);
-        // original path will be available as a request attribute
-        request.getRequestDispatcher(url).forward(request, response);
+        request.setAttribute(PATHINFO, pathinfo.toString());
+        request.getRequestDispatcher(jspFile).forward(request, response);
     }
 
     @Override

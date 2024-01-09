@@ -24,7 +24,15 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.IndexWriterConfig.OpenMode;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -148,7 +156,11 @@ public class GallicaIndexer implements Callable<String>
             Files.setPosixFilePermissions(lockFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
         }
         Path lucenePath = Paths.get(baseDir.getCanonicalPath(), LUCENE);
-        lucene = Alix.writer(lucenePath, new FrAnalyzer());
+        IndexWriterConfig conf = new IndexWriterConfig(new StandardAnalyzer());
+        // create for now
+        conf.setOpenMode(OpenMode.CREATE);
+        Directory dir = FSDirectory.open(lucenePath);
+        lucene = new IndexWriter(dir, conf);
         
         reportPrinter = new PrintWriter(
             new BufferedWriter(new OutputStreamWriter(
@@ -216,20 +228,26 @@ public class GallicaIndexer implements Callable<String>
                 Files.setPosixFilePermissions(htmlFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
             }
             reportPrinter.println(String.format("% 3d:%02d:%02d", hour,min,sec) + " indexing start");
-            lucene.addDocument(alixDoc.document());
+            /*
+            org.apache.lucene.document.Document luceneDoc = new org.apache.lucene.document.Document();
+            luceneDoc.add(new StringField("id", ark, Field.Store.YES));
+            luceneDoc.add(new TextField("text", "Petit texte", Field.Store.YES));
+            */
+            org.apache.lucene.document.Document luceneDoc = alixDoc.document();
+            lucene.addDocument(luceneDoc);
             reportPrinter.println(String.format("% 3d:%02d:%02d", hour,min,sec) + " indexing stop");
             // wait probably not needed here, indexatoin should do the job
             // millis = ThreadLocalRandom.current().nextInt(1000, 2000);
             // TimeUnit.MILLISECONDS.sleep(millis);
         }
         lucene.commit();
-        lucene.close();
         // A possible optimization here, the generation of coocs
         return stop("OK, FIN");
     }
 
-    public String stop(String message)
+    public String stop(String message) throws IOException
     {
+        lucene.close();
         String date = dateFormat.format(new Date());
         reportPrinter.println(String.format("%s — %s, %s.", date, label, message));
         reportPrinter.close();
@@ -289,7 +307,7 @@ public class GallicaIndexer implements Callable<String>
                 if (pos > 0) {
                     text = text.substring(pos);
                     info.size = text.length();
-                    alixDoc.text(text);
+                    alixDoc.text("Deux ou trois mots");
                     info.indexable = true;
                 }
                 else {
@@ -303,13 +321,13 @@ public class GallicaIndexer implements Callable<String>
                     if("dc.title".equalsIgnoreCase(name) && info.title == null) {
                         final String s = content.replace(" | Gallica", "");
                         info.title = s;
-                        alixDoc.title(s);
+                        // alixDoc.title(s);
                     }
                     if("dc.creator".equalsIgnoreCase(name)) {
                         if (byline.length() > 0) byline.append(". ");
                         final String s = content.replace(". Auteur du texte", "").trim();
                         byline.append(s);
-                        alixDoc.author(s);
+                        // alixDoc.author(s);
                     }
                     if("dc.date".equalsIgnoreCase(name) && info.date == null) {
                         info.date = content;
@@ -317,7 +335,7 @@ public class GallicaIndexer implements Callable<String>
                         if (m.find()) {
                             try {
                                 int year = Integer.parseInt(m.group(0));
-                                alixDoc.year(year);
+                                // alixDoc.year(year);
                             }
                             catch (NumberFormatException e) {
                                 
@@ -328,7 +346,7 @@ public class GallicaIndexer implements Callable<String>
                 if (byline.length() > 0) {
                     final String s = byline.toString();
                     info.byline = s;
-                    alixDoc.byline(s);
+                    // alixDoc.byline(s);
                 }
                 return;
             }

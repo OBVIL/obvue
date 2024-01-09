@@ -10,6 +10,7 @@
 <%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%! @SuppressWarnings("unchecked") %>
 <%
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
 
 Logger logger = Logger.getLogger(this.getClass().getName());
 final ServletContext servletContext = pageContext.getServletContext();
@@ -50,10 +51,11 @@ pool.submit(task);
 <head>
     <meta charset="UTF-8">
     <title>Chargement — Gallicobvie</title>
-    <link href="../static/obvie.css" rel="stylesheet"/>
+    <link href="<%=hrefContext%>static/obvie.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="landing">
+    <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="<%=hrefContext%>static/img/obvie_50.png"/></a>
         <h1><a href="."><%=label%></a>, chargement</h1>
         <div class="row">
             <div>
