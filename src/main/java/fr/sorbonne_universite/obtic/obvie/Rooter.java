@@ -6,8 +6,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -19,8 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Url dispatcher for obvie indexer
  */
-public class Rooter extends HttpServlet
-{
+public class Rooter extends HttpServlet {
     /** for serialization */
     private static final long serialVersionUID = 1L;
     /** Request parameter: the base name. */
@@ -35,6 +38,8 @@ public class Rooter extends HttpServlet
     public static final String DATADIR = "datadir";
     /** Request attribute: original extension requested, like csv or json. */
     public static final String EXT = "ext";
+    /** Context attribute: handles on tasks submitted to pool. */
+    public static final String FUTURES = "futures";
     /** Request attribute: error message for an error page. */
     public static final String MESSAGE = "message";
     /** Request attribute: internal messages for the servlet. */
@@ -51,36 +56,66 @@ public class Rooter extends HttpServlet
     public static final String REDIRECT = "redirect";
     /** Forbidden names for a corpus. */
     static final HashSet<String> STOP = new HashSet<String>(
-        Arrays.asList(new String[] { "WEB-INF", "static", "jsp", "reload" })
-    );
+            Arrays.asList(new String[] { "WEB-INF", "static", "jsp", "reload" }));
     /** Context directory, allow to check jsp existence. */
     private File contextDir;
     /** Directory of bases. */
     private File dataDir;
+    /** Pool of thread, for destruction at the end */
+    private ExecutorService pool;
+    /** Dictionary of Futures for threads submitted to the pool */
+    private HashMap<String, Future<String>> futures;
 
     @Override
-    public void init(ServletConfig config) throws ServletException
-    {
+    public void init(ServletConfig config) throws ServletException {
         super.init(config);
         contextDir = new File(getServletContext().getRealPath(""));
         ServletContext context = getServletContext();
         final int poolSize = getInteger(POOLSIZE, 10);
-        ExecutorService pool = Executors.newFixedThreadPool(poolSize);
+        pool = Executors.newFixedThreadPool(poolSize);
         context.setAttribute(POOL, pool);
-        context.setAttribute(DATADIR, dataDir());
+        futures = new HashMap<String, Future<String>>();
+        context.setAttribute(FUTURES, futures);
+        dataDir = dataDir();
+        context.setAttribute(DATADIR, dataDir);
         context.setAttribute(BASELIFE, getInteger(BASELIFE, 10));
     }
-    
-    public Integer getInteger(final String name, final int fallback)
-    {
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        pool.shutdown(); // Disable new tasks from being submitted
+        // loop on futures and send terminal signal
+        for (Map.Entry<String, Future<String>> entry : futures.entrySet()) {
+            String key = entry.getKey();
+            Future<String> future = entry.getValue();
+            future.cancel(true);
+        }
+        try {
+            // Wait a while for existing tasks to terminate
+            if (!pool.awaitTermination(5, TimeUnit.SECONDS)) {
+                pool.shutdownNow(); // Cancel currently executing tasks
+                // Wait a while for tasks to respond to being cancelled
+                if (!pool.awaitTermination(60, TimeUnit.SECONDS)) {
+                    System.err.println("Pool did not terminate");
+                }
+            }
+        } catch (InterruptedException ie) {
+            // (Re-)Cancel if current thread also interrupted
+            pool.shutdownNow();
+            // Preserve interrupt status
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    public Integer getInteger(final String name, final int fallback) {
         ServletContext context = getServletContext();
         String value = context.getInitParameter(name);
         if (value != null && !value.isEmpty()) {
             try {
                 Integer val = Integer.valueOf(value);
                 return val;
-            }
-            catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 // inform ?
             }
         }
@@ -88,40 +123,43 @@ public class Rooter extends HttpServlet
     }
 
     /**
-     * Get basedir to write 
+     * Get basedir to write
      * 
      * @return
      * @throws ServletException
      */
-    private File dataDir() throws ServletException
-    {
+    private File dataDir() throws ServletException {
         ServletContext context = getServletContext();
         String value = context.getInitParameter(DATADIR); // dir of bases
-        if(value == null || value.isEmpty()) {
+        if (value == null || value.isEmpty()) {
             value = getServletConfig().getInitParameter(DATADIR);
         }
-        if(value == null || value.isEmpty()) {
+        if (value == null || value.isEmpty()) {
             value = getServletContext().getRealPath("") + "WEB-INF/data/";
         }
         File file = new File(value);
         if (!file.isAbsolute()) {
-            throw new ServletException("Init param datadir is not an absolute file path: <Parameter name=\"datadir\" value=\"" + value + "\" override=\"false\"/>");
+            throw new ServletException(
+                    "Init param datadir is not an absolute file path: <Parameter name=\"datadir\" value=\"" + value
+                            + "\" override=\"false\"/>");
         }
         if (!file.exists() && !file.mkdirs()) {
-            throw new ServletException("Init param datadir, impossible to create: <Parameter name=\"datadir\" value=\"" + value + "\" override=\"false\"/>");
-        }
-        else if (!file.isDirectory()) {
-            throw new ServletException("Init param datadir, exists but is not a directory: <Parameter name=\"datadir\" value=\"" + value + "\" override=\"false\"/>");
-        }
-        else if (!file.canWrite()) {
-            throw new ServletException("Init param datadir, is a directory but is not writable: <Parameter name=\"datadir\" value=\"" + value + "\" override=\"false\"/>");
+            throw new ServletException("Init param datadir, impossible to create: <Parameter name=\"datadir\" value=\""
+                    + value + "\" override=\"false\"/>");
+        } else if (!file.isDirectory()) {
+            throw new ServletException(
+                    "Init param datadir, exists but is not a directory: <Parameter name=\"datadir\" value=\"" + value
+                            + "\" override=\"false\"/>");
+        } else if (!file.canWrite()) {
+            throw new ServletException(
+                    "Init param datadir, is a directory but is not writable: <Parameter name=\"datadir\" value=\""
+                            + value + "\" override=\"false\"/>");
         }
         return file;
     }
-    
+
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String context = request.getContextPath();
         // url = /context/base/action
@@ -140,39 +178,42 @@ public class Rooter extends HttpServlet
             request.getRequestDispatcher(path.toString()).forward(request, response);
             return;
         }
-        
+
         if (STOP.contains(base)) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             request.setAttribute(MESSAGE, "Page inconnue");
             request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
 
-        request.setAttribute(BASE, base); // 
+        request.setAttribute(BASE, base); //
         File baseDir = new File(dataDir, base);
         // ensure trailing space, redirection
         if (path.getNameCount() == 1 && !url.equals("/" + base + "/")) {
             response.sendRedirect(context + "/" + base + "/");
             return;
         }
-        // base does not exist, arks are sended, start loading
-        if (!baseDir.exists() && request.getParameter(ARKS) != null) {
-            request.getRequestDispatcher("/jsp/charger.jsp").forward(request, response);
-            return;
-        }
-        // base does not exist, offer form to send arks
-        else if (!baseDir.exists()) {
-            request.getRequestDispatcher("/jsp/arks.jsp").forward(request, response);
-            return;
-        }
-        // base is locked show progress
-        else if (!new File(baseDir, GallicaIndexer.LOCK_FILE).exists()) {
-            request.getRequestDispatcher("/jsp/progress.jsp").forward(request, response);
-            return;
-        }
         
-        // base welcome page
-        if (path.getNameCount() == 1) {
-            request.getRequestDispatcher("/jsp/desk.jsp").forward(request, response);
+        // base does not yet exist
+        if (path.getNameCount() == 1 && !baseDir.exists()) {
+            // arks are sended, start loading
+            if (request.getParameter(ARKS) != null) {
+                request.getRequestDispatcher("/jsp/load.jsp").forward(request, response);
+            }
+            // offer form to send arks
+            else  {
+                request.getRequestDispatcher("/jsp/arks.jsp").forward(request, response);
+            }
+            return;
+        }
+        // base is created, welcome pages 
+        else if (path.getNameCount() == 1) {
+            // lock file, indexation in progress
+            if (new File(baseDir, GallicaIndexer.LOCK_FILE).exists()) {
+                request.getRequestDispatcher("/jsp/progress.jsp").forward(request, response);
+            }
+            else {
+                request.getRequestDispatcher("/jsp/desk.jsp").forward(request, response);
+            }
             return;
         }
         // path inside base
@@ -198,13 +239,13 @@ public class Rooter extends HttpServlet
             pathinfo = action.subpath(1, action.getNameCount()).toString();
         // action with no extension
         url = "/jsp/" + jsp + ".jsp";
-        if(!new File(contextDir, url).exists()) {
+        if (!new File(contextDir, url).exists()) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             request.setAttribute(MESSAGE, "[Obvie] \"" + url + "\" script not found ");
-            // request.setAttribute(REDIRECT, base + "/"); 
+            // request.setAttribute(REDIRECT, base + "/");
             request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
         }
-        
+
         request.setAttribute(EXT, ext);
         request.setAttribute(PATHINFO, pathinfo);
         // original path will be available as a request attribute
@@ -212,8 +253,7 @@ public class Rooter extends HttpServlet
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 

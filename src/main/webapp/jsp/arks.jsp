@@ -5,23 +5,24 @@
 <%@ page import="fr.sorbonne_universite.obtic.obvie.GallicaIndexer"%>
 <%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%
-ServletContext servletContext = pageContext.getServletContext();
-File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
-String base = (String)request.getAttribute(Rooter.BASE);
-File baseDir = new File(dataDir, base);
+final ServletContext servletContext = pageContext.getServletContext();
+final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
+final String base = (String)request.getAttribute(Rooter.BASE);
+final File baseDir = new File(dataDir, base);
+final File lockFile = new File(baseDir, GallicaIndexer.LOCK_FILE);
+
 //already locked, send redirection to server, Rooter will do better job
-File lockFile = new File(baseDir, GallicaIndexer.LOCK_FILE);
 if (lockFile.exists()) {
  request.getRequestDispatcher("").forward(request, response);
 }
-int baselife = (Integer)servletContext.getAttribute(Rooter.BASELIFE);
+final int baselife = (Integer)servletContext.getAttribute(Rooter.BASELIFE);
 
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Charger des arks — Gallicobvie</title>
+    <title>Arks — Gallicobvie</title>
     <link href="../static/obvie.css" rel="stylesheet"/>
 </head>
 <body>

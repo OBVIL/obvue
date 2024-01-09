@@ -2029,7 +2029,12 @@ div.scatter div.legend div.dot {
     transform: none;
 }
 
-div.landing {
+.landing .row {
+    display: flex;
+    justify-content: center;
+}
+
+.landing {
     max-width: 55rem;
     margin-left: auto;
     margin-right: auto;
@@ -2037,17 +2042,17 @@ div.landing {
     padding-top: 2rem;
 }
 
-div.landing h1 {
+.landing h1 {
     text-align: center;
     margin-top: 0;
 }
 
-div.landing > .buts {
+.landing > .buts {
     display: flex;
     justify-content: center;
 }
 
-div.landing a.but {
+.landing a.but {
     font-size: 1.5rem;
     background: rgba(120, 105, 101, 0.8);
     color: #FFFFFF;
@@ -2061,7 +2066,7 @@ div.landing a.but {
     cursor: pointer;
 }
 
-div.landing a.but:hover {
+.landing a.but:hover {
     background: transparent;
     color: rgba(120, 105, 101, 0.8);
 }
