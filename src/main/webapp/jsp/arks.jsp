@@ -23,27 +23,33 @@ final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Arks — Gallicobvie</title>
+    <title>Arks, Obvie-Gallica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Display&display=swap" rel="stylesheet">
     <link href="<%=hrefContext%>static/obvie.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="win">
+    <%@ include file="header.jsp"%>
 <div class="landing">
-    <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="<%=hrefContext%>static/img/obvie_50.png"/></a>
-    <h1>Nouvelle base : <a href="."><%=base%></a></h1>
-    <p>Notez bien le lien de cette base, elle sera supprimée après <%=baselife%> jours sans utilisation.</p>
-    <p>Proposez une liste d’identifiants Gallica (arks) pour composer votre corpus de textes. 
-    Le nombre est pour l’instant limité à 5 textes pour ce prototype.
-    </p>
+    
     <form method="post">
-        <div class="table center">
-            <div class="tr">
-                <div class="th">
+        <table>
+            <caption><h1>Nouvelle base : <a href="."><%=base%></a></h1></caption>
+            <tr>
+                <th style="white-space: nowrap;" class="right">
                     <label for="label">Nom du corpus</label>
-                </div>
-                <div class="td">
+                </th>
+                <td>
                     <input name="label" size="15"/>
-                </div>
-            </div>
+                </td>
+                <td rowspan="3" style="width: 20rem; padding: 1rem;">
+                    <p>Notez bien le lien de cette base, elle sera supprimée après <%=baselife%> jours sans utilisation.</p>
+                    <p>Proposez une liste d’identifiants Gallica (arks) pour composer votre corpus de textes. 
+                    Le nombre est pour l’instant limité à 5 textes pour ce prototype.
+                    </p>
+                </td>
+            </tr>
             <!-- 
             <div class="tr">
                 <div class="th">
@@ -54,32 +60,29 @@ final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
                 </div>
             </div>
              -->
-            <div class="tr">
-                <div class="th">
+            <tr>
+                <th class="right">
                     <label>Série d’arks Gallica,<br/> 1 par ligne</label>
-                </div>
-                <div class="td">
-        <textarea rows="5" cols="15" name="<%=Rooter.ARKS%>">
+                </th>
+                <td>
+        <textarea rows="10" cols="15" name="<%=Rooter.ARKS%>">
 bpt6k54805
 bpt6k5482s
 bpt6k54833
 bpt6k5484d
 bpt6k5485q
         </textarea>
-                </div>
-            </div>
-            <div class="tr">
-                <div class="th">
-                </div>
-                <div class="td">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
                     <button>Indexer</button>
-                </div>
-            </div>
-        </div>
+                </td>
+            </tr>
+        </table>
     </form>
 </div>
+<%@ include file="footer.jsp"%>
 </body>
 </html>
-<%
-// */
-%>

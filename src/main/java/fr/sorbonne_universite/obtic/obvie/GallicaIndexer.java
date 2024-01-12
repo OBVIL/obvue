@@ -24,10 +24,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
-import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -39,7 +35,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.github.oeuvres.alix.lucene.Alix;
 import com.github.oeuvres.alix.lucene.AlixDocument;
 import com.github.oeuvres.alix.lucene.analysis.FrAnalyzer;
 
@@ -50,7 +45,9 @@ public class GallicaIndexer implements Callable<String>
     /** Name of the lock file */
     public static final String LOCK_FILE = ".~indexing.lock#";
     /** Name of the report file */
-    public static final String REPORT_FILE = "report.txt";
+    public static final String REPORT_FILE = "report.tsv";
+    /** Name of the properties for the base */
+    public static final String PROPS_FILE = "props.xml";
     /** Name of the lucene directory */
     public static final String LUCENE = "lucene";
     /** XML date format */
@@ -73,6 +70,8 @@ public class GallicaIndexer implements Callable<String>
     private final File reportFile;
     /** File to write in for reports. */
     private PrintWriter reportPrinter;
+    /** File to log each get to Gallica */
+    private PrintWriter logPrinter;
     /** Lucene writer */
     private IndexWriter lucene;
     
@@ -123,12 +122,12 @@ public class GallicaIndexer implements Callable<String>
 
         props.setProperty("src", "html/*.html");
         props.setProperty("lucene", "lucene/");
-        File configFile = new File(baseDir, "config.xml");
-        try (FileOutputStream output = new FileOutputStream(configFile)) {
+        File propsFile = new File(baseDir, PROPS_FILE);
+        try (FileOutputStream output = new FileOutputStream(propsFile)) {
             props.storeToXML(output, "Alix base configuration", StandardCharsets.UTF_8);
         }
         if (posix) {
-            Files.setPosixFilePermissions(configFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
+            Files.setPosixFilePermissions(propsFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
         }
 
         this.label = label;
@@ -141,7 +140,8 @@ public class GallicaIndexer implements Callable<String>
             )
         ));
         String date = dateFormat.format(new Date());
-        printer.println(String.format("%s — %s, tâche soumise.", date, label));
+        printer.println("    temps\tark       \tessais\ttx. ocr\tcars.\tdate\tauteur\ttitre");
+        printer.println(String.format("%s\t%s\t%s", date, baseDir.getName(), label));
         printer.close(); // close now in cas of retarting
         if (posix) {
             Files.setPosixFilePermissions(reportFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
@@ -156,7 +156,7 @@ public class GallicaIndexer implements Callable<String>
             Files.setPosixFilePermissions(lockFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
         }
         Path lucenePath = Paths.get(baseDir.getCanonicalPath(), LUCENE);
-        IndexWriterConfig conf = new IndexWriterConfig(new StandardAnalyzer());
+        IndexWriterConfig conf = new IndexWriterConfig(new FrAnalyzer());
         // create for now
         conf.setOpenMode(OpenMode.CREATE);
         Directory dir = FSDirectory.open(lucenePath);
@@ -169,87 +169,128 @@ public class GallicaIndexer implements Callable<String>
             )), 
             true // true for autoflush
         ); 
+        logPrinter = new PrintWriter(
+            new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(new File(baseDir, "download.log"), true), // true to append
+                StandardCharsets.UTF_8                  // Set encoding
+            )), 
+            true // true for autoflush
+        ); 
         String date = dateFormat.format(new Date());
-        reportPrinter.println(String.format("%s — %s, tâche démarrée.", date, label));
-
-        // 
         // put an handle on report file now
         // create 
         // loop on arks for download and index
         final long startNano = System.nanoTime();
         GallicaText info = new GallicaText();
-        String[] required = {"title", "byline", "year"};
+        String[] required = {"id", "title", "byline", "year", "bibl", "text"};
         AlixDocument alixDoc = new AlixDocument(required);
         for (String ark: arkList) {
             // 
             if (Thread.currentThread().isInterrupted()) {
                 return stop("INTERRUPTION");
             }
-            File htmlFile = new File(htmlDir, ark + ".html");
-            if (htmlFile.exists()) {
+            Path htmlPath = Paths.get(htmlDir.toString(), ark + ".html");
+            if (Files.exists(htmlPath)) {
                 continue;
             }
             alixDoc.id(ark);
             info.reset();
             info.ark = ark;
-            loadGallicaText(alixDoc, info);
+            try {
+                loadGallicaText(alixDoc, info);
+            } catch (Exception e) {
+                reportPrinter.println(e);
+                continue;
+            }
             int millis = ThreadLocalRandom.current().nextInt(3000, 5000);
-            while (info.status == 429 || info.status == 400 || info.status == 0) {
+            int essais = 1;
+            while (info.status == 429 || info.status == 0) {
                 try {
                     Thread.sleep(millis);
+                    loadGallicaText(alixDoc, info);
                 } 
                 catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     return stop("INTERRUPTION");
                 }
-                loadGallicaText(alixDoc, info);
+                catch (Exception e) {
+                    reportPrinter.println(e);
+                }
+                essais++;
                 if (millis > 180000) {
                     break;
                 }
                 millis = millis * 2 + ThreadLocalRandom.current().nextInt(0, millis / 4);
             }
-            final long nanos = System.nanoTime() - startNano;
-            long durationSec    = nanos/(1000*1000*1000);
-            final long sec        = durationSec % 60;
-            final long min        = (durationSec /60) % 60;
-            final long hour       = (durationSec /(60*60));
-            String duration = String.format("% 3d:%02d:%02d", hour,min,sec);
-            reportPrinter.println(duration + "\t" + info);
+            String status = "" + essais;
+            if (!info.indexable) {
+                status = "http " + info.status;
+            }
+            reportPrinter.print(
+                duration(startNano)
+                + "\t" + "<a target=\"_blank\" href=\""+ info.url + "\">" + ark + "</a>"
+                + "\t" + status
+                + "\t" + Objects.toString(info.ocr, "")
+                + "\t" + ((info.size > 0)?info.size:"")
+                + "\t" + Objects.toString(info.date, "")
+                + "\t" + Objects.toString(info.byline, "")
+                + "\t" + Objects.toString(info.title, "")
+                + "\t" + Objects.toString(info.message, "")
+            );
+            reportPrinter.flush();
+            String[] members = {
+                Objects.toString(info.byline, null),
+                Objects.toString(info.date, null),
+                Objects.toString(info.title, null),
+            };
+            String  bibl = null;
+            for (String s: members) {
+                if (s == null) continue;
+                if (bibl == null) bibl = s;
+                else bibl += ". " +s;
+            }
+            if (bibl != null) {
+                alixDoc.bibl(bibl + ".");
+            }
+            
             // no interesting html
             if (!info.indexable) {
+                reportPrinter.println(); // finish report line
                 continue;
             }
-            Writer out = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(htmlFile), StandardCharsets.UTF_8));
-            out.write(info.html);
-            out.flush();
-            out.close();
-            if (posix) {
-                Files.setPosixFilePermissions(htmlFile.toPath(), PosixFilePermissions.fromString("rw-rw-r--"));
+            final long indexNano = System.nanoTime();
+            try {
+                Files.write(htmlPath, info.html.getBytes(StandardCharsets.UTF_8));
+                if (posix) {
+                    Files.setPosixFilePermissions(htmlPath, PosixFilePermissions.fromString("rw-rw-r--"));
+                }
+                lucene.addDocument(alixDoc.document());
+            } catch (Exception e) {
+                reportPrinter.println(e);
             }
-            reportPrinter.println(String.format("% 3d:%02d:%02d", hour,min,sec) + " indexing start");
-            /*
-            org.apache.lucene.document.Document luceneDoc = new org.apache.lucene.document.Document();
-            luceneDoc.add(new StringField("id", ark, Field.Store.YES));
-            luceneDoc.add(new TextField("text", "Petit texte", Field.Store.YES));
-            */
-            org.apache.lucene.document.Document luceneDoc = alixDoc.document();
-            lucene.addDocument(luceneDoc);
-            reportPrinter.println(String.format("% 3d:%02d:%02d", hour,min,sec) + " indexing stop");
-            // wait probably not needed here, indexatoin should do the job
-            // millis = ThreadLocalRandom.current().nextInt(1000, 2000);
-            // TimeUnit.MILLISECONDS.sleep(millis);
+            reportPrinter.println("\tlucene " + duration(indexNano));
+            // wait ?
         }
         lucene.commit();
         // A possible optimization here, the generation of coocs
-        return stop("OK, FIN");
+        return stop("<a href=\".\" target=\"_top\" class=\"button\">Votre corpus est prêt</a>");
+    }
+    
+    public static String duration(final long startNano)
+    {
+        final long nanos = System.nanoTime() - startNano;
+        long durationSec    = nanos/(1000*1000*1000);
+        final long sec        = durationSec % 60;
+        final long min        = (durationSec /60) % 60;
+        final long hour       = (durationSec /(60*60));
+        return String.format("% 3d:%02d:%02d", hour,min,sec);
     }
 
     public String stop(String message) throws IOException
     {
         lucene.close();
         String date = dateFormat.format(new Date());
-        reportPrinter.println(String.format("%s — %s, %s.", date, label, message));
+        reportPrinter.println(String.format("%s\t%s\t%s.", date, label, message));
         reportPrinter.close();
         // free the lock
         if (lockFile.exists()) {
@@ -264,6 +305,8 @@ public class GallicaIndexer implements Callable<String>
         info.url = "https://gallica.bnf.fr/ark:/12148/" + info.ark + ".texteBrut";
         Connection.Response response = null;
         try {
+            final long downloadNano = System.nanoTime();
+            logPrinter.print(dateFormat.format(new Date())+ " " + info.url);
             response = Jsoup.connect(info.url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0")
                 .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8")
@@ -275,6 +318,7 @@ public class GallicaIndexer implements Callable<String>
                 .timeout(60000) // 60 s. timeout
                 .execute();
             info.status = response.statusCode();
+            logPrinter.println(" " + info.status + " " + duration(downloadNano));
             if (info.status == 429) {
                 return;
             }
@@ -283,6 +327,10 @@ public class GallicaIndexer implements Callable<String>
             }
             else if (info.status == 403) {
                 info.message = "N'est disponible que sur accréditation";
+                return;
+            }
+            else if (info.status == 400) {
+                info.message = "ARK malformée, caractère de contrôle incorrect";
                 return;
             }
             else if (info.status == 302) {
@@ -295,7 +343,7 @@ public class GallicaIndexer implements Callable<String>
                 if (el != null) {
                     Matcher m = patOcr.matcher(el.text());
                     if (m.find()) {
-                        info.message = m.group(0);
+                        info.ocr = m.group(0);
                     }
                 }
                 info.html = doc.outerHtml();
@@ -307,7 +355,7 @@ public class GallicaIndexer implements Callable<String>
                 if (pos > 0) {
                     text = text.substring(pos);
                     info.size = text.length();
-                    alixDoc.text("Deux ou trois mots");
+                    alixDoc.textField(text);
                     info.indexable = true;
                 }
                 else {
@@ -321,21 +369,21 @@ public class GallicaIndexer implements Callable<String>
                     if("dc.title".equalsIgnoreCase(name) && info.title == null) {
                         final String s = content.replace(" | Gallica", "");
                         info.title = s;
-                        // alixDoc.title(s);
+                        alixDoc.title(s);
                     }
                     if("dc.creator".equalsIgnoreCase(name)) {
                         if (byline.length() > 0) byline.append(". ");
                         final String s = content.replace(". Auteur du texte", "").trim();
                         byline.append(s);
-                        // alixDoc.author(s);
+                        alixDoc.author(s);
                     }
                     if("dc.date".equalsIgnoreCase(name) && info.date == null) {
-                        info.date = content;
                         Matcher m = patYear.matcher(content);
                         if (m.find()) {
                             try {
                                 int year = Integer.parseInt(m.group(0));
-                                // alixDoc.year(year);
+                                alixDoc.year(year);
+                                info.date = "" + year;
                             }
                             catch (NumberFormatException e) {
                                 
@@ -344,9 +392,8 @@ public class GallicaIndexer implements Callable<String>
                     }
                 }
                 if (byline.length() > 0) {
-                    final String s = byline.toString();
-                    info.byline = s;
-                    // alixDoc.byline(s);
+                    info.byline = byline.toString();
+                    alixDoc.byline(info.byline);
                 }
                 return;
             }
@@ -360,7 +407,7 @@ public class GallicaIndexer implements Callable<String>
             return;
         }
         catch (IOException e) {
-            reportPrinter.println(String.format("io — %s, %s", info.url, e));
+            reportPrinter.println(String.format("ERROR\t%s\t%s", info.url, e));
             return;
         }
     }
@@ -386,6 +433,7 @@ public class GallicaIndexer implements Callable<String>
         protected boolean indexable;
         protected String url;
         protected int status;
+        protected String ocr;
         protected String message;
         protected int size;
         protected String byline;
@@ -399,6 +447,7 @@ public class GallicaIndexer implements Callable<String>
             this.indexable = false;
             this.url = null;
             this.status = 0;
+            this.ocr = null;
             this.message = null;
             this.size = 0;
             this.html = null;
@@ -409,12 +458,12 @@ public class GallicaIndexer implements Callable<String>
         
         public String toString()
         {
-            return ark
+            return "<a target=\"_blank\" href=\""+ url + "\">" + ark + "</a>"
                 + "\t" + status
                 + "\t" + Objects.toString(message, "")
                 + "\t" + ((size > 0)?size:"")
-                + "\t" + Objects.toString(byline, "")
                 + "\t" + Objects.toString(date, "")
+                + "\t" + Objects.toString(byline, "")
                 + "\t" + Objects.toString(title, "")
             ;
         }

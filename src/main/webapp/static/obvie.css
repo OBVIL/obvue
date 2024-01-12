@@ -10,58 +10,105 @@
  * orange: #ea5b0c; rgb(234, 91, 12);
  */
 
-body,
-select,
-#header .base mark {
-    font-family: "Open Sans", "Ubuntu", "Calibri", "Segoe UI", Avenir, Helvetica, sans-serif;
+:root {
+    --col1: #26458A; /* hsl(221, 57, 35) rgb(38, 71, 140) */
+    --col1a50: rgba(38, 71, 140, 0.5);
+    --bg1: #fff;
+    --bg2: #eee;
+    --col2: #FCB502;
+    --col2low: rgba(252, 181, 2, 0.7)
 }
 
-button {
-    font-family: "Arial", sans-serif;
+::selection {
+    background-color: var(--col1);
+    color: var(--bg1);
 }
 
-
-/*
-#header .base {
-    font-family: "Times New Roman", Times, serif;
-}
-*/
-
-body.facet a span {
-    font-family: "Arial Narrow", sans-serif;
+body {
+    font-family: Lato, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--col1);
+    font-size: 16px;
+    background-color: var(--bg1);
 }
 
-#tabs a,
-#tabs button {
-    font-family: Arial, sans-serif;
+pre {
+    font-size: 12px;
+}
+
+#header a.obtic {
+    display: block;
+    background-color: var(--bg1);
+    text-align: center;
+    padding: 15px;
+    position: relative;
+}
+
+a.obtic > img {
+  height: 93px;
+}
+
+#footer .rule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--col1);
+  padding: 10px;
+}
+.rule::before, .rule::after {
+    content: " ";
+    font-size: 0;
+    border: 1px solid var(--bg1);
+    margin: 0 10px;
+    width: 35%;
+}
+
+.rule .monogram {
+  width: 50px;
+  height: 50px;
+}
+
+.monogram {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('img/obtic_monogram.svg');
+}
+
+body.win {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 }
 
 body,
 .biflex,
 .gutter.but {
-    background-color: #faf9f6;
+    background-color: var(--bg1);
 }
 
 body.document #qform,
 body.comp #qform {
-    background-color: hsla(45, 29%, 90%, 0.5);
+    background-color: var(--bg2);
 }
 
 ::-webkit-scrollbar {
-    background: #faf9f6;
+    background: var(--bg1);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #92897F;
+    background: var(--col1);
 }
 
 html {
     scrollbar-width: thin;
-    scrollbar-color: #92897F #faf9f6;
+    scrollbar-color: var(--col1) var(--bg1);
 }
 
 .gutter.but {
-    color: #92897F;
+    color: var(--col1);
 }
 
 #chapters a:hover,
@@ -70,9 +117,9 @@ html {
 }
 
 header.biblbar {
-    background-color: #92897F;
+    background-color: var(--col1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0px 3px 2px 1px rgba(146, 137, 127, 0.5);
+    box-shadow: 0px 3px 2px 1px var(--col1a50);
 }
 
 header.biblbar,
@@ -107,26 +154,16 @@ header {
     border-color: #FFFFFF;
 }
 
-::-moz-selection {
-    /* let it alone for Chrome */
-    background: rgba(120, 105, 101, 0.8);
-    color: #FFFFFF;
-}
 
 #tabs button.here,
 #tabs a.here {
-    background: rgba(120, 105, 101, 0.8);
+    background: var(--bg2);
     color: #FFFFFF;
 }
 
 #tabs button:hover,
 #tabs a:hover {
-    background: hsl(31, 17%, 80%);
-}
-
-::selection {
-    background: rgba(120, 105, 101, 0.8);
-    color: #FFFFFF;
+    background: var(--bg2);
 }
 
 mark {
@@ -157,7 +194,7 @@ textarea:focus {
 }
 
 a {
-    color: #1a1a80;
+    color: var(--col1);
 }
 
 .keywords a,
@@ -170,7 +207,7 @@ select,
 body.facet,
 .sortable caption,
 .hit .bibl a {
-    color: rgb(120, 105, 101);
+    
 }
 
 a:hover,
@@ -192,7 +229,7 @@ body.facet .active,
 h4 .occs,
 a.xred,
 .term .occs {
-    color: #ea5b0c;
+    color: var(--col2);
 }
 
 select {
@@ -236,7 +273,7 @@ input[type=text] {
     outline: none;
     font-size: 120%;
     margin: 1px;
-    outline: 1px solid #CCC;
+    outline: 1px solid var(--bg2);
     border: none;
     border-width: 1px;
 }
@@ -296,6 +333,7 @@ body main {
 a {
     background-color: transparent;
     text-decoration: none;
+    color: var(--col2low);
 }
 
 a:focus,
@@ -349,15 +387,13 @@ details {
     color: #999;
 }
 
-body>header {
-    border-width: 2px;
-    padding-bottom: 1rem;
-    border-bottom-style: solid;
-    padding: 0 1rem 0 1rem;
-}
 
 input.year {
     width: 10ex;
+}
+
+.right {
+    text-align: right;
 }
 
 select {
@@ -473,14 +509,24 @@ iframe {
 }
 
 #header {
-    padding: 5px 2px 0 2px;
     position: relative;
-    height: 75px;
     margin: 0;
     width: 100%;
     overflow: hidden;
     /* scroll pb */
     /* check #win top */
+}
+
+#header > nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    height: 70px;
+    background-color: var(--col1);
+    color: var(--bg1);
+    padding: 0.2rem 1rem;
 }
 
 #win {
@@ -491,12 +537,6 @@ iframe {
     bottom: 0px;
     display: flex;
     flex-direction: row;
-}
-
-#header .logo {
-    position: absolute;
-    top: 0;
-    z-index: 2;
 }
 
 #header .hn {
@@ -1063,24 +1103,24 @@ body.comparer #right {
 
 body.left {
     background: top 2rem left 10px / 195% auto fixed no-repeat url("img/obvil.svg");
-    background: top 2rem left 10px / 195% auto fixed no-repeat url("img/obvil.svg"), linear-gradient(90deg, hsla(32, 8%, 54%, 0.5), 5%, rgba(255, 255, 255, 1), 25%, #FFF);
+    background: top 2rem left 10px / 195% auto fixed no-repeat url("img/obvil.svg"), linear-gradient(90deg, var(--bg2), 5%, var(--bg1), 25%, #FFF);
 }
 
 body.right {
     background: top 2rem right 10px / 195% auto fixed no-repeat url("img/obvil_r.svg");
-    background: top 2rem right 10px / 195% auto fixed no-repeat url("img/obvil_r.svg"), linear-gradient(270deg, hsla(32, 8%, 54%, 0.5), 5%, rgba(255, 255, 255, 1), 25%, #FFF);
+    background: top 2rem right 10px / 195% auto fixed no-repeat url("img/obvil_r.svg"), linear-gradient(270deg, var(--bg2), 5%, var(--bg1), 25%, #FFF);
 }
 
 html.right {
-    scrollbar-color: #faf9f6 hsla(32, 8%, 54%, 0.5);
+    scrollbar-color: var(--bg1) rgba(38, 71, 140, 0.5);
 }
 
 body.right::-webkit-scrollbar {
-    background: hsla(32, 8%, 54%, 0.5);
+    background: rgba(38, 71, 140, 0.5);
 }
 
 body.right::-webkit-scrollbar-thumb {
-    background: #faf9f6;
+    background: var(--bg1);
 }
 
 body.help {
@@ -1544,7 +1584,8 @@ div.text {
 section:after,
 section:before,
 .bar:after,
-.bar:before {
+.bar:before,
+ul:before {
     content: " ";
     visibility: hidden;
     display: block;
@@ -2039,7 +2080,6 @@ div.scatter div.legend div.dot {
     margin-left: auto;
     margin-right: auto;
     word-wrap: normal;
-    padding-top: 2rem;
 }
 
 .landing h1 {
@@ -2052,34 +2092,33 @@ div.scatter div.legend div.dot {
     justify-content: center;
 }
 
-.landing a.but {
-    font-size: 1.5rem;
-    background: rgba(120, 105, 101, 0.8);
-    color: #FFFFFF;
-    font-weight: bold;
-    line-height: 100%;
-    text-transform: uppercase;
-    padding: 5px 5px 5px 5px;
-    border-style: solid;
-    border-width: 1px;
-    margin-right: 2px;
+button,
+a.button {
+    line-height: 1.86;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--col2);
+    background-color: var(--col1);
+    border-radius: 6px 6px 6px 6px;
+    padding: 0em 1rem 0em 1rem;
     cursor: pointer;
 }
 
-.landing a.but:hover {
-    background: transparent;
-    color: rgba(120, 105, 101, 0.8);
+button:hover,
+a.button:hover {
+    background: var(--col2);
+    color: var(--col1);
 }
 
-.landing .logo {
+.landing .obvie {
     float: left;
 }
 
-.logo img {
+nav .logo img {
     opacity: 0.7;
 }
 
-a.logo:hover img {
+nav .logo:hover img {
     opacity: 1;
 }
 
@@ -2104,6 +2143,5 @@ div.th {
     width: 15rem;
     vertical-align: top;
     text-align: right;
-    color: rgba(120, 105, 101, 0.8);
     font-weight: bold;
 }

@@ -14,14 +14,17 @@ final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
 final String base = (String)request.getAttribute(Rooter.BASE);
 final File baseDir = new File(dataDir, base);
 final File reportFile = new File(baseDir, GallicaIndexer.REPORT_FILE);
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Téléchargements, avancement  — Gallicobvie</title>
+    <title>Téléchargements, avancement, Obvie-Gallica</title>
+    <link href="<%=hrefContext%>static/obvie.css" rel="stylesheet"/>
 </head>
-<body>
+<body onload="document.body.scrollTop = document.body.scrollHeight;">
     <div class="landing">
         <pre><%
 if (reportFile.exists()) {
@@ -31,7 +34,6 @@ if (reportFile.exists()) {
         out.println(line);
     }
 }
-
         %></pre>
     </div>
 </body>

@@ -80,6 +80,8 @@ corpus = (Corpus)session.getAttribute(corpusKey);
   <head>
     <meta charset="UTF-8"/>
     <title><%= (corpus != null) ? JspTools.escape(corpus.name())+", " : "" %><%=alix.props.get("label")%> [Obvie]</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/obvie.css"/>
     <script> const base = "<%=base%>"; </script> <%-- give code of the text base for all further js  --%>
     <script src="../static/vendor/split.js">//</script>

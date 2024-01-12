@@ -123,7 +123,9 @@ SortField sf2 = new SortField(Names.ALIX_ID, SortField.Type.STRING);
         </form>
         <%
         if (doc != null) {
-            out.println("<div class=\"heading\">");
+            String bibl = doc.doc().get("bibl");
+            if (bibl == null) bibl = "";
+            out.println("<div  class=\"heading\">");
             out.println(doc.doc().get("bibl"));
             out.println("</div>");
             // hilite

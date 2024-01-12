@@ -160,10 +160,19 @@ public class Rooter extends HttpServlet {
             throw new ServletException(
                     "Init param datadir, exists but is not a directory: <Parameter name=\"datadir\" value=\"" + value
                             + "\" override=\"false\"/>");
-        } else if (!file.canWrite()) {
-            throw new ServletException(
-                    "Init param datadir, is a directory but is not writable: <Parameter name=\"datadir\" value=\""
-                            + value + "\" override=\"false\"/>");
+        } 
+        else {
+            // try to write in 
+            File tmp = new File(value, "created");
+            try {
+                tmp.createNewFile();
+                tmp.delete();
+            }
+            catch (Exception e) {
+                throw new ServletException(
+                        "Init param datadir, is a directory but is not writable: <Parameter name=\"datadir\" value=\""
+                                + value + "\" override=\"false\"/> " + tmp, e);
+            }
         }
         return file;
     }
@@ -197,7 +206,7 @@ public class Rooter extends HttpServlet {
             throw new ServletException("Infinite loop");
         }
         if (parts.length == 0) {
-            request.getRequestDispatcher("/jsp/gallicobvie.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/obvie-gallica.jsp").forward(request, response);
             return;
         }
         String base = parts[0];

@@ -101,7 +101,7 @@ private static void htmlLine(JspWriter out, final FormEnum dic, final int no, fi
     // tag
     out.append("    <td>");
     final int flag = dic.tag();
-    out.append(Tag.label(flag));
+    out.append(Tag.name(flag));
     out.append("</td>\n");
     
     // doc founds
@@ -137,7 +137,7 @@ private static void htmlLine(JspWriter out, final FormEnum dic, final int no, fi
 private static void csvLine(JspWriter out, final FormEnum dic, final int no, final String q, final boolean filtered) throws IOException {
     out.append(dic.form().replaceAll("\t\n", " "));
     final int flag = dic.tag();
-    out.append("\t").append(Tag.label(flag));
+    out.append("\t").append(Tag.name(flag));
     out.append("\t").append(""+dic.hits());
     out.append("\t");
     if (q != null) out.append(""+dic.freq());

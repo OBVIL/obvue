@@ -1,12 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ page import="java.io.File"%>
+<%@ page import="java.io.FileInputStream"%>
 <%@ page import="java.io.IOException"%>
+<%@ page import="java.nio.file.Path"%>
+<%@ page import="java.nio.file.Paths"%>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.text.DecimalFormatSymbols" %>
 <%@ page import="java.util.*"%>
 <%@ page import="org.apache.lucene.analysis.Analyzer"%>
 <%@ page import="org.apache.lucene.document.Document"%>
 <%@ page import="org.apache.lucene.index.IndexReader"%>
+<%@ page import="org.apache.lucene.index.StoredFields"%>
 <%@ page import="org.apache.lucene.index.Term"%>
 <%@ page import="org.apache.lucene.search.*"%>
 <%@ page import="org.apache.lucene.search.BooleanClause.Occur"%>
@@ -18,6 +22,7 @@
 <%@ page import="com.github.oeuvres.alix.lucene.search.*"%>
 <%@ page import="com.github.oeuvres.alix.util.ML"%>
 <%@ page import="com.github.oeuvres.alix.web.*"%>
+<%@ page import="fr.sorbonne_universite.obtic.obvie.GallicaIndexer"%>
 <%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%!/** Field name containing canonized text */
 public static String TEXT = "text";
@@ -285,10 +290,27 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
 <%
 
 final long time = System.nanoTime();
+final ServletContext servletContext = pageContext.getServletContext();
+final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
+final String base = (String)request.getAttribute(Rooter.BASE);
+final File baseDir = new File(dataDir, base);
+
+Path lucenePath = Paths.get(dataDir.getCanonicalPath(), base, GallicaIndexer.LUCENE);
+
+
 final JspTools tools = new JspTools(pageContext);
-// final File contextDir = (File) request.getAttribute(Rooter.CONTEXT_DIR);
-final String base = (String) request.getAttribute(Rooter.BASE);
-final Alix alix = Alix.instance(base);
+// load and cache a lucene Reader
+final Alix alix;
+if (Alix.hasInstance(base)) {
+    alix = Alix.instance(base);
+}
+else {
+    alix = Alix.instance(base, lucenePath, new FrAnalyzer(), null);
+    File propsFile = new File(baseDir, GallicaIndexer.PROPS_FILE);
+    if (propsFile.canRead()) {
+        alix.props.loadFromXML(new FileInputStream(propsFile));
+    }
+}
 final IndexSearcher searcher = alix.searcher();
 final IndexReader reader = alix.reader();
 final String corpusKey = CORPUS_ + base;

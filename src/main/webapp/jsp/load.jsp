@@ -18,6 +18,7 @@ final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
 final String base = (String)request.getAttribute(Rooter.BASE);
 final File baseDir = new File(dataDir, base);
 final File lockFile = new File(baseDir, GallicaIndexer.LOCK_FILE);
+final int baselife = (Integer)servletContext.getAttribute(Rooter.BASELIFE);
 
 // should not arrive
 if (baseDir.isFile() && !baseDir.delete()) {
@@ -50,31 +51,31 @@ pool.submit(task);
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Chargement — Gallicobvie</title>
+    <title>Chargement — Obvie-Gallica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cantarell&family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Display&display=swap" rel="stylesheet">
     <link href="<%=hrefContext%>static/obvie.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="win">
+    <%@ include file="header.jsp"%>
     <div class="landing">
-    <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="<%=hrefContext%>static/img/obvie_50.png"/></a>
-        <h1><a href="."><%=label%></a>, chargement</h1>
-        <div class="row">
-            <div>
-                <h2>Arks en cours d’indexation</h2>
-                <ul>
-                <%
+        <h1><a href="."><%=label%></a> — chargement</h1>
+        <p>Notez bien le lien de cette base, elle sera supprimée après <%=baselife%> jours sans utilisation.</p>
+        <div><b>Textes demandés :</b>
+        <%
+String sep = "";
 for (String ark: arks) {
     final String href = String.format("https://gallica.bnf.fr/ark:/12148/%s", ark);
-    out.println(String.format("<li><a target=\"_blank\" href=\"%s\">%s</a></li>", href, ark));
+    out.print(String.format("%s<a target=\"_blank\" href=\"%s.texteBrut\">%s</a>", sep, href, ark));
+    sep = ", ";
 }
-                %>
-                </ul>
-            </div>
-            <div>
-                <h2>Avancement</h2>
-                <iframe id="report" src="report.jsp"></iframe>
-            </div>
+out.print(".");
+            %>
         </div>
+        <iframe style="width: 100%; height: 25rem;" id="report" src="report.jsp"></iframe>
     </div>
+    <%@ include file="footer.jsp"%>
     <script>
 const reloadReport = window.setInterval(report, 10000);
 function report() {
