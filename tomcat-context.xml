@@ -1,0 +1,17 @@
+<Context 
+  path="/gallica-obvie" 
+  docBase="/data/app/gallica-obvie/obvie/" 
+  reloadable="true"
+  privileged="true"
+>
+    <WatchedResource>jsp/prelude.jsp</WatchedResource>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/lib/alix.jar</WatchedResource>
+    <CookieProcessor sameSiteCookies="Lax"/>
+    <!-- Dossier des donnéee, externe au war applicatif -->
+    <Parameter name="datadir" value="/var/lib/tomcat9/data/gallica-obvie" override="false"/>
+    <!-- Nombre d’actions d’indexation auorisées en parallèle -->
+    <Parameter name="poolsize" value="10" override="false"/>
+    <!-- Durée de vie d’une base sans activité, en jours -->
+    <Parameter name="baselife" value="10" override="false"/>
+</Context>

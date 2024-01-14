@@ -42,6 +42,7 @@ private Query query(final JspTools tools, final Corpus corpus, final Doc refDoc)
     else if (q != null) {
         String lowbibl = q.toLowerCase();
         query = Alix.query("bibl", lowbibl, ANAMET, Occur.MUST);
+        tools.out.println("query=" + query);
     }
     // restrict to corpus
     if (corpus != null) {
@@ -61,7 +62,6 @@ private Query query(final JspTools tools, final Corpus corpus, final Doc refDoc)
 private String results(final JspTools tools, final Corpus corpus, final Doc refDoc, final IndexSearcher searcher)
         throws IOException, NoSuchFieldException {
     StringBuilder sb = new StringBuilder();
-
     Query query = query(tools, corpus, refDoc);
     if (query == null)
         return "";
@@ -120,11 +120,11 @@ private String results(final JspTools tools, final Corpus corpus, final Doc refD
         // fast hack because of links in links
         text = text.replaceAll("<(/?)a([ >])", "<$1span$2");
         if (marker != null) {
-            sb.append("<a class=\"bibl\" href=\"compdoc.jsp?id=" + doc.get(Names.ALIX_ID) + paging + back + "\">");
+            sb.append("<a class=\"bibl\" href=\"compdoc?id=" + doc.get(Names.ALIX_ID) + paging + back + "\">");
             sb.append(marker.mark(text));
             sb.append("</a>\n");
         } else {
-            sb.append("<a class=\"bibl\" href=\"compdoc.jsp?id=" + doc.get(Names.ALIX_ID) + paging + back + "\">");
+            sb.append("<a class=\"bibl\" href=\"compdoc?id=" + doc.get(Names.ALIX_ID) + paging + back + "\">");
             sb.append(text);
             sb.append("</a>\n");
         }
@@ -162,6 +162,7 @@ try {
 } catch (IllegalArgumentException e) {
     refId = null;
 } // unknown id
+
 
 // parameter 
 if (OptionMime.htf.name().equals(format)) {

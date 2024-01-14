@@ -73,7 +73,7 @@ for (String ark: arks) {
 out.print(".");
             %>
         </div>
-        <iframe style="width: 100%; height: 25rem;" id="report" src="report.jsp"></iframe>
+        <iframe style="width: 100%; height: 25rem;" id="report" src="report"></iframe>
     </div>
     <%@ include file="footer.jsp"%>
     <script>

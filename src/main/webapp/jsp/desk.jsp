@@ -72,6 +72,7 @@ else if ("new".equals(tools.getString("corpus", null))) {
   session.setAttribute(corpusKey, null);
 }
 corpus = (Corpus)session.getAttribute(corpusKey);
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
 
 
 %>
@@ -92,14 +93,19 @@ corpus = (Corpus)session.getAttribute(corpusKey);
     </script>
   </head>
   <body class="split">
-    <header id="header">
-      <span class="base"><a href=".">Corpus : <em><%=alix.props.get("label")%></em></a> <%
+    <header id="header" class="header_desk">
+      <div>
+        <a class="logo gallica" href="https://gallica.bnf.fr/">
+            <img src="<%=hrefContext%>static/img/gallica_logo.svg" alt="ObTIC" height="40"/>
+        </a>
+      
+        <span class="base"><a href=".">Corpus : <em><%=alix.props.get("label")%></em></a> <%
    if (corpus != null) {
      String name = corpus.name();
      out.println("<mark><a class=\"xred\" title=\"Supprimer la sélection\" href=\"?corpus=new&amp;q="+JspTools.escUrl(q)+"\">🗙</a>  "+name+"</mark>");
-   }
- %></span>
-      <a class="logo" href="../" title="Liste des collections de cet installation."><img alt="Obvie app" src="../static/img/obvie_50.png"/></a>
+   }%>
+        </span>
+      </div>
       <form id="qform" name="qform" onsubmit="return dispatch(this)" target="page" action="<%=view%>">
         <a href="." class="reset" title="Annuler les recherches en cours">⟲</a>
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>
@@ -121,9 +127,14 @@ corpus = (Corpus)session.getAttribute(corpusKey);
           <a class="help" href="../static/aide.html" target="aide">Aide</a>
         </div>
       </form>
+      <div class="right">
+        <a class="logo obvie" href="<%=hrefContext%>"><img alt="Nouveau corpus" src="<%=hrefContext%>static/img/obvie_50b.png"/></a>
+      </div>
+      <!-- 
       <a class="hn" href="https://www.huma-num.fr/annuaire-des-sites-web" target="_blank">
         <img title="Hébergé par Huma-Num" src="../static/img/hn.png" align="right"/>
       </a>
+       -->
     </header>
     <div id="win">
       <div id="aside">

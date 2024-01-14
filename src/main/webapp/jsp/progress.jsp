@@ -30,12 +30,14 @@ if (!lockFile.exists()) {
     <title>Indexation en cours — Gallicobvie</title>
     <link href="../static/obvie.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="win">
+    <%@ include file="header.jsp"%>
     <article class="landing">
-        <a class="logo" href="<%=hrefContext%>" title="Créer un nouveau corpus"><img alt="Nouvelle base" src="static/img/obvie_50.png"/></a>
         <h1><%=base %>, indexation en cours</h1>
-        <iframe id="report" name="report" src="report"></iframe>
+        <p>                                                                                                                      </p>
+        <iframe style="width: 100%; height: 25rem;" id="report" src="report"></iframe>
     </article>
+    <%@ include file="footer.jsp"%>
     <script>
 const reloadReport = window.setInterval(report, 10000);
 function report() {

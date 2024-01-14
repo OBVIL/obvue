@@ -3,7 +3,8 @@
 <%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%@ page import="com.github.oeuvres.alix.util.RandomName"%>
 <%
-File dataDir = (File)pageContext.getAttribute(Rooter.DATADIR);
+final ServletContext servletContext = pageContext.getServletContext();
+final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
 String name = RandomName.name(10);
 int i = 0;
 while (new File(dataDir, name).exists()) {

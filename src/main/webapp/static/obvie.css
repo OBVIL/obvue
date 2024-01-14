@@ -143,27 +143,28 @@ button,
 select:hover,
 select:focus,
 details,
-#tabs a,
-#tabs button,
 .marginnote,
 .gutter.but {
     border-color: #c3b7aa;
 }
 
-header {
-    border-color: #FFFFFF;
-}
-
-
-#tabs button.here,
-#tabs a.here {
-    background: var(--bg2);
-    color: #FFFFFF;
+#tabs button,
+#tabs a {
+    color: var(--bg1);
+    background: transparent;
+    font-weight: bold;
+    line-height: 100%;
+    padding: 5px 5px 5px 5px;
+    margin-right: 2px;
+    cursor: pointer;
 }
 
 #tabs button:hover,
-#tabs a:hover {
-    background: var(--bg2);
+#tabs a:hover,
+#tabs button.here,
+#tabs a.here {
+    background: var(--bg1);
+    color: var(--col2);
 }
 
 mark {
@@ -210,7 +211,6 @@ body.facet,
     
 }
 
-a:hover,
 #gotop:hover,
 div.term a:hover,
 #q,
@@ -262,9 +262,20 @@ select {
  */
 
 #header form {
+    padding: 1rem 2rem 0 2rem;
     width: 80%;
-    margin-right: 20px;
-    margin-left: calc(15vw + 100px);
+}
+
+.header_desk {
+    display: flex;
+    justify-content: space-between;
+    height: 78px;
+    background-color: var(--col1);
+    color: var(--bg1);
+}
+
+.header_desk > * {
+    align-self: stretch;
 }
 
 input.start,
@@ -283,12 +294,14 @@ input.start {
 }
 
 #q {
+    outline: unset;
     font-size: 1.3rem;
     padding: 2px 1rem;
     font-weight: bold;
     min-width: 8rem;
     max-width: 55rem;
     width: 90%;
+    
 }
 
 main {
@@ -339,6 +352,10 @@ a {
 a:focus,
 a:active {
     outline: unset;
+}
+
+a:hover {
+    color: var(--col2);
 }
 
 button {
@@ -512,7 +529,6 @@ iframe {
     position: relative;
     margin: 0;
     width: 100%;
-    overflow: hidden;
     /* scroll pb */
     /* check #win top */
 }
@@ -570,26 +586,6 @@ iframe {
     border-color: #FFF;
 }
 
-#tabs {
-    bottom: 0;
-    position: absolute;
-    width: 100%;
-}
-
-#tabs button,
-#tabs a {
-    color: #000;
-    background: transparent;
-    font-weight: bold;
-    font-size: 11px;
-    line-height: 100%;
-    text-transform: uppercase;
-    padding: 5px 5px 5px 5px;
-    border-style: solid;
-    border-width: 1px;
-    margin-right: 2px;
-    cursor: pointer;
-}
 
 #tabs a:hover {
     text-decoration: none;
@@ -1102,13 +1098,11 @@ body.comparer #right {
 }
 
 body.left {
-    background: top 2rem left 10px / 195% auto fixed no-repeat url("img/obvil.svg");
-    background: top 2rem left 10px / 195% auto fixed no-repeat url("img/obvil.svg"), linear-gradient(90deg, var(--bg2), 5%, var(--bg1), 25%, #FFF);
+    background: linear-gradient(90deg, var(--bg2), 5%, var(--bg1), 25%, #FFF);
 }
 
 body.right {
-    background: top 2rem right 10px / 195% auto fixed no-repeat url("img/obvil_r.svg");
-    background: top 2rem right 10px / 195% auto fixed no-repeat url("img/obvil_r.svg"), linear-gradient(270deg, var(--bg2), 5%, var(--bg1), 25%, #FFF);
+    background: linear-gradient(270deg, var(--bg2), 5%, var(--bg1), 25%, #FFF);
 }
 
 html.right {
@@ -1549,6 +1543,11 @@ body.chrono form {
 .sortable thead th {
     font-weight: normal;
     font-size: 16px;
+}
+
+.sortable td a {
+    color: var(--col1);
+    display: block;
 }
 
 caption div.flex {

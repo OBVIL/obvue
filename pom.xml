@@ -89,6 +89,23 @@
             be moved to parent pom) -->
             <plugins>
                 <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <!-- Do not try 11, =servlet 5.0, =incompatible with common server  -->
+                    <version>10.0.19</version>
+                    <configuration>
+                        <systemProperties>
+                            <obvie.datadir>${basedir}/work/gallica</obvie.datadir>
+                            <jetty.port>8888</jetty.port>
+                        </systemProperties>
+                        <scan>5</scan>
+                        <webApp>
+                          <contextPath>/</contextPath>
+                        </webApp>
+                        <contextXml>jetty-context.xml</contextXml>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>3.4.0</version>

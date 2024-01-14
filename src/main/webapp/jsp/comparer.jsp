@@ -65,7 +65,7 @@ body, html {
 </style>
 </head>
 <body class="comparer">
-    <header id="header">
+    <header id="header" class="header_desk">
         <span class="base"><%=alix.props.get("label")%> <%
  if (corpus != null) {
      String name = corpus.name();

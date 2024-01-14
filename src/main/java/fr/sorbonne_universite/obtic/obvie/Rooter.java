@@ -2,10 +2,6 @@ package fr.sorbonne_universite.obtic.obvie;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,11 +31,11 @@ public class Rooter extends HttpServlet {
     /** Request attribute: the base name. */
     public static final String BASE = "base";
     /** Context init param: base lifetime, in days. */
-    public static final String BASELIFE = "baselife";
+    public static final String BASELIFE = "obvie.baselife";
     /** Request attribute: set of bases, with their properties. */
     public static final String BASE_LIST = "baseList";
     /** Context init param: directory of bases. */
-    public static final String DATADIR = "datadir";
+    public static final String DATADIR = "obvie.datadir";
     /** Request attribute: debug informations for the rewrite process. */
     public static final String DEBUG = "ext";
     /** Request attribute: original extension requested, like csv or json. */
@@ -55,7 +51,7 @@ public class Rooter extends HttpServlet {
     /** Request attribute: original extension of action. */
     public static final String PATHINFO = "pathinfo";
     /** Context init param: number of allowed indexation tasks. */
-    public static final String POOLSIZE = "poolsize";
+    public static final String POOLSIZE = "obvie.poolsize";
     /** Context attribute: a FixedThreadPool. */
     public static final String POOL = "pool";
     /** Request attribute: Properties for the base. */

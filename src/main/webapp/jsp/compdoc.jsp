@@ -115,7 +115,7 @@ if (doc != null) {
     %>
 
     <p>
-        <a href="meta.jsp">Chercher un document</a>
+        <a href="meta">Chercher un document</a>
     </p>
 
     <%
@@ -126,7 +126,7 @@ if (doc != null) {
     <header class="biblbar" title="<%=ML.detag(bibl)%>">
         <%
         // link to go back to results
-        String url = "meta.jsp";
+        String url = "meta";
         if (q != null)
             url += "?q=" + JspTools.escape(q);
         else if (refId != null)
