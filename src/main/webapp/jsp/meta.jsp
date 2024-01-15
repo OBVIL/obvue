@@ -42,7 +42,6 @@ private Query query(final JspTools tools, final Corpus corpus, final Doc refDoc)
     else if (q != null) {
         String lowbibl = q.toLowerCase();
         query = Alix.query("bibl", lowbibl, ANAMET, Occur.MUST);
-        tools.out.println("query=" + query);
     }
     // restrict to corpus
     if (corpus != null) {
@@ -50,11 +49,11 @@ private Query query(final JspTools tools, final Corpus corpus, final Doc refDoc)
     }
     // meta, restric document type
     else if (query != null && q != null) {
-        query = new BooleanQuery.Builder().add(QUERY_CHAPTER, Occur.FILTER).add(query, Occur.MUST).build();
+        query = new BooleanQuery.Builder().add(QUERY_ARTICLE, Occur.FILTER).add(query, Occur.MUST).build();
     }
     // no queries by parameter
     else if (query == null) {
-        query = QUERY_CHAPTER;
+        query = QUERY_ARTICLE;
     }
     return query;
 }
@@ -204,7 +203,7 @@ else {
             out.println("<input type=\"hidden\" name=\"refid\" value=\"" + refDoc.id() + "\"/>");
         } else {
             out.print(
-            "<input size=\"50\" type=\"text\" id=\"q\" onfocus=\"var len = this.value.length * 2; this.setSelectionRange(len, len); \" autofocus=\"true\"");
+            "<input size=\"50\" type=\"text\" class=\"q meta\" id=\"q\" onfocus=\"var len = this.value.length * 2; this.setSelectionRange(len, len); \" autofocus=\"true\"");
             out.println(" spellcheck=\"false\" autocomplete=\"off\" name=\"q\" value=\"" + JspTools.escape(q) + "\"/>");
             // out.println("<br/>" + query);
         }

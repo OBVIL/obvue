@@ -94,9 +94,9 @@ final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
   </head>
   <body class="split">
     <header id="header" class="header_desk">
-      <div>
+      <div class="left">
         <a class="logo gallica" href="https://gallica.bnf.fr/">
-            <img src="<%=hrefContext%>static/img/gallica_logo.svg" alt="ObTIC" height="40"/>
+          <img src="<%=hrefContext%>static/img/gallica_logo.svg" alt="ObTIC" height="40"/>
         </a>
       
         <span class="base"><a href=".">Corpus : <em><%=alix.props.get("label")%></em></a> <%
@@ -107,14 +107,14 @@ final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
         </span>
       </div>
       <form id="qform" name="qform" onsubmit="return dispatch(this)" target="page" action="<%=view%>">
-        <a href="." class="reset" title="Annuler les recherches en cours">⟲</a>
+        <a href="." class="reset" title="Annuler les recherches en cours"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" height="24"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg></a>
         <input type="hidden" name="start" value="<%= ((start > 0)?""+start:"") %>"/>
         <input type="hidden" name="hpp"/>
         <input type="hidden" name="leftid"/>
         <input id="q" name="q" autocomplete="off" autofocus="true" value="<%=JspTools.escape(q)%>"
           oninput="this.form['start'].value=''; this.form['hpp'].value=''"
         />
-        <button type="submit" name="send" tabindex="-1" class="magnify">⚲</button>
+        <button type="submit" name="send" tabindex="-1" class="magnify"><svg width="24" height="24"><path d="M9 2a7 7 0 0 0 0 14 7 7 0 0 0 4.6-1.7l.4.4V16l6 6 2-2-6-6h-1.3l-.4-.4A7 7 0 0 0 9 2zm0 2a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5z"/></svg></button>
         <div id="tabs">
           <a href="corpus" target="page">Corpus</a>
           <a href="cloud" target="page">Nuage</a>
@@ -127,9 +127,8 @@ final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
           <a class="help" href="../static/aide.html" target="aide">Aide</a>
         </div>
       </form>
-      <div class="right">
-        <a class="logo obvie" href="<%=hrefContext%>"><img alt="Nouveau corpus" src="<%=hrefContext%>static/img/obvie_50b.png"/></a>
-      </div>
+      <a class="logo obvie" href="<%=hrefContext%>"><img align="middle" alt="Nouveau corpus" src="<%=hrefContext%>static/img/obvie_50b.png"/></a>
+
       <!-- 
       <a class="hn" href="https://www.huma-num.fr/annuaire-des-sites-web" target="_blank">
         <img title="Hébergé par Huma-Num" src="../static/img/hn.png" align="right"/>

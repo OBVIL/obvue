@@ -31,7 +31,7 @@ final static String YEAR = "year";
 /** Key prefix for current corpus in session */
 public static String CORPUS_ = "corpus_";
 /** A filter for documents */
-final static Query QUERY_CHAPTER = new TermQuery(new Term(Names.ALIX_TYPE, Names.CHAPTER));
+final static Query QUERY_ARTICLE = new TermQuery(new Term(Names.ALIX_TYPE, Names.ARTICLE));
 
 final static DecimalFormatSymbols frsyms = DecimalFormatSymbols.getInstance(Locale.FRANCE);
 final static DecimalFormat dfScoreFr = new DecimalFormat("0.00000", frsyms);
@@ -243,7 +243,7 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
     else if (corpus != null)
         query = new CorpusQuery(corpus.name(), corpus.bits());
     else
-        query = QUERY_CHAPTER;
+        query = QUERY_ARTICLE;
     Sort sort = sorter.sort;
     String key = "" + page.getRequest().getAttribute(Rooter.BASE) + "?" + query;
     if (sort != null)

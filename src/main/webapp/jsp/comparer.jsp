@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ include file="prelude.jsp"%>
 <%
+final String hrefContext = (String)request.getAttribute(Rooter.HREF_CONTEXT);
+
 // parameters
 String id1 = tools.getString("leftid", null);
 int docId1 = tools.getInt("leftdocid", -1);
@@ -66,6 +68,10 @@ body, html {
 </head>
 <body class="comparer">
     <header id="header" class="header_desk">
+      <div class="left">
+        <a class="logo gallica" href="https://gallica.bnf.fr/">
+          <img src="<%=hrefContext%>static/img/gallica_logo.svg" alt="ObTIC" height="40"/>
+        </a>
         <span class="base"><%=alix.props.get("label")%> <%
  if (corpus != null) {
      String name = corpus.name();
@@ -73,16 +79,16 @@ body, html {
      + "\">🗙</a>  " + name + "</mark>");
 
  }
- %></span> <a class="logo" href="." title="Annuler les recherches en cours"><img
-            alt="Obvie app" src="../static/img/obvie_50.png" /></a>
+ %></span>
+        </div>
         <form id="qform" name="qform" action=".">
-            <a href="." class="reset">⟲</a> <input type="hidden"
+            <a href="." class="reset" title="Annuler les recherches en cours"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" height="24"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg></a>
+            <input type="hidden"
                 name="start" value="<%=((start > 0) ? "" + start : "")%>" />
             <input type="hidden" name="hpp" /> <input id="q" name="q"
                 autocomplete="off" value="<%=JspTools.escape(q)%>"
                 oninput="this.form['start'].value=''; this.form['hpp'].value=''" />
-            <button type="submit" name="send" tabindex="-1"
-                class="magnify">⚲</button>
+            <button type="submit" name="send" tabindex="-1" class="magnify"><svg width="24" height="24"><path d="M9 2a7 7 0 0 0 0 14 7 7 0 0 0 4.6-1.7l.4.4V16l6 6 2-2-6-6h-1.3l-.4-.4A7 7 0 0 0 9 2zm0 2a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5z"/></svg></button>
             <div id="tabs">
                 <button name="view" value="corpus">Corpus</button>
                 <button name="view" value="cloud">Nuage</button>
@@ -94,6 +100,7 @@ body, html {
                 <a class="help" href="../static/aide.html" target="aide">Aide</a>
             </div>
         </form>
+      <a class="logo obvie" href="<%=hrefContext%>" title="Annuler les recherches en cours"><img align="middle" alt="Nouveau corpus" src="<%=hrefContext%>static/img/obvie_50b.png"/></a>
     </header>
     <div id="win">
         <iframe id="left" name="left" src="<%=url1%>"> </iframe>

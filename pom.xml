@@ -85,8 +85,6 @@
     <build>
         <finalName>obvie</finalName>
         <pluginManagement>
-            <!-- lock down plugins versions to avoid using Maven defaults (may
-            be moved to parent pom) -->
             <plugins>
                 <plugin>
                     <groupId>org.eclipse.jetty</groupId>
@@ -101,6 +99,7 @@
                         <scan>5</scan>
                         <webApp>
                           <contextPath>/</contextPath>
+                          <defaultsDescriptor>${basedir}/lib/webdefault.xml</defaultsDescriptor>
                         </webApp>
                         <contextXml>jetty-context.xml</contextXml>
                     </configuration>

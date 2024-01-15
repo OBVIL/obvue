@@ -117,14 +117,14 @@ html {
 }
 
 header.biblbar {
-    background-color: var(--col1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    background: var(--bg1);
+    border-bottom: 1px solid var(--col1);
     box-shadow: 0px 3px 2px 1px var(--col1a50);
 }
 
 header.biblbar,
 header.biblbar a {
-    color: #FFFFFF;
+    color: #000
 }
 
 header.biblbar a:hover {
@@ -157,13 +157,13 @@ details,
     padding: 5px 5px 5px 5px;
     margin-right: 2px;
     cursor: pointer;
+    border: none;
 }
 
 #tabs button:hover,
 #tabs a:hover,
 #tabs button.here,
 #tabs a.here {
-    background: var(--bg1);
     color: var(--col2);
 }
 
@@ -261,9 +261,8 @@ select {
  * Global styling
  */
 
-#header form {
-    padding: 1rem 2rem 0 2rem;
-    width: 80%;
+.header_desk form {
+    padding: 16px 24px 16px 24px;
 }
 
 .header_desk {
@@ -272,10 +271,14 @@ select {
     height: 78px;
     background-color: var(--col1);
     color: var(--bg1);
+    align-item: stretch;
 }
 
 .header_desk > * {
-    align-self: stretch;
+}
+
+.header_desk > a.obvie {
+    padding: 12px 12px;
 }
 
 input.start,
@@ -283,10 +286,6 @@ input[type=text] {
     -webkit-appearance: none;
     outline: none;
     font-size: 120%;
-    margin: 1px;
-    outline: 1px solid var(--bg2);
-    border: none;
-    border-width: 1px;
 }
 
 input.start {
@@ -299,9 +298,12 @@ input.start {
     padding: 2px 1rem;
     font-weight: bold;
     min-width: 8rem;
-    max-width: 55rem;
-    width: 90%;
+    width: 100%;
     
+}
+
+input.q.meta {
+    border: var(--col1) solid 1px;
 }
 
 main {
@@ -366,13 +368,6 @@ button {
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
-}
-
-button.magnify {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
 }
 
 button:hover {
@@ -881,18 +876,12 @@ body.document #q {
 
 header.biblbar {
     top: 0;
-    position: fixed;
-    text-align: center;
+    position: sticky;
     width: 100%;
     z-index: 10;
-    height: 1.5rem;
-    overflow: hidden;
-    display: flex;
 }
 
 header.biblbar a.bibl {
-    display: block;
-    margin-left: 2rem;
     text-decoration: none;
 }
 
@@ -946,7 +935,6 @@ table.prevnext a:hover {
 }
 
 body.document header.bibl a.but,
-button.magnify,
 a.reset {
     font-size: 1.5rem;
     position: absolute;
@@ -954,6 +942,16 @@ a.reset {
     border: none !important;
     background: transparent;
 }
+
+button.magnify {
+    margin-left: -30px;
+    padding: 0;
+    margin: 0;
+    border-radius: unset;
+    border: none !important;
+    background: transparent;
+}
+
 
 a.reset {
     margin-left: -1.5rem;
@@ -1145,10 +1143,6 @@ body.comp.right main {
     padding-right: 2rem;
 }
 
-body.comp {
-    padding-top: 1.6rem;
-}
-
 body.comp a.pb,
 body.comp .marginnote {
     display: none;
@@ -1156,8 +1150,6 @@ body.comp .marginnote {
 
 body.comp #text,
 ul.legend {
-    font-size: 112%;
-    color: #666;
 }
 
 .biflex {
@@ -1177,7 +1169,7 @@ ul.legend {
 }
 
 #text a {
-    color: #000;
+    color: var(--col1);
 }
 
 #text a:hover,
@@ -2091,8 +2083,8 @@ div.scatter div.legend div.dot {
     justify-content: center;
 }
 
-button,
-a.button {
+.landing button,
+.landing a.button {
     line-height: 1.86;
     font-size: 0.9rem;
     font-weight: 600;
@@ -2103,8 +2095,8 @@ a.button {
     cursor: pointer;
 }
 
-button:hover,
-a.button:hover {
+.landing button:hover,
+.landing a.button:hover {
     background: var(--col2);
     color: var(--col1);
 }
@@ -2113,11 +2105,12 @@ a.button:hover {
     float: left;
 }
 
-nav .logo img {
+
+.logo img {
     opacity: 0.7;
 }
 
-nav .logo:hover img {
+.logo:hover img {
     opacity: 1;
 }
 

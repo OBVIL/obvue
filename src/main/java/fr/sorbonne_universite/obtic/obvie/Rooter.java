@@ -141,7 +141,7 @@ public class Rooter extends HttpServlet {
             value = getServletConfig().getInitParameter(DATADIR);
         }
         if (value == null || value.isEmpty()) {
-            value = getServletContext().getRealPath("") + "WEB-INF/data/";
+            value = new File(getServletContext().getRealPath("") ,"WEB-INF/data/").toString();
         }
         File file = new File(value);
         if (!file.isAbsolute()) {
