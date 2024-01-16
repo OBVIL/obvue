@@ -111,7 +111,7 @@ if (!queried && sort == OptionFacetSort.score) {
                 if (hits < 1) continue; // in alpha order, try next
             }
             href.setLength(hrefLen);
-            href.append("&amp;start=" +  (results.no() + 1)); // parenthesis for addition!
+            href.append("&amp;start=" +  (results.no() )); // parenthesis for addition!
             href.append("&amp;hpp=");
             if (filtered || queried) {
                 href.append(hits);

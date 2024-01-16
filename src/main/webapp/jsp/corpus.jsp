@@ -210,7 +210,7 @@ for (ScoreDoc hit : hits) {
     %>
         <a href="#" id="gotop">▲</a>
         <script>
-bottomLoad();
+// bottomLoad();
                     
         </script>
     </body>

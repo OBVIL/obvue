@@ -111,10 +111,14 @@ html {
     color: var(--col1);
 }
 
-#chapters a:hover,
-.gutter {
+#chapters a:hover {
     background: #E1DDCF;
 }
+
+.gutter {
+    background: var(--col1);
+}
+
 
 header.biblbar {
     background: var(--bg1);
@@ -158,6 +162,7 @@ details,
     margin-right: 2px;
     cursor: pointer;
     border: none;
+    font-size: 16px;
 }
 
 #tabs button:hover,
@@ -275,6 +280,14 @@ select {
 }
 
 .header_desk > * {
+}
+
+.header_desk > .left {
+    padding: 6px 12px;
+}
+
+.header_desk > .left > .base {
+    padding-left: 12px;
 }
 
 .header_desk > a.obvie {
@@ -563,10 +576,6 @@ iframe {
 }
 
 #header .base {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    font-size: 20px;
 }
 
 #header .base .label {
@@ -720,6 +729,7 @@ body.corpus {
 
 body.corpus caption {
     text-align: left;
+    background-color: transparent;
 }
 
 body.corpus main {
@@ -845,7 +855,7 @@ body.facet .active {
  */
 
 body.document {
-    padding-top: 2rem;
+    padding-top: 64px;
 }
 
 body.document main {
@@ -876,9 +886,11 @@ body.document #q {
 
 header.biblbar {
     top: 0;
-    position: sticky;
+    position: fixed;
     width: 100%;
     z-index: 10;
+    font-size: 12px;
+    padding: 2px 1rem;
 }
 
 header.biblbar a.bibl {
@@ -887,8 +899,17 @@ header.biblbar a.bibl {
 
 header.biblbar a.back {
     text-decoration: none;
-    font-size: 2rem;
-    line-height: 1.7rem;
+    font-size: 2em;
+    line-height: 1.7em;
+    font-weight:bold;
+    float: left;
+    height: 100%;
+    color: --var(col2);
+}
+
+header.biblbar a.back:hover {
+    background-color: var(--col1);
+    color: var(--bg1);
 }
 
 header.biblbar a.up {
@@ -944,12 +965,15 @@ a.reset {
 }
 
 button.magnify {
-    margin-left: -30px;
-    padding: 0;
     margin: 0;
+    margin-left: -30px;
     border-radius: unset;
     border: none !important;
     background: transparent;
+}
+
+button.magnify svg {
+    color: var(--col2);
 }
 
 
@@ -1131,6 +1155,10 @@ body.help li {
 
 body.help img {
     max-width: 100%;
+}
+
+body.comp {
+    padding-top: 80px;
 }
 
 body.comp.left main {
@@ -1331,6 +1359,7 @@ article.res mark {
     text-align: justify;
     margin: 5px 0;
     padding: 0 0.5rem;
+    font-size: 12px;
 }
 
 #chapters>a:hover {
@@ -1530,6 +1559,7 @@ body.chrono form {
 
 .sortable {
     margin-top: 0;
+    font-size: 12px;
 }
 
 .sortable thead th {
