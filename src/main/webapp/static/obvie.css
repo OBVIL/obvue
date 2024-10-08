@@ -964,22 +964,23 @@ a.reset {
     background: transparent;
 }
 
-button.magnify {
-    margin: 0;
-    margin-left: -30px;
-    border-radius: unset;
-    border: none !important;
-    background: transparent;
-}
 
 button.magnify svg {
-    color: var(--col2);
+    fill: var(--col2);
 }
-
 
 a.reset {
-    margin-left: -1.5rem;
+    margin: 5px 0 0 -26px;
 }
+
+a.reset svg {
+    fill: var(--bg1);
+}
+
+a.reset:hover svg {
+    fill: var(--col2);
+}
+
 
 a.csv {
     font-size: 1.5rem;
@@ -987,6 +988,11 @@ a.csv {
 }
 
 button.magnify {
+    position: absolute;
+    margin: 3px 0 0 -30px;
+    border-radius: unset;
+    border: none !important;
+    background: transparent;
     margin-left: -2rem;
 }
 

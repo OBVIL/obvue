@@ -5,7 +5,7 @@
 <%@ page import="fr.sorbonne_universite.obtic.obvie.Rooter"%>
 <%@ page import="com.github.oeuvres.alix.lucene.Alix"%>
 <%@ page import="com.github.oeuvres.alix.lucene.Alix.FSDirectoryType"%>
-<%@ page import="com.github.oeuvres.alix.lucene.analysis.FrAnalyzer"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.FlagFindFilterTest"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>

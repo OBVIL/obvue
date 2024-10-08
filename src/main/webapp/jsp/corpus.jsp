@@ -6,8 +6,7 @@
 <%@ page import="com.github.oeuvres.alix.lucene.search.FormEnum"%>
 <%@ page import="org.apache.lucene.index.FieldInfos"%>
 <%@ page import="org.apache.lucene.index.FieldInfo"%>
-<%!
-final String fieldName = TEXT;
+<%!final String fieldName = TEXT;
 final static HashSet<String> FIELDS = new HashSet<String>(
     Arrays.asList(new String[]{Names.ALIX_ID, "byline", "year", "title"})
 );

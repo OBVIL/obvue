@@ -18,7 +18,7 @@
 <%@ page import="com.github.oeuvres.alix.Names"%>
 <%@ page import="com.github.oeuvres.alix.lucene.Alix"%>
 <%@ page import="com.github.oeuvres.alix.lucene.Alix.FSDirectoryType"%>
-<%@ page import="com.github.oeuvres.alix.lucene.analysis.FrAnalyzer"%>
+<%@ page import="com.github.oeuvres.alix.lucene.analysis.AlixAnalyzer"%>
 <%@ page import="com.github.oeuvres.alix.lucene.search.*"%>
 <%@ page import="com.github.oeuvres.alix.util.ML"%>
 <%@ page import="com.github.oeuvres.alix.web.*"%>
@@ -288,7 +288,6 @@ public TopDocs getTopDocs(PageContext page, Alix alix, Corpus corpus, String q, 
     return topDocs;
 }%>
 <%
-
 final long time = System.nanoTime();
 final ServletContext servletContext = pageContext.getServletContext();
 final File dataDir = (File)servletContext.getAttribute(Rooter.DATADIR);
@@ -305,7 +304,7 @@ if (Alix.hasInstance(base)) {
     alix = Alix.instance(base);
 }
 else {
-    alix = Alix.instance(base, lucenePath, new FrAnalyzer(), null);
+    alix = Alix.instance(base, lucenePath, new AlixAnalyzer(), null);
     File propsFile = new File(baseDir, GallicaIndexer.PROPS_FILE);
     if (propsFile.canRead()) {
         alix.props.loadFromXML(new FileInputStream(propsFile));
